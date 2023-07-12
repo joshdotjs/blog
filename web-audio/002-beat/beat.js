@@ -4,10 +4,15 @@ const hihat = new Tone.Player("./hi-hat.mp3").toDestination();
 
 const playBeat = () => {
   Tone.Transport.scheduleRepeat((time) => {
-      kick.start(time);
-      hihat.start(time + 0.5);
-      snare.start(time + 1);
-      hihat.start(time + 1.5);
+    console.log('time', time);
+
+    hihat.start(time);
+    hihat.start(time + 0.25);
+    hihat.start(time + 0.5);
+    hihat.start(time + 0.75);
+
+    kick.start(time);
+    snare.start(time + 0.5);
   }, "2n");
   
   Tone.Transport.start();
