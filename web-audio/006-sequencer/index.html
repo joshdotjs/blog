@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <script defer src="https://cdn.jsdelivr.net/npm/tone@latest/build/Tone.min.js"></script>
+    <!-- <script type="module" src="./index-part-1.js"></script> -->
+    <script type="module" src="./index-part-2.js"></script>
+  </head>
+  <body>
+    
+    <button id="start">Start Beat</button>
+    <button id="stop">Stop Beat</button>
+
+    <div id="display">
+      <div id="time">Time: <span></span></div>
+      <div id="count">Count: <span></span></div>
+      <div id="bars">Bars: <span></span></div>
+      <div id="beats">Beats: <span></span></div>
+    </div>
+
+    <div id="volume-control">
+      <label for="volume">Master Volume: </label>
+      <input type="range" id="volume" min="0" max="100" value="50" step="1">
+    </div>
+
+    <div id="bpm-control">
+      <label for="bpm">BPM: </label>
+      <input type="range" id="bpm" min="40" max="220" value="120" step="1">
+    </div>
+
+  </body>
+</html>
