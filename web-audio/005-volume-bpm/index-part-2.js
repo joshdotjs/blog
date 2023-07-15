@@ -71,14 +71,14 @@ function updateDisplay(time) {
 
 // ==============================================
 
-const volumeControl = document.querySelector('#volume');
-volumeControl.addEventListener('input', ({ target: { value } }) => {
-    Tone.Destination.volume.value = value - 50; // Tone.js uses a decibel scale for volume where 0 is maximum and -Infinity is minimum.
+const volume_control = qs('#volume');
+volume_control.addEventListener('input', ({ target: { value } }) => {
+  Tone.Destination.volume.value = value - 50; // Tone.js uses a decibel scale for volume where 0 is maximum and -Infinity is minimum.
 });
 
 // ==============================================
 
-const bpmControl = document.querySelector('#bpm');
-bpmControl.addEventListener('input', ({ target: { value } }) => {
-    Tone.Transport.bpm.value = value;
+const bpm_control = qs('#bpm');
+bpm_control.addEventListener('input', ({ target: { value } }) => {
+  T.bpm.value = value;
 });
