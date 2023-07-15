@@ -10,7 +10,6 @@ const round = (x, places) =>  Number.parseFloat(x).toFixed(places);
 let count = 0;
 const updateCount = () => count = (count + 1) % 16;
 
-// ==============================================
 
 const playBeat = () => {
 
