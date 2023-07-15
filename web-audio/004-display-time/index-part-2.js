@@ -8,7 +8,6 @@ const { Transport: T } = Tone;
 const round = (x, places) =>  Number.parseFloat(x).toFixed(places);
 
 let count = 0;
-const updateCount = () => count = (count + 1) % 16;
 
 // ==============================================
 
@@ -25,9 +24,16 @@ const playBeat = () => {
       snare.start(time);
     }
 
-    updateDisplay(time);
-    updateCount();
-    
+    const [bars, beats, sixteenths] = T.position.split(':');
+    console.log(
+      'count: ', count, 
+      '\ntime: ', round(time, 2), 
+      '\nbars: ', bars, 
+      '\nbeats: ', beats, 
+      '\nsixteenths: ', round(sixteenths, 2)
+    );
+
+    count = (count + 1) % 16;
   }, "8n");
   
   T.start();
@@ -53,18 +59,5 @@ const qs = x => document.querySelector(x);
 const start_btn = qs('#start');
 const stop_btn = qs('#stop');
 
-start_btn.addEventListener('click', () => startBeat());
-stop_btn.addEventListener('click', () => stopBeat());
-
-const time_display = qs('#time > span');
-const count_display = qs('#count > span');
-const bars_display = qs('#bars > span');
-const beats_display = qs('#beats > span');
-
-function updateDisplay(time) {
-  const [bars, beats, sixteenths] = T.position.split(':');
-  time_display.textContent = round(time, 2);
-  count_display.textContent = count;
-  bars_display.textContent = bars;
-  beats_display.textContent = beats;
-}
+start_btn?.addEventListener('click', () => startBeat());
+stop_btn?.addEventListener('click', () => stopBeat());
