@@ -11,8 +11,6 @@ const patterns = [
 
 const tracks = qsa('.track > div');
 
-
-
 tracks.forEach((track, i) => {
   const steps = track.querySelectorAll('div');
   steps.forEach((step, j) => {
@@ -63,6 +61,7 @@ const loopCallback = (time) => {
 // ==============================================
 
 const playBeat = () => {
+  count = 0;
   T.scheduleRepeat(t => loopCallback(t), "8n");
   T.start();
 }; // playBeat()
@@ -82,11 +81,23 @@ const stopBeat = () => {
 
 // ==============================================
 
+let paused = false;
+const pauseBeat = () => {
+  if (paused) T.start();
+  else  T.pause();
+
+  paused = !paused;
+}; // stopBeat()
+
+// ==============================================
+
 const start_btn = qs('#start');
 const stop_btn = qs('#stop');
+const pause_btn = qs('#pause');
 
 start_btn.addEventListener('click', () => startBeat());
 stop_btn.addEventListener('click', () => stopBeat());
+pause_btn.addEventListener('click', () => pauseBeat());
 
 const time_display = qs('#time > span');
 const count_display = qs('#count > span');
