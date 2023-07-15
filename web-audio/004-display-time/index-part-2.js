@@ -59,5 +59,5 @@ const qs = x => document.querySelector(x);
 const start_btn = qs('#start');
 const stop_btn = qs('#stop');
 
-start_btn?.addEventListener('click', () => startBeat());
-stop_btn?.addEventListener('click', () => stopBeat());
+start_btn.addEventListener('click', () => startBeat());
+stop_btn.addEventListener('click', () => stopBeat());

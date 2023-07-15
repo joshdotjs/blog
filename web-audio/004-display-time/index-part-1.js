@@ -13,11 +13,11 @@ const playBeat = () => {
     const [bars, beats, sixteenths] = T.position.split(':');
     console.log('count: ', count, '\nbars: ', bars, '\nbeats: ', beats, '\nsixteenths: ', sixteenths);
 
+    count = (count + 1) % 16;
+
   }, "8n");
   
   T.start();
-
-  count = (count + 1) % 16;
 };
 
 const startBeat = () => Tone.start().then(() => {
@@ -35,5 +35,5 @@ const qs = x => document.querySelector(x);
 const start_btn = qs('#start');
 const stop_btn = qs('#stop');
 
-start_btn?.addEventListener('click', () => startBeat());
-stop_btn?.addEventListener('click', () => stopBeat());
+start_btn.addEventListener('click', () => startBeat());
+stop_btn.addEventListener('click', () => stopBeat());
