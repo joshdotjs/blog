@@ -1,3 +1,6 @@
+const qs = x => document.querySelector(x);
+const qsa = x => document.querySelectorAll(x);
+
 // ==============================================
 
 const patterns = [
@@ -5,6 +8,26 @@ const patterns = [
   [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,], // kick
   [0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0,], // snare
 ];
+
+const tracks = qsa('.track > div');
+
+
+
+tracks.forEach((track, i) => {
+  const steps = track.querySelectorAll('div');
+  steps.forEach((step, j) => {
+
+    // initialize the UI to match initial patterns
+    if (patterns[i][j])
+      steps[j].classList.toggle('on');
+
+    // toggle the pattern and UI when a step is clicked
+    step.addEventListener('click', () => {
+      patterns[i][j] = patterns[i][j] ? 0 : 1;
+      steps[j].classList.toggle('on');
+    });
+  });
+});
 
 // ==============================================
 
@@ -58,8 +81,6 @@ const stopBeat = () => {
 }; // stopBeat()
 
 // ==============================================
-
-const qs = x => document.querySelector(x);
 
 const start_btn = qs('#start');
 const stop_btn = qs('#stop');
