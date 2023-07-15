@@ -1,0 +1,70 @@
+
+const kick = new Tone.Player("/assets/samples/drums/kick.mp3").toDestination();
+const snare = new Tone.Player("/assets/samples/drums/snare.mp3").toDestination();
+const hihat = new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination();
+
+// ==============================================
+
+const { Transport: T } = Tone;
+const round = (x, places) =>  Number.parseFloat(x).toFixed(places);
+
+let count = 0;
+const updateCount = () => count = (count + 1) % 16;
+
+
+const playBeat = () => {
+
+  T.scheduleRepeat((time) => {
+    
+    hihat.start(time);
+
+    if (count % 4 === 0) {
+      kick.start(time);
+    }
+    if ((count + 2) % 4 === 0) {
+      snare.start(time);
+    }
+
+    updateDisplay(time);
+    updateCount();
+    
+  }, "8n");
+  
+  T.start();
+};
+
+// ==============================================
+
+const startBeat = () => Tone.start().then(() => {
+  playBeat();
+});
+
+// ==============================================
+
+const stopBeat = () => {
+  T.stop();
+  T.cancel();
+};
+
+// ==============================================
+
+const qs = x => document.querySelector(x);
+
+const start_btn = qs('#start');
+const stop_btn = qs('#stop');
+
+start_btn.addEventListener('click', () => startBeat());
+stop_btn.addEventListener('click', () => stopBeat());
+
+const time_display = qs('#time > span');
+const count_display = qs('#count > span');
+const bars_display = qs('#bars > span');
+const beats_display = qs('#beats > span');
+
+function updateDisplay(time) {
+  const [bars, beats, sixteenths] = T.position.split(':');
+  time_display.textContent = round(time, 2);
+  count_display.textContent = count;
+  bars_display.textContent = bars;
+  beats_display.textContent = beats;
+}
