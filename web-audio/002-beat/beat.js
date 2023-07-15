@@ -1,6 +1,6 @@
-const kick = new Tone.Player("./kick.mp3").toDestination();
-const snare = new Tone.Player("./snare.mp3").toDestination();
-const hihat = new Tone.Player("./hi-hat.mp3").toDestination();
+const kick = new Tone.Player("/assets/samples/drums/kick.mp3").toDestination();
+const snare = new Tone.Player("/assets/samples/drums/snare.mp3").toDestination();
+const hihat = new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination();
 
 const playBeat = () => {
   Tone.Transport.scheduleRepeat((time) => {
