@@ -130,7 +130,20 @@ const start_btn = qs('#start');
 const stop_btn = qs('#stop');
 const pause_btn = qs('#pause');
 
-start_btn.addEventListener('click', () => startBeat());
+start_btn.addEventListener('click', () => {
+
+  // TODO: 
+  console.log('Tone.context.state: ', Tone.context.state);
+
+  startBeat();
+
+  // TODO: Move into playing state function
+  start_btn.disabled = true;
+  stop_btn.disabled = false;
+  pause_btn.disabled = false;
+});
+
+
 stop_btn.addEventListener('click', () => stopBeat());
 pause_btn.addEventListener('click', () => pauseBeat());
 
