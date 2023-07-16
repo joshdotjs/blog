@@ -43,6 +43,7 @@ const startBeat = () => Tone.start().then(() => {
 const stopBeat = () => {
   T.stop();
   T.cancel();
+  count = 0;
 };
 
 // ==============================================

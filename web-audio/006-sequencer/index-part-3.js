@@ -95,7 +95,6 @@ const loopCallback = (time) => {
 // ==============================================
 
 const playBeat = () => {
-  count = 0;
   T.scheduleRepeat(t => loopCallback(t), "8n");
   T.start();
 }; // playBeat()
@@ -112,6 +111,7 @@ const stopBeat = () => {
   T.stop();
   T.cancel();
   resetHighlightedSteps();
+  count = 0;
 }; // stopBeat()
 
 // ==============================================
