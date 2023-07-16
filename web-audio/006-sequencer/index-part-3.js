@@ -67,6 +67,13 @@ const highlightStep = (count) => {
   });
 };
 
+const resetHighlightedSteps = () => {
+  console.log('resetting highlighted steps');
+  Steps.forEach(steps => {
+    steps.forEach(step => step.classList.remove('current'));
+  });
+}
+
 // ==============================================
 
 const loopCallback = (time) => {
@@ -104,6 +111,7 @@ const startBeat = () => Tone.start().then(() => {
 const stopBeat = () => {
   T.stop();
   T.cancel();
+  resetHighlightedSteps();
 }; // stopBeat()
 
 // ==============================================
