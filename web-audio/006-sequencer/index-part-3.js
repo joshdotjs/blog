@@ -144,8 +144,28 @@ start_btn.addEventListener('click', () => {
 });
 
 
-stop_btn.addEventListener('click', () => stopBeat());
-pause_btn.addEventListener('click', () => pauseBeat());
+stop_btn.addEventListener('click', () => {
+  stopBeat();
+
+  // TODO: Move into stopped state function
+  start_btn.disabled = false;
+  stop_btn.disabled = true;
+  pause_btn.disabled = true;
+});
+pause_btn.addEventListener('click', () => {
+  pauseBeat();
+
+  // TODO: Move into paused state function
+  if (paused) {
+    start_btn.disabled = true;
+    stop_btn.disabled = true;
+    pause_btn.disabled = false;
+  } else {
+    start_btn.disabled = true;
+    stop_btn.disabled = false;
+    pause_btn.disabled = false;
+  }
+});
 
 const time_display = qs('#time > span');
 const count_display = qs('#count > span');
