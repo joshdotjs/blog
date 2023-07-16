@@ -57,6 +57,18 @@ const updateCount = () => count = (count + 1) % 16;
 
 // ==============================================
 
+const highlightStep = (count) => {
+  const prev_idx = count - 1;
+  const is_prev_idx_pos = prev_idx >= 0;
+  
+  Steps.forEach((steps, i) => {
+    steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+    steps[count].classList.add('current');
+  });
+};
+
+// ==============================================
+
 const loopCallback = (time) => {
   
   if (patterns[0][count])
@@ -68,11 +80,7 @@ const loopCallback = (time) => {
   if (patterns[2][count])
     snare.start(time);
 
-  const prev_idx = count - 1;
-  const is_prev_idx_pos = prev_idx >= 0;
-  Steps[0][is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
-  Steps[0][count].classList.add('current');
-
+  highlightStep(count);
   updateDisplay(time);
   updateCount();
 }; // loop()
