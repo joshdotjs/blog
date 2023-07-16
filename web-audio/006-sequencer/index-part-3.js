@@ -3,6 +3,18 @@ const qsa = x => document.querySelectorAll(x);
 
 // ==============================================
 
+
+// TOOD: refactor
+//  --Tracks array of Track objects
+//  --Track class
+//    ---properties:
+//      ----name
+//      ----steps (DOM elements)
+//      ----pattern (array of 1s and 0s)
+//    ---methods:
+//      ----toggleStep()
+//      ----play()
+
 const patterns = [
   [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,], // hi-hat
   [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,], // kick
@@ -10,9 +22,11 @@ const patterns = [
 ];
 
 const tracks = qsa('.track > div');
+let Steps = [];
 
 tracks.forEach((track, i) => {
   const steps = track.querySelectorAll('div');
+  Steps.push(steps);
   steps.forEach((step, j) => {
 
     // initialize the UI to match initial patterns
@@ -53,6 +67,11 @@ const loopCallback = (time) => {
 
   if (patterns[2][count])
     snare.start(time);
+
+  const prev_idx = count - 1;
+  const is_prev_idx_pos = prev_idx >= 0;
+  Steps[0][is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+  Steps[0][count].classList.add('current');
 
   updateDisplay(time);
   updateCount();
