@@ -8,26 +8,22 @@ const hihat = new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination(
 const { Transport: T } = Tone;
 const round = (x, places) =>  Number.parseFloat(x).toFixed(places);
 
+// ==============================================
+
 let count = 0;
 const updateCount = () => count = (count + 1) % 16;
 
+// ==============================================
 
 const playBeat = () => {
 
-  T.scheduleRepeat((time) => {
-    
+  T.scheduleRepeat((time) => { 
     hihat.start(time);
-
-    if (count % 4 === 0) {
-      kick.start(time);
-    }
-    if ((count + 2) % 4 === 0) {
-      snare.start(time);
-    }
+    if (count % 4 === 0) kick.start(time);
+    if ((count + 2) % 4 === 0) snare.start(time);
 
     updateDisplay(time);
-    updateCount();
-    
+    updateCount();  
   }, "8n");
   
   T.start();

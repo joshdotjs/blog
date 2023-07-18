@@ -19,17 +19,17 @@
       > div {
         width: 20px;
         height: 20px;
-        background-color: lightblue;
+        background-color: skyblue;
         margin: 1px;
     
         display: grid;
         place-items: center;
 
         &.on {
-          outline: solid black 2px;
+          outline: solid darkorange 2px;
         }
         &.current {
-          color: yellow;
+          color: lime;
         }
       }
     }
