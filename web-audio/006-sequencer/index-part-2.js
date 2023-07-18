@@ -32,7 +32,7 @@ const loopCallback = (time) => {
 
   updateDisplay(time);
   updateCount();
-}; // loop()
+}; // loopCallback()
 
 // ==============================================
 

@@ -3,18 +3,6 @@ const qsa = x => document.querySelectorAll(x);
 
 // ==============================================
 
-
-// TOOD: refactor
-//  --Tracks array of Track objects
-//  --Track class
-//    ---properties:
-//      ----name
-//      ----steps (DOM elements)
-//      ----pattern (array of 1s and 0s)
-//    ---methods:
-//      ----toggleStep()
-//      ----play()
-
 const patterns = [
   [1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0,], // hi-hat
   [1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0,], // kick
