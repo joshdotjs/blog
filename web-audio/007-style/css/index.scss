@@ -4,14 +4,21 @@
 // ==============================================
 
 $border-1: solid 1px #252D31;
+$border-2: solid 1px #8B9396;
 
-$background-1: rgb(75,83,86);
-$gradient-1: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
+$background-grey-1: rgb(75,83,86);
+$gradient-grey-1: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
+$gradient-grey-2: linear-gradient(0deg, rgba(145,165,175,1) 0%, rgba(193,213,223,1) 100%);
 
+$gradient-red-1: linear-gradient(0deg, rgba(93,72,74,1) 0%, rgba(118,97,99,1) 100%);
+$gradient-red-2: linear-gradient(0deg, rgba(195,140,144,1) 0%, rgba(245,190,195,1) 100%);
+
+$background-green-1: #6EDB00;
+$gradient-green-1: linear-gradient(0deg, #DCF7AB 0%, $background-green-1 100%);
 
 // ==============================================
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -37,12 +44,38 @@ body {
     $track-height: 22px;
     $mr: 8px;
 
+    &-led-enable {
+      border: $border-2;
+      $sz: 9px;
+      height: $sz;
+      width: $sz;
+      border-radius: $sz / 2;
+      @include shadow(1);
+      &-inner {
+        $sz: 7px;
+        height: $sz;
+        width: $sz;
+        background: $background-grey-1;
+        background: $gradient-green-1;
+        border-radius: $sz / 2;
+        border: $border-1;
+        &-line {
+          height: 50%;
+          width: 1px;
+          background: white;
+          margin: 0 auto;
+          border-radius: 1px;
+        }
+      } // &-inner
+      margin-right: $mr;
+    } // &-led-enable
+
     &-knob-volume {
       $sz: 10px;
       height: $sz;
       width: $sz;
-      background: $background-1;
-      background: $gradient-1;
+      background: $background-grey-1;
+      background: $gradient-grey-1;
       border-radius: $sz / 2;
       border: $border-1;
       @include shadow(1);
@@ -68,8 +101,8 @@ body {
       @include shadow(1);
       border-radius: 2px;
       border: $border-1;
-      background: $background-1;
-      background: $gradient-1;
+      background: $background-grey-1;
+      background: $gradient-grey-1;
       margin-right: $mr;
      } 
 
@@ -83,9 +116,11 @@ body {
         width: 13px;
         margin: 1px;
 
-        display: grid;
-        place-items: center;
-        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 1px; // HACK - TODO: remove
+
         user-select: none;
         font-size: 11px;
 
@@ -93,16 +128,15 @@ body {
         
         border-radius: 3px;
         border: solid 1px #252D31;
-        background: rgb(75,83,86);
+        // background: rgb(75,83,86);
         color: white;
         &-A {  
-          background: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
-          &.step-on { background: linear-gradient(0deg, rgba(145,165,175,1) 0%, rgba(193,213,223,1) 100%); }
+          background: $gradient-grey-1;
+          &.step-on { background: $gradient-grey-2; }
         }
         &-B { 
-
-          background: linear-gradient(0deg, rgba(93,72,74,1) 0%, rgba(118,97,99,1) 100%);
-          &.step-on { background: linear-gradient(0deg, rgba(195,140,144,1) 0%, rgba(245,190,195,1) 100%); }
+          background: $gradient-red-1;
+          &.step-on { background: $gradient-red-2; }
         }
         
         &.current {

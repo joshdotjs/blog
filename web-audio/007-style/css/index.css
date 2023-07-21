@@ -23,7 +23,7 @@
   font-weight: 900;
   src: url("/assets/fonts/Roboto/woff/roboto-black-webfont.woff2") format("woff2"), url("/assets/fonts/Roboto/woff/roboto-black-webfont.woff") format("woff");
 }
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -43,6 +43,29 @@ body {
   border: solid transparent 2px;
   display: flex;
   align-items: center;
+}
+#tracks .track-led-enable {
+  border: solid 1px #8B9396;
+  height: 9px;
+  width: 9px;
+  border-radius: 4.5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-right: 8px;
+}
+#tracks .track-led-enable-inner {
+  height: 7px;
+  width: 7px;
+  background: rgb(75, 83, 86);
+  background: linear-gradient(0deg, #DCF7AB 0%, #6EDB00 100%);
+  border-radius: 3.5px;
+  border: solid 1px #252D31;
+}
+#tracks .track-led-enable-inner-line {
+  height: 50%;
+  width: 1px;
+  background: white;
+  margin: 0 auto;
+  border-radius: 1px;
 }
 #tracks .track-knob-volume {
   height: 10px;
@@ -84,14 +107,15 @@ body {
 #tracks .track .steps .step {
   width: 13px;
   margin: 1px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1px;
   user-select: none;
   font-size: 11px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 3px;
   border: solid 1px #252D31;
-  background: rgb(75, 83, 86);
   color: white;
 }
 #tracks .track .steps .step-A {
