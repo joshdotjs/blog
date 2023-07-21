@@ -65,34 +65,29 @@ const resetHighlightedSteps = () => {
 
 // ==============================================
 
-const loopCallback = (time) => {
-  
-  if (patterns[0][count])
-    hihat.start(time);
-
-  if (patterns[1][count])
-    kick.start(time);
-
-  if (patterns[2][count])
-    snare.start(time);
-
+const loopCallback = (time) => {  
+  if (patterns[0][count]) hihat.start(time);
+  if (patterns[1][count]) kick.start(time);
+  if (patterns[2][count]) snare.start(time);
   highlightStep(count);
   updateDisplay(time);
   updateCount();
-}; // loop()
+}; // loopCallback()
 
 // ==============================================
 
 const playBeat = () => {
-  T.scheduleRepeat(t => loopCallback(t), "8n");
+  T.scheduleRepeat((t) => loopCallback(t), "8n");
   T.start();
 }; // playBeat()
 
 // ==============================================
 
-const startBeat = () => Tone.start().then(() => {
+const startBeat = async () => {
+  // Tone.start().then(() => playBeat());
+  await Tone.start();
   playBeat();
-}); // startBeat()
+}; // startBeat()
 
 // ==============================================
 
@@ -109,7 +104,6 @@ let paused = false;
 const pauseBeat = () => {
   if (paused) T.start();
   else  T.pause();
-
   paused = !paused;
 }; // stopBeat()
 
@@ -120,42 +114,38 @@ const start_btn = master_controls.querySelector('.master-control-play');
 const stop_btn = master_controls.querySelector('.master-control-stop');
 const pause_btn = master_controls.querySelector('.master-control-pause');
 
-start_btn.addEventListener('click', () => {
-
-  // TODO: 
-  console.log('Tone.context.state: ', Tone.context.state);
-
-  startBeat();
-
-  // TODO: Move into playing state function
-  start_btn.disabled = true;
-  stop_btn.disabled = false;
-  pause_btn.disabled = false;
-});
-
-
-stop_btn.addEventListener('click', () => {
-  stopBeat();
-
-  // TODO: Move into stopped state function
-  start_btn.disabled = false;
-  stop_btn.disabled = true;
-  pause_btn.disabled = true;
-});
-pause_btn.addEventListener('click', () => {
-  pauseBeat();
-
-  // TODO: Move into paused state function
-  if (paused) {
-    start_btn.disabled = true;
-    stop_btn.disabled = true;
-    pause_btn.disabled = false;
-  } else {
+const changeBeatState = (next) => () => {
+  if (next === 'play') {
+    startBeat();
     start_btn.disabled = true;
     stop_btn.disabled = false;
     pause_btn.disabled = false;
-  }
-});
+  } // if (next === 'play')
+
+  if (next === 'pause') {
+    stopBeat();
+    start_btn.disabled = false;
+    stop_btn.disabled = true;
+    pause_btn.disabled = true;
+  } // if (next === 'pause')
+
+  if (next === 'stop') {
+    pauseBeat();
+    if (paused) {
+      start_btn.disabled = true;
+      stop_btn.disabled = true;
+      pause_btn.disabled = false;
+    } else {
+      start_btn.disabled = true;
+      stop_btn.disabled = false;
+      pause_btn.disabled = false;
+    }
+  } // if (next === 'stop')
+}
+
+start_btn.addEventListener('click', changeBeatState('play'));
+stop_btn.addEventListener('click',  changeBeatState('stop'));
+pause_btn.addEventListener('click', changeBeatState('pause'));
 
 // const time_display = qs('#time > span');
 const timing_display = qs('.timing-display');
@@ -176,21 +166,16 @@ function resetCount() {
   beats_display.textContent = '0';
   count_display.textContent = '00';
   count = 0;
-}
+} // resetCount()
 
 // ==============================================
 
-const volume_control = qs('#volume');
-volume_control.addEventListener('input', ({ target: { value } }) => {
-  Tone.Destination.volume.value = value - 50; // Tone.js uses a decibel scale for volume where 0 is maximum and -Infinity is minimum.
-});
-
-// ==============================================
-
-// const bpm_control = qs('#bpm');
-// bpm_control.addEventListener('input', ({ target: { value } }) => {
-//   T.bpm.value = value;
+// const volume_control = qs('#volume');
+// volume_control.addEventListener('input', ({ target: { value } }) => {
+//   Tone.Destination.volume.value = value - 50; // Tone.js uses a decibel scale for volume where 0 is maximum and -Infinity is minimum.
 // });
+
+// ==============================================
 
 const bpm_display = qs('.bpm-display');
 const bpm_display_value = bpm_display.querySelector('.bpm-display-value');
@@ -201,65 +186,63 @@ function setBPM(value) {
   const rounded = Math.round(value);
   T.bpm.value = rounded;
   bpm_display_value.innerText = rounded;
-};
-setBPM(130); // initialize to 130
+}; // setBPM()
+setBPM(140); // initialize to 140 bpm
 
 bpm_button_up.addEventListener('click', () => {
-  console.log('bpm_control_button_up clicked');
   setBPM(T.bpm.value + 1);
 });
 
 bpm_button_down.addEventListener('click', () => {
-  console.log('bpm_control_button_down clicked');
   setBPM(T.bpm.value - 1);
 });
 
 // ==============================================
 
-const setupSliderBPM = () => {
-  let knob = qs('.bpm-display');
-  let valueElement = knob.querySelector('.bpm-display-value');
-  let value = 0;
-  let isMouseDown = false;
-  let lastY;
+// const setupSliderBPM = () => {
+//   let knob = qs('.bpm-display');
+//   let valueElement = knob.querySelector('.bpm-display-value');
+//   let value = 0;
+//   let isMouseDown = false;
+//   let lastY;
   
-  knob.addEventListener('mousedown', function(e) {
-    isMouseDown = true;
-    lastY = e.clientY;
-  });
+//   knob.addEventListener('mousedown', function(e) {
+//     isMouseDown = true;
+//     lastY = e.clientY;
+//   });
   
-  knob.addEventListener('mousemove', function(e) {
-    if (isMouseDown) {
-      value += lastY - e.clientY;
-      lastY = e.clientY;
-      valueElement.innerText = value;
-    }
-  });
+//   knob.addEventListener('mousemove', function(e) {
+//     if (isMouseDown) {
+//       value += lastY - e.clientY;
+//       lastY = e.clientY;
+//       valueElement.innerText = value;
+//     }
+//   });
   
-  knob.addEventListener('mouseup', function() {
-    isMouseDown = false;
-  });
+//   knob.addEventListener('mouseup', function() {
+//     isMouseDown = false;
+//   });
   
-  knob.addEventListener('mouseleave', function() {
-    isMouseDown = false;
-  });
+//   knob.addEventListener('mouseleave', function() {
+//     isMouseDown = false;
+//   });
   
-  // Handle touch events for mobile
-  knob.addEventListener('touchstart', function(e) {
-    isMouseDown = true;
-    lastY = e.touches[0].clientY;
-  });
+//   // Handle touch events for mobile
+//   knob.addEventListener('touchstart', function(e) {
+//     isMouseDown = true;
+//     lastY = e.touches[0].clientY;
+//   });
   
-  knob.addEventListener('touchmove', function(e) {
-    if (isMouseDown) {
-        value += lastY - e.touches[0].clientY;
-        lastY = e.touches[0].clientY;
-        valueElement.innerText = value;
-    }
-  });
+//   knob.addEventListener('touchmove', function(e) {
+//     if (isMouseDown) {
+//         value += lastY - e.touches[0].clientY;
+//         lastY = e.touches[0].clientY;
+//         valueElement.innerText = value;
+//     }
+//   });
   
-  knob.addEventListener('touchend', function() {
-      isMouseDown = false;
-  });
-};
-setupSliderBPM();
+//   knob.addEventListener('touchend', function() {
+//       isMouseDown = false;
+//   });
+// };
+// setupSliderBPM();
