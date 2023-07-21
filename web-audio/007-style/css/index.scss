@@ -35,161 +35,28 @@ body {
   font-weight: 300;
 }
 
-// ==============================================
+main {
 
-#top-bar {
-  padding: 8px 16px;
-  background: $background-grey-1;
-  border-bottom: $border-3;
-  display: flex;
-  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
 
-  // --------------------------------------------
+  // ==============================================
 
-  .master-knob-volume {
-    $sz: 10px;
-    height: $sz;
-    width: $sz;
+  #top-bar {
+    padding: 8px 16px;
     background: $background-grey-1;
-    background: $gradient-grey-2;
-    border-radius: $sz / 2;
-    border: $border-1;
-    &-line {
-      height: 50%;
-      width: 1px;
-      background: $light-gray-1;
-      margin: 0 auto;
-      border-radius: 1px;
-    }
-    @include shadow(1);
-    margin-right: 8px;
-  }
-
-  // --------------------------------------------
-
-  .master-controls {
-    width: fit-content;
-    display: flex;
-
-    border-radius: 2px;
-    overflow: hidden;
-    border: $border-1;
-
-    .master-control {
-      background: $gradient-grey-2;
-      padding: 3px 0;
-
-      svg { 
-        color: $light-gray-1;
-        height: 8px;
-      }
-
-      &-play  { border-right: $border-1; }
-      &-stop  { border-right: $border-1; }
-      &-pause {}
-    }
-    @include shadow(1);
-    margin-right: 8px;
-  }
-
-  // --------------------------------------------
-
-  .bpm-control {
-    // height: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    padding: 2px 0;
-    background: red;
-    border-radius: 2px;
-    border: solid #7B8E95 1px;
-    background: #BCCFD6;
-
-    &-value {
-      font-size: 9px;
-      line-height: 1;
-      margin-right: 2px;
-    }
-
-    &-units {
-      font-size: 5px;
-      margin-top: auto;
-    }
-
-    margin-right: 8px;
-  }
-
-  // --------------------------------------------
-
-  .timing-display { 
-    // width: 50px;
-    padding: 1px 4px;
-    font-size: 10px;
-    color: #D8F8F9;
-    background: #4F6666;
-    border: solid #3A5151 1px;
-    border-radius: 2px;
-    &-bars {}
-    &-beats {}
-    &-count {
-      font-size: 6px;
-    }
-    // &-units {
-    //   font-size: 4px;
-    // }
-  }
-
-  // --------------------------------------------
-}
-
-// ==============================================
-
-#tracks {
-  border: solid $border-1 1px;
-  background: $background-grey-1;
-  padding: 16px;
-  
-  .track {
-    // border: solid transparent 2px;
+    border-bottom: $border-3;
     display: flex;
     align-items: center;
 
-    $track-height: 22px;
-    $mr: 6px;
+    // --------------------------------------------
 
-    &-led-enable {
-      border: $border-2;
-      $sz: 9px;
-      height: $sz;
-      width: $sz;
-      border-radius: $sz / 2;
-      &-inner {
-        $sz: 7px;
-        height: $sz;
-        width: $sz;
-        background: $background-grey-1;
-        background: $gradient-green-1;
-        border-radius: $sz / 2;
-        border: $border-1;
-        &-line {
-          height: 50%;
-          width: 1px;
-          background: white;
-          margin: 0 auto;
-          border-radius: 1px;
-        }
-      } // &-inner
-      @include shadow(1);
-      margin-right: $mr;
-    } // &-led-enable
-
-    &-knob-volume {
+    .master-knob-volume {
       $sz: 10px;
       height: $sz;
       width: $sz;
       background: $background-grey-1;
-      background: $gradient-grey-1;
+      background: $gradient-grey-2;
       border-radius: $sz / 2;
       border: $border-1;
       &-line {
@@ -200,65 +67,212 @@ body {
         border-radius: 1px;
       }
       @include shadow(1);
-      margin-right: $mr;
+      margin-right: 8px;
     }
 
-    &-title { 
+    // --------------------------------------------
+
+    .master-controls {
+      width: fit-content;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 50px !important;
-      height: $track-height;
-      font-size: 12px;
-      user-select: none;
-      color: white;
+
       border-radius: 2px;
+      overflow: hidden;
       border: $border-1;
-      background: $background-grey-1;
-      background: $gradient-grey-1;
+
+      .master-control {
+        all: unset;
+        background: $gradient-grey-2;
+        padding: 3px 0;
+
+        svg { 
+          color: $light-gray-1;
+          height: 8px;
+        }
+
+        &-play  { border-right: $border-1; }
+        &-stop  { border-right: $border-1; }
+        &-pause {}
+
+        &:disabled {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }
       @include shadow(1);
-      margin-right: $mr;
-    } 
+      margin-right: 8px;
+    }
 
-    .steps {
-      display: inline-flex;
-      height: $track-height;
-      
-      .step {
-        width: 13px;
-        margin: 1px;
+    // --------------------------------------------
 
+    .bpm-control {
+      // height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      padding: 2px 0;
+      background: red;
+      border-radius: 2px;
+      border: solid #7B8E95 1px;
+      background: #BCCFD6;
+
+      &-value {
+        font-size: 9px;
+        line-height: 1;
+        margin-right: 2px;
+      }
+
+      &-units {
+        font-size: 5px;
+        margin-top: auto;
+      }
+
+      margin-right: 8px;
+    }
+
+    // --------------------------------------------
+
+    .timing-display { 
+      // width: 50px;
+      padding: 1px 4px;
+      font-size: 10px;
+      color: #D8F8F9;
+      background: #4F6666;
+      border: solid #3A5151 1px;
+      border-radius: 2px;
+      &-bars {}
+      &-beats {}
+      &-count {
+        font-size: 6px;
+      }
+      // &-units {
+      //   font-size: 4px;
+      // }
+    }
+
+    // --------------------------------------------
+  }
+
+  // ==============================================
+
+  #tracks {
+    border: solid $border-1 1px;
+    background: $background-grey-1;
+    padding: 16px;
+    
+    .track {
+      // border: solid transparent 2px;
+      display: flex;
+      align-items: center;
+
+      $track-height: 22px;
+      $mr: 6px;
+
+      &-led-enable {
+        border: $border-2;
+        $sz: 9px;
+        height: $sz;
+        width: $sz;
+        border-radius: $sz / 2;
+        &-inner {
+          $sz: 7px;
+          height: $sz;
+          width: $sz;
+          background: $background-grey-1;
+          background: $gradient-green-1;
+          border-radius: $sz / 2;
+          border: $border-1;
+          &-line {
+            height: 50%;
+            width: 1px;
+            background: white;
+            margin: 0 auto;
+            border-radius: 1px;
+          }
+        } // &-inner
+        @include shadow(1);
+        margin-right: $mr;
+      } // &-led-enable
+
+      &-knob-volume {
+        $sz: 10px;
+        height: $sz;
+        width: $sz;
+        background: $background-grey-1;
+        background: $gradient-grey-1;
+        border-radius: $sz / 2;
+        border: $border-1;
+        &-line {
+          height: 50%;
+          width: 1px;
+          background: $light-gray-1;
+          margin: 0 auto;
+          border-radius: 1px;
+        }
+        @include shadow(1);
+        margin-right: $mr;
+      }
+
+      &-title { 
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 1px; // HACK - TODO: remove
-
+        min-width: 50px !important;
+        height: $track-height;
+        font-size: 12px;
         user-select: none;
-        font-size: 11px;
-
-        
-        border-radius: 3px;
-        border: solid 1px #252D31;
-        // background: rgb(75,83,86);
         color: white;
-        &-A {  
-          background: $gradient-grey-1;
-          &.step-on { background: $gradient-grey-1-on; }
-        }
-        &-B { 
-          background: $gradient-red-1;
-          &.step-on { background: $gradient-red-1-on; }
-        }
-        
-        &.current {
-          color: lime;
-        }
+        border-radius: 2px;
+        border: $border-1;
+        background: $background-grey-1;
+        background: $gradient-grey-1;
         @include shadow(1);
+        margin-right: $mr;
+      } 
+
+      .steps {
+        display: inline-flex;
+        height: $track-height;
+        
+        .step {
+          width: 13px;
+          margin: 1px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding-bottom: 1px; // HACK - TODO: remove
+
+          user-select: none;
+          font-size: 11px;
+
+          
+          border-radius: 3px;
+          border: solid 1px #252D31;
+          // background: rgb(75,83,86);
+          color: white;
+          &-A {  
+            background: $gradient-grey-1;
+            &.step-on { background: $gradient-grey-1-on; }
+          }
+          &-B { 
+            background: $gradient-red-1;
+            &.step-on { background: $gradient-red-1-on; }
+          }
+          
+          &.current {
+            color: lime;
+          }
+          @include shadow(1);
+        }
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
       }
     }
-
-    &:not(:last-child) {
-      margin-bottom: 4px;
-    }
   }
-}
+
+  // ==============================================
+} // main

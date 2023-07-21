@@ -115,9 +115,10 @@ const pauseBeat = () => {
 
 // ==============================================
 
-const start_btn = qs('#start');
-const stop_btn = qs('#stop');
-const pause_btn = qs('#pause');
+const master_controls = qs('.master-controls');
+const start_btn = master_controls.querySelector('.master-control-play');
+const stop_btn = master_controls.querySelector('.master-control-stop');
+const pause_btn = master_controls.querySelector('.master-control-pause');
 
 start_btn.addEventListener('click', () => {
 

@@ -34,14 +34,18 @@ body {
   font-weight: 300;
 }
 
-#top-bar {
+main {
+  width: fit-content;
+  margin: 0 auto;
+}
+main #top-bar {
   padding: 8px 16px;
   background: #5E696D;
   border-bottom: solid 1px #404B50;
   display: flex;
   align-items: center;
 }
-#top-bar .master-knob-volume {
+main #top-bar .master-knob-volume {
   height: 10px;
   width: 10px;
   background: #5E696D;
@@ -51,14 +55,14 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 8px;
 }
-#top-bar .master-knob-volume-line {
+main #top-bar .master-knob-volume-line {
   height: 50%;
   width: 1px;
   background: #C2C9CD;
   margin: 0 auto;
   border-radius: 1px;
 }
-#top-bar .master-controls {
+main #top-bar .master-controls {
   width: fit-content;
   display: flex;
   border-radius: 2px;
@@ -67,21 +71,26 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 8px;
 }
-#top-bar .master-controls .master-control {
+main #top-bar .master-controls .master-control {
+  all: unset;
   background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
   padding: 3px 0;
 }
-#top-bar .master-controls .master-control svg {
+main #top-bar .master-controls .master-control svg {
   color: #C2C9CD;
   height: 8px;
 }
-#top-bar .master-controls .master-control-play {
+main #top-bar .master-controls .master-control-play {
   border-right: solid 1px #252D31;
 }
-#top-bar .master-controls .master-control-stop {
+main #top-bar .master-controls .master-control-stop {
   border-right: solid 1px #252D31;
 }
-#top-bar .bpm-control {
+main #top-bar .master-controls .master-control:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+main #top-bar .bpm-control {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,16 +102,16 @@ body {
   background: #BCCFD6;
   margin-right: 8px;
 }
-#top-bar .bpm-control-value {
+main #top-bar .bpm-control-value {
   font-size: 9px;
   line-height: 1;
   margin-right: 2px;
 }
-#top-bar .bpm-control-units {
+main #top-bar .bpm-control-units {
   font-size: 5px;
   margin-top: auto;
 }
-#top-bar .timing-display {
+main #top-bar .timing-display {
   padding: 1px 4px;
   font-size: 10px;
   color: #D8F8F9;
@@ -110,20 +119,19 @@ body {
   border: solid #3A5151 1px;
   border-radius: 2px;
 }
-#top-bar .timing-display-count {
+main #top-bar .timing-display-count {
   font-size: 6px;
 }
-
-#tracks {
+main #tracks {
   border: solid solid 1px #252D31 1px;
   background: #5E696D;
   padding: 16px;
 }
-#tracks .track {
+main #tracks .track {
   display: flex;
   align-items: center;
 }
-#tracks .track-led-enable {
+main #tracks .track-led-enable {
   border: solid 1px #8B9396;
   height: 9px;
   width: 9px;
@@ -131,7 +139,7 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 6px;
 }
-#tracks .track-led-enable-inner {
+main #tracks .track-led-enable-inner {
   height: 7px;
   width: 7px;
   background: #5E696D;
@@ -139,14 +147,14 @@ body {
   border-radius: 3.5px;
   border: solid 1px #252D31;
 }
-#tracks .track-led-enable-inner-line {
+main #tracks .track-led-enable-inner-line {
   height: 50%;
   width: 1px;
   background: white;
   margin: 0 auto;
   border-radius: 1px;
 }
-#tracks .track-knob-volume {
+main #tracks .track-knob-volume {
   height: 10px;
   width: 10px;
   background: #5E696D;
@@ -156,14 +164,14 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 6px;
 }
-#tracks .track-knob-volume-line {
+main #tracks .track-knob-volume-line {
   height: 50%;
   width: 1px;
   background: #C2C9CD;
   margin: 0 auto;
   border-radius: 1px;
 }
-#tracks .track-title {
+main #tracks .track-title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -179,11 +187,11 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 6px;
 }
-#tracks .track .steps {
+main #tracks .track .steps {
   display: inline-flex;
   height: 22px;
 }
-#tracks .track .steps .step {
+main #tracks .track .steps .step {
   width: 13px;
   margin: 1px;
   display: flex;
@@ -197,21 +205,21 @@ body {
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
-#tracks .track .steps .step-A {
+main #tracks .track .steps .step-A {
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
 }
-#tracks .track .steps .step-A.step-on {
+main #tracks .track .steps .step-A.step-on {
   background: linear-gradient(0deg, rgb(145, 165, 175) 0%, rgb(193, 213, 223) 100%);
 }
-#tracks .track .steps .step-B {
+main #tracks .track .steps .step-B {
   background: linear-gradient(0deg, rgb(93, 72, 74) 0%, rgb(118, 97, 99) 100%);
 }
-#tracks .track .steps .step-B.step-on {
+main #tracks .track .steps .step-B.step-on {
   background: linear-gradient(0deg, rgb(195, 140, 144) 0%, rgb(245, 190, 195) 100%);
 }
-#tracks .track .steps .step.current {
+main #tracks .track .steps .step.current {
   color: lime;
 }
-#tracks .track:not(:last-child) {
+main #tracks .track:not(:last-child) {
   margin-bottom: 4px;
 }/*# sourceMappingURL=index.css.map */
