@@ -44,6 +44,8 @@ body {
   display: flex;
   align-items: center;
 
+  // --------------------------------------------
+
   .master-knob-volume {
     $sz: 10px;
     height: $sz;
@@ -52,7 +54,6 @@ body {
     background: $gradient-grey-2;
     border-radius: $sz / 2;
     border: $border-1;
-    @include shadow(1);
     &-line {
       height: 50%;
       width: 1px;
@@ -60,8 +61,11 @@ body {
       margin: 0 auto;
       border-radius: 1px;
     }
+    @include shadow(1);
     margin-right: 8px;
   }
+
+  // --------------------------------------------
 
   .master-controls {
     width: fit-content;
@@ -71,11 +75,9 @@ body {
     overflow: hidden;
     border: $border-1;
 
-    @include shadow(1);
-    
     .master-control {
       background: $gradient-grey-2;
-      padding: 2px 0;
+      padding: 3px 0;
 
       svg { 
         color: $light-gray-1;
@@ -86,7 +88,37 @@ body {
       &-stop  { border-right: $border-1; }
       &-pause {}
     }
+    @include shadow(1);
+    margin-right: 8px;
   }
+
+  // --------------------------------------------
+
+  .bpm-control {
+    // height: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    padding: 2px 0;
+    background: red;
+    border-radius: 2px;
+    border: solid #7B8E95 1px;
+    background: #BCCFD6;
+
+    &-value {
+      font-size: 9px;
+      line-height: 1;
+      margin-right: 2px;
+    }
+
+    &-units {
+      font-size: 5px;
+      margin-top: auto;
+    }
+  }
+
+  // --------------------------------------------
 }
 
 // ==============================================
@@ -110,7 +142,6 @@ body {
       height: $sz;
       width: $sz;
       border-radius: $sz / 2;
-      @include shadow(1);
       &-inner {
         $sz: 7px;
         height: $sz;
@@ -127,6 +158,7 @@ body {
           border-radius: 1px;
         }
       } // &-inner
+      @include shadow(1);
       margin-right: $mr;
     } // &-led-enable
 
@@ -138,7 +170,6 @@ body {
       background: $gradient-grey-1;
       border-radius: $sz / 2;
       border: $border-1;
-      @include shadow(1);
       &-line {
         height: 50%;
         width: 1px;
@@ -146,6 +177,7 @@ body {
         margin: 0 auto;
         border-radius: 1px;
       }
+      @include shadow(1);
       margin-right: $mr;
     }
 
@@ -158,18 +190,16 @@ body {
       font-size: 12px;
       user-select: none;
       color: white;
-      @include shadow(1);
       border-radius: 2px;
       border: $border-1;
       background: $background-grey-1;
       background: $gradient-grey-1;
+      @include shadow(1);
       margin-right: $mr;
     } 
 
     .steps {
       display: inline-flex;
-      // border: solid black 1px;
-    
       height: $track-height;
       
       .step {
@@ -184,7 +214,6 @@ body {
         user-select: none;
         font-size: 11px;
 
-        @include shadow(1);
         
         border-radius: 3px;
         border: solid 1px #252D31;
@@ -202,6 +231,7 @@ body {
         &.current {
           color: lime;
         }
+        @include shadow(1);
       }
     }
   }

@@ -65,10 +65,11 @@ body {
   overflow: hidden;
   border: solid 1px #252D31;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-right: 8px;
 }
 #top-bar .master-controls .master-control {
   background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
-  padding: 2px 0;
+  padding: 3px 0;
 }
 #top-bar .master-controls .master-control svg {
   color: #C2C9CD;
@@ -80,6 +81,27 @@ body {
 #top-bar .master-controls .master-control-stop {
   border-right: solid 1px #252D31;
 }
+#top-bar .bpm-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  padding: 2px 0;
+  background: red;
+  border-radius: 2px;
+  border: solid #7B8E95 1px;
+  background: #BCCFD6;
+}
+#top-bar .bpm-control-value {
+  font-size: 9px;
+  line-height: 1;
+  margin-right: 2px;
+}
+#top-bar .bpm-control-units {
+  font-size: 5px;
+  margin-top: auto;
+}
+
 #tracks {
   border: solid solid 1px #252D31 1px;
   background: #5E696D;
@@ -139,11 +161,11 @@ body {
   font-size: 12px;
   user-select: none;
   color: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 2px;
   border: solid 1px #252D31;
   background: #5E696D;
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   margin-right: 6px;
 }
 #tracks .track .steps {
@@ -159,10 +181,10 @@ body {
   padding-bottom: 1px;
   user-select: none;
   font-size: 11px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 3px;
   border: solid 1px #252D31;
   color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 #tracks .track .steps .step-A {
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
