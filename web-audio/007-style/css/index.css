@@ -189,7 +189,7 @@ main #tracks .track-title {
   align-items: center;
   min-width: 50px !important;
   height: 22px;
-  font-size: 12px;
+  font-size: 10px;
   user-select: none;
   color: white;
   border-radius: 2px;
