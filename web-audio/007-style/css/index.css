@@ -92,6 +92,7 @@ body {
   border-radius: 3px;
   border: solid 1px #252D31;
   background: rgb(75, 83, 86);
+  color: white;
 }
 #tracks .track .steps .step-A {
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);

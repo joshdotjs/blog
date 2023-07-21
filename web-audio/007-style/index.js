@@ -9,11 +9,11 @@ const patterns = [
   [0, 0, 1, 0,  0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1,], // snare
 ];
 
-const tracks = qsa('.track > div');
+const tracks = qsa('.track > .steps');
 let Steps = [];
 
 tracks.forEach((track, i) => {
-  const steps = track.querySelectorAll('div');
+  const steps = track.querySelectorAll('.step');
   Steps.push(steps);
   steps.forEach((step, j) => {
 
