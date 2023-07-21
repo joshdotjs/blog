@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./index.css">
+    <script src="/assets/lib/Tone/Tone.js" defer></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body>
+    
+    <button id="start">Start Beat</button>
+    <button id="stop" disabled>Stop Beat</button>
+    <button id="pause" disabled>Pause Beat</button>
+
+    <div id="display">
+      <div id="time">Time: <span></span></div>
+      <div id="count">Count: <span></span></div>
+      <div id="bars">Bars: <span></span></div>
+      <div id="beats">Beats: <span></span></div>
+    </div>
+
+    <div id="volume-control">
+      <label for="volume">Master Volume: </label>
+      <input type="range" id="volume" min="0" max="100" value="50" step="1">
+    </div>
+
+    <div id="bpm-control">
+      <label for="bpm">BPM: </label>
+      <input type="range" id="bpm" min="40" max="220" value="120" step="1">
+    </div>
+
+    <div id="tracks">    
+
+      <div class="track">
+        <p>HH</p>
+        <div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </div>
+      </div> <!-- .track -->
+
+      <div class="track">
+        <p>Kick</p>
+        <div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </div>
+      </div> <!-- .track -->
+
+      <div class="track">
+        <p>Snare</p>
+        <div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </div>
+      </div> <!-- .track -->
+
+    </div> <!-- #tracks-->
+   </body>
+</html>
