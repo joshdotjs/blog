@@ -19,12 +19,12 @@ tracks.forEach((track, i) => {
 
     // initialize the UI to match initial patterns
     if (patterns[i][j])
-      steps[j].classList.toggle('on');
+      steps[j].classList.toggle('step-on');
 
     // toggle the pattern and UI when a step is clicked
     step.addEventListener('click', () => {
       patterns[i][j] = patterns[i][j] ? 0 : 1;
-      steps[j].classList.toggle('on');
+      steps[j].classList.toggle('step-on');
     });
   });
 });
