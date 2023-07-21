@@ -35,20 +35,33 @@ body {
 }
 
 #top-bar {
-  height: 40px;
+  padding: 8px;
   background: #5E696D;
   border-bottom: solid 1px #404B50;
 }
 #top-bar .master-controls {
-  background: red;
+  width: fit-content;
   display: flex;
-  gap: 1px;
+  border-radius: 2px;
+  overflow: hidden;
+  border: solid 1px #252D31;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 #top-bar .master-controls .master-control {
   background: blue;
-  border: solid black 1px;
+  background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
+  padding: 2px 0;
 }
-
+#top-bar .master-controls .master-control svg {
+  color: #C2C9CD;
+  height: 8px;
+}
+#top-bar .master-controls .master-control-play {
+  border-right: solid 1px #252D31;
+}
+#top-bar .master-controls .master-control-stop {
+  border-right: solid 1px #252D31;
+}
 #tracks {
   border: solid solid 1px #252D31 1px;
   background: #5E696D;
