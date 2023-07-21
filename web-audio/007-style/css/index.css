@@ -34,6 +34,21 @@ body {
   font-weight: 300;
 }
 
+#top-bar {
+  height: 40px;
+  background: #5E696D;
+  border-bottom: solid 1px #404B50;
+}
+#top-bar .master-controls {
+  background: red;
+  display: flex;
+  gap: 1px;
+}
+#top-bar .master-controls .master-control {
+  background: blue;
+  border: solid black 1px;
+}
+
 #tracks {
   border: solid solid 1px #252D31 1px;
   background: #5E696D;
@@ -50,12 +65,12 @@ body {
   width: 9px;
   border-radius: 4.5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 8px;
+  margin-right: 6px;
 }
 #tracks .track-led-enable-inner {
   height: 7px;
   width: 7px;
-  background: rgb(75, 83, 86);
+  background: #5E696D;
   background: linear-gradient(0deg, #DCF7AB 0%, #6EDB00 100%);
   border-radius: 3.5px;
   border: solid 1px #252D31;
@@ -70,12 +85,12 @@ body {
 #tracks .track-knob-volume {
   height: 10px;
   width: 10px;
-  background: rgb(75, 83, 86);
+  background: #5E696D;
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
   border-radius: 5px;
   border: solid 1px #252D31;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 8px;
+  margin-right: 6px;
 }
 #tracks .track-knob-volume-line {
   height: 50%;
@@ -96,9 +111,9 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 2px;
   border: solid 1px #252D31;
-  background: rgb(75, 83, 86);
+  background: #5E696D;
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
-  margin-right: 8px;
+  margin-right: 6px;
 }
 #tracks .track .steps {
   display: inline-flex;
