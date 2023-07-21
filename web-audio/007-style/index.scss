@@ -1,8 +1,48 @@
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 300;
+  src: url('/assets/fonts/Roboto/woff/roboto-light-webfont.woff2') format('woff2'),
+       url('/assets/fonts/Roboto/woff/roboto-light-webfont.woff')  format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: url('/assets/fonts/Roboto/woff/roboto-regular-webfont.woff2') format('woff2'),
+       url('/assets/fonts/Roboto/woff/roboto-regular-webfont.woff')  format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 500;
+  src: url('/assets/fonts/Roboto/woff/roboto-medium-webfont.woff2') format('woff2'),
+       url('/assets/fonts/Roboto/woff/roboto-medium-webfont.woff')  format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 700;
+  src: url('/assets/fonts/Roboto/woff/roboto-bold-webfont.woff2') format('woff2'),
+       url('/assets/fonts/Roboto/woff/roboto-bold-webfont.woff')  format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 900;
+  src: url('/assets/fonts/Roboto/woff/roboto-black-webfont.woff2') format('woff2'),
+       url('/assets/fonts/Roboto/woff/roboto-black-webfont.woff')  format('woff');
+}
+
+// ==============================================
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+// ==============================================
 
 #tracks {
   .track {
@@ -10,22 +50,24 @@
     display: flex;
     align-items: center;
 
-    > p { 
+    &-title { 
       margin-right: 8px;
       min-width: 40px !important;
       /* background: red; */
      } 
 
-    > div {
+    .steps {
       display: inline-flex;
       border: solid black 1px;
     
-      > div {
+      .step {
         width: 20px;
         height: 20px;
-        background-color: skyblue;
         margin: 1px;
-    
+
+        background: rgb(75,83,86);
+        background: linear-gradient(0deg, rgba(75,83,86,1) 0%, rgba(90,99,102,1) 100%);
+
         display: grid;
         place-items: center;
 
