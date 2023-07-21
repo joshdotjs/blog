@@ -38,6 +38,25 @@ body {
   padding: 8px;
   background: #5E696D;
   border-bottom: solid 1px #404B50;
+  display: flex;
+  align-items: center;
+}
+#top-bar .master-knob-volume {
+  height: 10px;
+  width: 10px;
+  background: #5E696D;
+  background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
+  border-radius: 5px;
+  border: solid 1px #252D31;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-right: 8px;
+}
+#top-bar .master-knob-volume-line {
+  height: 50%;
+  width: 1px;
+  background: #C2C9CD;
+  margin: 0 auto;
+  border-radius: 1px;
 }
 #top-bar .master-controls {
   width: fit-content;
@@ -48,7 +67,6 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 #top-bar .master-controls .master-control {
-  background: blue;
   background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
   padding: 2px 0;
 }
@@ -108,7 +126,7 @@ body {
 #tracks .track-knob-volume-line {
   height: 50%;
   width: 1px;
-  background: white;
+  background: #C2C9CD;
   margin: 0 auto;
   border-radius: 1px;
 }
