@@ -3,6 +3,14 @@
 
 // ==============================================
 
+$border-1: solid 1px #252D31;
+
+$background-1: rgb(75,83,86);
+$gradient-1: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
+
+
+// ==============================================
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,19 +25,41 @@ body {
 // ==============================================
 
 #tracks {
+  border: solid $border-1 1px;
+  background: #5E696D;
+  padding: 16px;
+  
   .track {
     border: solid transparent 2px;
     display: flex;
     align-items: center;
-    background: #5E696D;
 
     $track-height: 22px;
+    $mr: 8px;
+
+    &-knob-volume {
+      $sz: 10px;
+      height: $sz;
+      width: $sz;
+      background: $background-1;
+      background: $gradient-1;
+      border-radius: $sz / 2;
+      border: $border-1;
+      @include shadow(1);
+      &-line {
+        height: 50%;
+        width: 1px;
+        background: white;
+        margin: 0 auto;
+        border-radius: 1px;
+      }
+      margin-right: $mr;
+    }
 
     &-title { 
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 8px;
       min-width: 50px !important;
       height: $track-height;
       font-size: 12px;
@@ -37,9 +67,10 @@ body {
       color: white;
       @include shadow(1);
       border-radius: 2px;
-      border: solid 1px #252D31;
-      background: rgb(75,83,86);
-      background: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
+      border: $border-1;
+      background: $background-1;
+      background: $gradient-1;
+      margin-right: $mr;
      } 
 
     .steps {
