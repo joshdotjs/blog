@@ -39,6 +39,7 @@ const hihat = new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination(
 
 const { Transport: T } = Tone;
 const round = (x, places) =>  Number.parseFloat(x).toFixed(places);
+const pad = (x, places) => String(x).padStart(places, '0');
 
 let count = 0;
 const updateCount = () => count = (count + 1) % 16;
@@ -99,7 +100,7 @@ const stopBeat = () => {
   T.stop();
   T.cancel();
   resetHighlightedSteps();
-  count = 0;
+  resetCount();
 }; // stopBeat()
 
 // ==============================================
@@ -155,18 +156,26 @@ pause_btn.addEventListener('click', () => {
   }
 });
 
-const time_display = qs('#time > span');
-const count_display = qs('#count > span');
-const bars_display = qs('#bars > span');
-const beats_display = qs('#beats > span');
+// const time_display = qs('#time > span');
+const timing_display = qs('.timing-display');
+const count_display  = timing_display.querySelector('.timing-display-count');
+const bars_display   = timing_display.querySelector('.timing-display-bars');
+const beats_display  = timing_display.querySelector('.timing-display-beats');
 
 function updateDisplay(time) {
   const [bars, beats, sixteenths] = T.position.split(':');
-  time_display.textContent = round(time, 2);
-  count_display.textContent = count;
-  bars_display.textContent = bars;
+  // time_display.textContent = round(time, 2);
+  bars_display.textContent = pad(bars, 3);
   beats_display.textContent = beats;
+  count_display.textContent = pad(count, 2);
 } // updateDisplay()
+
+function resetCount() {
+  bars_display.textContent = '000';
+  beats_display.textContent = '0';
+  count_display.textContent = '00';
+  count = 0;
+}
 
 // ==============================================
 
