@@ -38,7 +38,7 @@ body {
 // ==============================================
 
 #top-bar {
-  padding: 8px;
+  padding: 8px 16px;
   background: $background-grey-1;
   border-bottom: $border-3;
   display: flex;
@@ -116,6 +116,28 @@ body {
       font-size: 5px;
       margin-top: auto;
     }
+
+    margin-right: 8px;
+  }
+
+  // --------------------------------------------
+
+  .timing-display { 
+    // width: 50px;
+    padding: 1px 4px;
+    font-size: 10px;
+    color: #D8F8F9;
+    background: #4F6666;
+    border: solid #3A5151 1px;
+    border-radius: 2px;
+    &-bars {}
+    &-beats {}
+    &-count {
+      font-size: 6px;
+    }
+    // &-units {
+    //   font-size: 4px;
+    // }
   }
 
   // --------------------------------------------
@@ -129,7 +151,7 @@ body {
   padding: 16px;
   
   .track {
-    border: solid transparent 2px;
+    // border: solid transparent 2px;
     display: flex;
     align-items: center;
 
@@ -233,6 +255,10 @@ body {
         }
         @include shadow(1);
       }
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 4px;
     }
   }
 }

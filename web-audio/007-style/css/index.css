@@ -35,7 +35,7 @@ body {
 }
 
 #top-bar {
-  padding: 8px;
+  padding: 8px 16px;
   background: #5E696D;
   border-bottom: solid 1px #404B50;
   display: flex;
@@ -91,6 +91,7 @@ body {
   border-radius: 2px;
   border: solid #7B8E95 1px;
   background: #BCCFD6;
+  margin-right: 8px;
 }
 #top-bar .bpm-control-value {
   font-size: 9px;
@@ -101,6 +102,17 @@ body {
   font-size: 5px;
   margin-top: auto;
 }
+#top-bar .timing-display {
+  padding: 1px 4px;
+  font-size: 10px;
+  color: #D8F8F9;
+  background: #4F6666;
+  border: solid #3A5151 1px;
+  border-radius: 2px;
+}
+#top-bar .timing-display-count {
+  font-size: 6px;
+}
 
 #tracks {
   border: solid solid 1px #252D31 1px;
@@ -108,7 +120,6 @@ body {
   padding: 16px;
 }
 #tracks .track {
-  border: solid transparent 2px;
   display: flex;
   align-items: center;
 }
@@ -200,4 +211,7 @@ body {
 }
 #tracks .track .steps .step.current {
   color: lime;
+}
+#tracks .track:not(:last-child) {
+  margin-bottom: 4px;
 }/*# sourceMappingURL=index.css.map */
