@@ -52,9 +52,11 @@ body {
   width: 15px;
   height: 25px;
   margin: 1px;
-  border-radius: 5px;
   display: grid;
   place-items: center;
+  user-select: none;
+  border-radius: 5px;
+  border: solid 1px #252D31;
   background: rgb(75, 83, 86);
 }
 #tracks .track .steps .step-A {
