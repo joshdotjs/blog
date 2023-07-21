@@ -122,14 +122,14 @@ const changeBeatState = (next) => () => {
     pause_btn.disabled = false;
   } // if (next === 'play')
 
-  if (next === 'pause') {
+  if (next === 'stop') {
     stopBeat();
     start_btn.disabled = false;
     stop_btn.disabled = true;
     pause_btn.disabled = true;
   } // if (next === 'pause')
 
-  if (next === 'stop') {
+  if (next === 'pause') {
     pauseBeat();
     if (paused) {
       start_btn.disabled = true;
