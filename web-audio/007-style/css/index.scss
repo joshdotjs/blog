@@ -14,7 +14,6 @@ body {
   font-weight: 300;
 }
 
-
 // ==============================================
 
 #tracks {
@@ -24,31 +23,44 @@ body {
     align-items: center;
     background: #5E696D;
 
+    $track-height: 22px;
+
     &-title { 
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-right: 8px;
-      min-width: 40px !important;
+      min-width: 50px !important;
+      height: $track-height;
+      font-size: 12px;
+      user-select: none;
       color: white;
       @include shadow(1);
+      border-radius: 2px;
+      border: solid 1px #252D31;
+      background: rgb(75,83,86);
+      background: linear-gradient(0deg, rgba(73,80,84,1) 0%, rgba(97,104,108,1) 100%);
      } 
 
     .steps {
       display: inline-flex;
-      border: solid black 1px;
+      // border: solid black 1px;
     
+      height: $track-height;
+      
       .step {
-        width: 15px;
-        height: 25px;
+        width: 13px;
         margin: 1px;
 
         display: grid;
         place-items: center;
         
-        user-select: none; // don't select text
+        user-select: none;
         font-size: 11px;
 
         @include shadow(1);
         
-        border-radius: 5px;
+        border-radius: 3px;
         border: solid 1px #252D31;
         background: rgb(75,83,86);
         &-A {  
@@ -66,6 +78,5 @@ body {
         }
       }
     }
-
   }
 }

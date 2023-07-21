@@ -41,25 +41,34 @@ body {
   background: #5E696D;
 }
 #tracks .track-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-right: 8px;
-  min-width: 40px !important;
+  min-width: 50px !important;
+  height: 22px;
+  font-size: 12px;
+  user-select: none;
   color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  border-radius: 2px;
+  border: solid 1px #252D31;
+  background: rgb(75, 83, 86);
+  background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
 }
 #tracks .track .steps {
   display: inline-flex;
-  border: solid black 1px;
+  height: 22px;
 }
 #tracks .track .steps .step {
-  width: 15px;
-  height: 25px;
+  width: 13px;
   margin: 1px;
   display: grid;
   place-items: center;
   user-select: none;
   font-size: 11px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  border-radius: 5px;
+  border-radius: 3px;
   border: solid 1px #252D31;
   background: rgb(75, 83, 86);
 }
