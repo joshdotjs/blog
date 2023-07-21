@@ -105,17 +105,18 @@ main {
 
     // --------------------------------------------
 
-    .bpm-control {
+    .bpm-display {
       // height: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 35px;
-      padding: 2px 0;
+      width: 42px;
+      padding: 2px 2px;
       background: red;
       border-radius: 2px;
       border: solid #7B8E95 1px;
       background: #BCCFD6;
+      user-select: none;
 
       &-value {
         font-size: 9px;
@@ -126,6 +127,18 @@ main {
       &-units {
         font-size: 5px;
         margin-top: auto;
+        margin-right: 2px;
+      }
+
+      &-buttons {
+        // outline: solid red 1px;
+        width: fit-content;
+        width: 5px;
+        svg {
+          color: black;
+          height: 5px;
+          cursor: pointer;
+        }
       }
 
       margin-right: 8px;
@@ -137,6 +150,7 @@ main {
       // width: 50px;
       padding: 1px 4px;
       font-size: 10px;
+      user-select: none;
       color: #D8F8F9;
       background: #4F6666;
       border: solid #3A5151 1px;

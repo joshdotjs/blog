@@ -13,9 +13,9 @@
       <input type="range" id="volume" min="0" max="100" value="50" step="1">
     </div>
 
-    <div id="bpm-control">
-      <label for="bpm">BPM: </label>
-      <input type="range" id="bpm" min="40" max="220" value="120" step="1">
+    <div>
+      <div id="knob">knob</div>
+      <div id="value">VALUE</div>
     </div>
 
     <main>
@@ -56,9 +56,19 @@
           
         </div> <!-- .master-controls -->
 
-        <div class="bpm-control">
-          <span class="bpm-control-value">130</span>
-          <span class="bpm-control-units">BPM</span>
+        <div class="bpm-display">
+          <span class="bpm-display-value">130</span>
+          <span class="bpm-display-units">BPM</span>
+
+          <div class="bpm-display-buttons">
+            <svg class="bpm-display-button-up" xmlns="http://www.w3.org/2000/svg" height="8" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
+              <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+            </svg>
+
+            <svg class="bpm-display-button-down" xmlns="http://www.w3.org/2000/svg" height="8" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+              <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+          </div>
         </div>
 
         <div class="timing-display">

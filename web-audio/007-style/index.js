@@ -187,7 +187,79 @@ volume_control.addEventListener('input', ({ target: { value } }) => {
 
 // ==============================================
 
-const bpm_control = qs('#bpm');
-bpm_control.addEventListener('input', ({ target: { value } }) => {
-  T.bpm.value = value;
+// const bpm_control = qs('#bpm');
+// bpm_control.addEventListener('input', ({ target: { value } }) => {
+//   T.bpm.value = value;
+// });
+
+const bpm_display = qs('.bpm-display');
+const bpm_display_value = bpm_display.querySelector('.bpm-display-value');
+const bpm_button_up = bpm_display.querySelector('.bpm-display-button-up');
+const bpm_button_down = bpm_display.querySelector('.bpm-display-button-down');
+
+function setBPM(value) {
+  const rounded = Math.round(value);
+  T.bpm.value = rounded;
+  bpm_display_value.innerText = rounded;
+};
+setBPM(130); // initialize to 130
+
+bpm_button_up.addEventListener('click', () => {
+  console.log('bpm_control_button_up clicked');
+  setBPM(T.bpm.value + 1);
 });
+
+bpm_button_down.addEventListener('click', () => {
+  console.log('bpm_control_button_down clicked');
+  setBPM(T.bpm.value - 1);
+});
+
+// ==============================================
+
+const setupSliderBPM = () => {
+  let knob = qs('.bpm-display');
+  let valueElement = knob.querySelector('.bpm-display-value');
+  let value = 0;
+  let isMouseDown = false;
+  let lastY;
+  
+  knob.addEventListener('mousedown', function(e) {
+    isMouseDown = true;
+    lastY = e.clientY;
+  });
+  
+  knob.addEventListener('mousemove', function(e) {
+    if (isMouseDown) {
+      value += lastY - e.clientY;
+      lastY = e.clientY;
+      valueElement.innerText = value;
+    }
+  });
+  
+  knob.addEventListener('mouseup', function() {
+    isMouseDown = false;
+  });
+  
+  knob.addEventListener('mouseleave', function() {
+    isMouseDown = false;
+  });
+  
+  // Handle touch events for mobile
+  knob.addEventListener('touchstart', function(e) {
+    isMouseDown = true;
+    lastY = e.touches[0].clientY;
+  });
+  
+  knob.addEventListener('touchmove', function(e) {
+    if (isMouseDown) {
+        value += lastY - e.touches[0].clientY;
+        lastY = e.touches[0].clientY;
+        valueElement.innerText = value;
+    }
+  });
+  
+  knob.addEventListener('touchend', function() {
+      isMouseDown = false;
+  });
+};
+setupSliderBPM();
