@@ -51,8 +51,8 @@ main {
   border-radius: 3px;
 
   // TODO: remove this after scaling to proper width
-  width: 624px;
-  // width: fit-content;
+  // width: 624px;
+  width: fit-content;
   
   // margin: 0 auto;
   // TODO: remove this
@@ -60,8 +60,9 @@ main {
   
   // ==============================================
 
+  $pad: 25px;
   #top-bar {
-    padding: 8px 16px;
+    padding: calc(#{$pad} / 2) $pad;
     background: $background-grey-1;
     border-bottom: $border-3;
     display: flex;
@@ -69,8 +70,9 @@ main {
 
     // --------------------------------------------
 
+    $mr: 12px;
     .master-knob-volume {
-      $sz: 10px;
+      $sz: 15px;
       height: $sz;
       width: $sz;
       background: $background-grey-1;
@@ -85,7 +87,7 @@ main {
         border-radius: 1px;
       }
       @include shadow(1);
-      margin-right: 8px;
+      margin-right: $mr;
     }
 
     // --------------------------------------------
@@ -101,11 +103,11 @@ main {
       .master-control {
         all: unset;
         background: $gradient-grey-2;
-        padding: 3px 0;
+        padding: 3px 4px;
 
         svg { 
           color: $light-gray-1;
-          height: 8px;
+          height: 15px;
         }
 
         &-play  { border-right: $border-1; }
@@ -118,7 +120,7 @@ main {
         }
       }
       @include shadow(1);
-      margin-right: 8px;
+      margin-right: $mr;
     }
 
     // --------------------------------------------
@@ -128,8 +130,8 @@ main {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      padding: 2px 2px;
+      width: 78px;
+      padding: 4px 0;
       background: red;
       border-radius: 2px;
       border: solid #7B8E95 1px;
@@ -137,37 +139,38 @@ main {
       user-select: none;
 
       &-value {
-        font-size: 9px;
+        font-size: 15px;
         line-height: 1;
-        margin-right: 2px;
+        margin-right: 3px;
       }
 
       &-units {
-        font-size: 5px;
+        font-size: 8px;
         margin-top: auto;
-        margin-right: 2px;
+        margin-right: 6px;
+        margin-bottom: 3px;
       }
 
       &-buttons {
         // outline: solid red 1px;
-        width: fit-content;
-        width: 5px;
+        $w: 10px;
+        width: $w;
         svg {
           color: black;
-          height: 5px;
+          height: $w;
           cursor: pointer;
         }
       }
 
-      margin-right: 8px;
+      margin-right: $mr;
     }
 
     // --------------------------------------------
 
     .timing-display { 
       // width: 50px;
-      padding: 1px 4px;
-      font-size: 10px;
+      padding: 4px 10px;
+      font-size: 15px;
       user-select: none;
       color: #D8F8F9;
       background: #4F6666;
@@ -176,7 +179,7 @@ main {
       &-bars {}
       &-beats {}
       &-count {
-        font-size: 6px;
+        // font-size: 10px;
       }
       // &-units {
       //   font-size: 4px;
@@ -191,7 +194,7 @@ main {
   #tracks {
     border: solid $border-1 1px;
     background: $background-grey-1;
-    padding: 16px;
+    padding: $pad;
     
     .track {
       // border: solid transparent 2px;
