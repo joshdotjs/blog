@@ -35,25 +35,28 @@ body {
 }
 
 main {
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   width: fit-content;
   margin: 0 auto;
 }
 main #top-bar {
-  padding: 8px 16px;
+  padding: calc(25px / 2) 25px;
   background: #5E696D;
   border-bottom: solid 1px #404B50;
   display: flex;
   align-items: center;
 }
 main #top-bar .master-knob-volume {
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
   background: #5E696D;
   background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
-  border-radius: 5px;
+  border-radius: calc(15px / 2);
   border: solid 1px #252D31;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 8px;
+  margin-right: 12px;
 }
 main #top-bar .master-knob-volume-line {
   height: 50%;
@@ -69,16 +72,16 @@ main #top-bar .master-controls {
   overflow: hidden;
   border: solid 1px #252D31;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 8px;
+  margin-right: 12px;
 }
 main #top-bar .master-controls .master-control {
   all: unset;
   background: linear-gradient(0deg, #252F34 0%, #3A4449 100%);
-  padding: 3px 0;
+  padding: 3px 4px;
 }
 main #top-bar .master-controls .master-control svg {
   color: #C2C9CD;
-  height: 8px;
+  height: 15px;
 }
 main #top-bar .master-controls .master-control-play {
   border-right: solid 1px #252D31;
@@ -94,50 +97,49 @@ main #top-bar .bpm-display {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  padding: 2px 2px;
+  width: 78px;
+  padding: 4px 0;
   background: red;
   border-radius: 2px;
   border: solid #7B8E95 1px;
   background: #BCCFD6;
   user-select: none;
-  margin-right: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-right: 12px;
 }
 main #top-bar .bpm-display-value {
-  font-size: 9px;
+  font-size: 15px;
   line-height: 1;
-  margin-right: 2px;
+  margin-right: 3px;
 }
 main #top-bar .bpm-display-units {
-  font-size: 5px;
+  font-size: 8px;
   margin-top: auto;
-  margin-right: 2px;
+  margin-right: 6px;
+  margin-bottom: 3px;
 }
 main #top-bar .bpm-display-buttons {
-  width: fit-content;
-  width: 5px;
+  width: 10px;
 }
 main #top-bar .bpm-display-buttons svg {
   color: black;
-  height: 5px;
+  height: 10px;
   cursor: pointer;
 }
 main #top-bar .timing-display {
-  padding: 1px 4px;
-  font-size: 10px;
+  padding: 4px 10px;
+  font-size: 15px;
   user-select: none;
   color: #D8F8F9;
   background: #4F6666;
   border: solid #3A5151 1px;
   border-radius: 2px;
-}
-main #top-bar .timing-display-count {
-  font-size: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 main #tracks {
   border: solid solid 1px #252D31 1px;
   background: #5E696D;
-  padding: 16px;
+  padding: 25px;
 }
 main #tracks .track {
   display: flex;
@@ -145,18 +147,18 @@ main #tracks .track {
 }
 main #tracks .track-led-enable {
   border: solid 1px #8B9396;
-  height: 9px;
-  width: 9px;
-  border-radius: 4.5px;
+  height: 12px;
+  width: 12px;
+  border-radius: calc(12px / 2);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 6px;
+  margin-right: 10px;
 }
 main #tracks .track-led-enable-inner {
-  height: 7px;
-  width: 7px;
+  height: calc(12px - 2px);
+  width: calc(12px - 2px);
   background: #5E696D;
   background: linear-gradient(0deg, #DCF7AB 0%, #6EDB00 100%);
-  border-radius: 3.5px;
+  border-radius: calc(calc(12px - 2px) / 2);
   border: solid 1px #252D31;
 }
 main #tracks .track-led-enable-inner-line {
@@ -167,14 +169,14 @@ main #tracks .track-led-enable-inner-line {
   border-radius: 1px;
 }
 main #tracks .track-knob-volume {
-  height: 10px;
-  width: 10px;
+  height: 16px;
+  width: 16px;
   background: #5E696D;
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
-  border-radius: 5px;
+  border-radius: calc(16px / 2);
   border: solid 1px #252D31;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 6px;
+  margin-right: 10px;
 }
 main #tracks .track-knob-volume-line {
   height: 50%;
@@ -187,9 +189,9 @@ main #tracks .track-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 50px !important;
-  height: 22px;
-  font-size: 10px;
+  min-width: 75px !important;
+  padding: 4px 0;
+  font-size: 15px;
   user-select: none;
   color: white;
   border-radius: 2px;
@@ -197,24 +199,22 @@ main #tracks .track-title {
   background: #5E696D;
   background: linear-gradient(0deg, rgb(73, 80, 84) 0%, rgb(97, 104, 108) 100%);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  margin-right: 6px;
+  margin-right: 10px;
 }
 main #tracks .track .steps {
   display: inline-flex;
-  height: 22px;
+  height: 40px;
+  gap: 6px;
 }
 main #tracks .track .steps .step {
-  width: 13px;
-  margin: 1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 1px;
+  width: 22px;
   user-select: none;
   font-size: 11px;
   border-radius: 3px;
   border: solid 1px #252D31;
+  background: rgb(75, 83, 86);
   color: white;
+  transition: transform 0.1s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 main #tracks .track .steps .step-A {
@@ -230,8 +230,9 @@ main #tracks .track .steps .step-B.step-on {
   background: linear-gradient(0deg, rgb(195, 140, 144) 0%, rgb(245, 190, 195) 100%);
 }
 main #tracks .track .steps .step.current {
-  box-shadow: 0 1px 3px rgba(153, 233, 47, 0.12), 0 1px 2px rgba(110, 219, 0, 0.24);
+  box-shadow: 0 3px 6px rgba(151, 233, 47, 0.16), 0 3px 6px rgba(151, 233, 47, 0.23);
+  transform: scale(1.09);
 }
 main #tracks .track:not(:last-child) {
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }/*# sourceMappingURL=index.css.map */
