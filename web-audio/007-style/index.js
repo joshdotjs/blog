@@ -190,11 +190,11 @@ function setBPM(value) {
 setBPM(140); // initialize to 140 bpm
 
 bpm_button_up.addEventListener('click', () => {
-  setBPM(T.bpm.value + 1);
+  setBPM(Math.min(T.bpm.value + 10, 300));
 });
 
 bpm_button_down.addEventListener('click', () => {
-  setBPM(T.bpm.value - 1);
+  setBPM(Math.max(10, T.bpm.value - 10));
 });
 
 // ==============================================
