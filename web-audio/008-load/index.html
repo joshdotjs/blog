@@ -8,16 +8,21 @@
     <!-- Loading the .mp3 file from an HTML element -->
     <!-- <script type="module" src="/web-audio/008-load/index-part-1.js"></script> -->
 
-    <!-- Play the uploaded audio file -->
-    <script type="module" src="/web-audio/008-load/index-part-2.js"></script>
+    <!-- Play the uploaded audio file in <audio> -->
+    <!-- <script type="module" src="/web-audio/008-load/index-part-2.js"></script> -->
+
+    <!-- Load uploaded audio data into Tone.js -->
+    <script type="module" src="/web-audio/008-load/index-part-3.js"></script>
   </head>
   <body>
 
-    <label label="input">
-      <input type="file" id="input" />
+    <label label="html-input">
+      <input type="file" id="html-input" />
     </label>
 
-    <audio src=" " id="track" controls></audio>
+    <audio src=" " id="html-audio" controls></audio>
+
+    <button id="html-button-play-tone">Play Tone.js</button>
 
    </body>
 </html>

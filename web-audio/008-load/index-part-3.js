@@ -1,3 +1,5 @@
+const player = new Tone.Player().toDestination();
+
 // ==============================================
 
 function loadHandler (event) {
@@ -7,8 +9,22 @@ function loadHandler (event) {
   const audio = document.querySelector("#html-audio");
   if (!audio) throw new Error("<audio> element not found");
 
+  // load .mp3 into <audio>
   const url = URL.createObjectURL(file);
   audio.setAttribute('src', url);
+
+  // load .mp3 into Tone.js (and play it)
+  player.load(url).then(() => {
+    Tone.Transport.start();
+    player.start()
+  });
+
+  const button = document.querySelector("#html-button-play-tone");
+  if (!button) throw new Error("<button> element not found");
+
+  button.addEventListener("click", () => {
+    player.start();
+  });
 }
 
 // ==============================================
