@@ -11,10 +11,12 @@ const sample_paths = [
 
 // ==============================================
 
-const start_ctx_button = document.querySelector('.start');
-start_ctx_button?.addEventListener('click', async () => {
-  audio_ctx = new AudioContext();
-  console.log('audio context started');
+audio_ctx = new AudioContext();
+console.log('step 1: audio context started');
+
+setupSamples(sample_paths).then((buffers) => {
+  samples = buffers;
+  console.log('step 2: samples loaded');
 });
 
 // ==============================================
@@ -46,15 +48,6 @@ function playSample(audio_buffer, time) {
   sample_source.start(time);
 }
 
-// ==============================================
-
-const setup_sapmles_button = document.querySelector('.setup-samples');
-setup_sapmles_button?.addEventListener('click', () => {
-  setupSamples(sample_paths).then((buffers) => {
-
-    samples = buffers;
-  });
-});
 
 // ==============================================
 
