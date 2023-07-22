@@ -8,14 +8,16 @@
     <!-- Loading the .mp3 file from an HTML element -->
     <!-- <script type="module" src="/web-audio/008-load/index-part-1.js"></script> -->
 
-    <!-- Grab the audio data -->
+    <!-- Play the uploaded audio file -->
     <script type="module" src="/web-audio/008-load/index-part-2.js"></script>
   </head>
   <body>
 
     <label label="input">
-      <input type="file" id="input" multiple />
+      <input type="file" id="input" />
     </label>
+
+    <audio src=" " id="track" controls></audio>
 
    </body>
 </html>
