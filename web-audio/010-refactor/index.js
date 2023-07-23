@@ -11,6 +11,11 @@ class Track {
     this.pattern = pattern;
     this.name = name;
   }
+
+  toggle(index) {
+    // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
+    this.pattern[index] = this.pattern[index] ? 0 : 1;
+  }
 }
 
 // ==============================================
@@ -29,6 +34,9 @@ const patterns = [
   [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], // snare
 ];
 
+// TODO: move into Track class with bettern name (consider modifying markup class-name)
+// TODO: move into Track class with bettern name (consider modifying markup class-name)
+// TODO: move into Track class with bettern name (consider modifying markup class-name)
 const tracks = qsa('.track > .steps');
 let Steps = [];
 
@@ -44,7 +52,11 @@ tracks.forEach((track, i) => {
 
     // toggle the pattern and UI when a step is clicked
     step.addEventListener('click', () => {
-      patterns[i][j] = patterns[i][j] ? 0 : 1;
+      // patterns[i][j] = patterns[i][j] ? 0 : 1;
+      // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
+      Tracks[i].toggle(j);
+
+      // TODO: 
       steps[j].classList.toggle('step-on');
     });
   });
