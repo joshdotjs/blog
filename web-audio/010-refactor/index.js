@@ -3,6 +3,26 @@ const qsa = x => document.querySelectorAll(x);
 
 // ==============================================
 
+class Track {
+  pattern = [];
+  name = '';
+
+  constructor({ pattern, name }) {
+    this.pattern = pattern;
+    this.name = name;
+  }
+}
+
+// ==============================================
+
+const Tracks = [
+  new Track({ pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], name: 'hi-hat' }),
+  new Track({ pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], name: 'kick' }),
+  new Track({ pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], name: 'snare' }),
+];
+
+// ==============================================
+
 const patterns = [
   [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], // hi-hat
   [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], // kick
@@ -18,7 +38,8 @@ tracks.forEach((track, i) => {
   steps.forEach((step, j) => {
 
     // initialize the UI to match initial patterns
-    if (patterns[i][j])
+    // if (patterns[i][j])
+    if (Tracks[i].pattern[j])
       steps[j].classList.toggle('step-on');
 
     // toggle the pattern and UI when a step is clicked

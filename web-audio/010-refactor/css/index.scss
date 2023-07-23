@@ -1,8 +1,6 @@
 @forward './scss/fonts';
 @use './scss/mixins' as *;
 
-// DESIRED WIDTH: 624px
-
 // ==============================================
 
 $border-1: solid 1px #252D31;
@@ -27,13 +25,6 @@ $gradient-green-1: linear-gradient(0deg, #DCF7AB 0%, $background-green-1 100%);
 
 // ==============================================
 
-// @function scale($x) {
-//   $scale: 1.2;
-//   @return calc(#{$scale} * #{$x});
-// }
-
-
-
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -46,14 +37,15 @@ body {
 }
 
 main {
-  // outline: solid red 10px;
   border-radius: 5px;
   overflow: hidden;
   @include shadow(2);
 
-  // width: 624px;
   width: fit-content;
   margin: 0 auto;
+
+  // DEBUG:
+  margin-top: 200px;
   
   // ==============================================
 
@@ -195,7 +187,6 @@ main {
     padding: $pad;
     
     .track {
-      // border: solid transparent 2px;
       display: flex;
       align-items: center;
 
