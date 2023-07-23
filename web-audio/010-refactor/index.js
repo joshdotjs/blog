@@ -6,24 +6,42 @@ const qsa = x => document.querySelectorAll(x);
 class Track {
   pattern = [];
   name = '';
+  player = new Tone.Player("/assets/samples/drums/kick.mp3").toDestination();
 
-  constructor({ pattern, name }) {
+  constructor({ pattern, name, player }) {
     this.pattern = pattern;
     this.name = name;
+    this.player = player;
   }
 
   toggle(index) {
     // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
     this.pattern[index] = this.pattern[index] ? 0 : 1;
   }
+
+  start(time) {
+    this.player.start(time);
+  }
 }
 
 // ==============================================
 
 const Tracks = [
-  new Track({ pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], name: 'hi-hat' }),
-  new Track({ pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], name: 'kick' }),
-  new Track({ pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], name: 'snare' }),
+  new Track({ 
+    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
+    name: 'hi-hat',
+    player: new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination(),
+  }),
+  new Track({ 
+    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
+    name: 'kick',
+    player: new Tone.Player("/assets/samples/drums/kick.mp3").toDestination(),
+  }),
+  new Track({ 
+    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
+    name: 'snare',
+    player: new Tone.Player("/assets/samples/drums/snare.mp3").toDestination(),
+  }),
 ];
 
 // ==============================================
@@ -48,7 +66,7 @@ tracks.forEach((track, i) => {
     // initialize the UI to match initial patterns
     // if (patterns[i][j])
     if (Tracks[i].pattern[j])
-      steps[j].classList.toggle('step-on');
+      steps[j].classList.toggle('step-on'); // TODO
 
     // toggle the pattern and UI when a step is clicked
     step.addEventListener('click', () => {
@@ -56,8 +74,7 @@ tracks.forEach((track, i) => {
       // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
       Tracks[i].toggle(j);
 
-      // TODO: 
-      steps[j].classList.toggle('step-on');
+      steps[j].classList.toggle('step-on'); // TODO
     });
   });
 });
@@ -99,9 +116,20 @@ const resetHighlightedSteps = () => {
 // ==============================================
 
 const loopCallback = (time) => {  
-  if (patterns[0][count]) hihat.start(time);
-  if (patterns[1][count]) kick.start(time);
-  if (patterns[2][count]) snare.start(time);
+  // if (patterns[0][count]) hihat.start(time);
+  // if (Tracks[0].pattern[count]) Tracks[0].start(time);
+  
+  // // if (patterns[1][count]) kick.start(time);
+  // if (Tracks[1].pattern[count]) Tracks[1].start(time);
+
+  // // if (patterns[2][count]) snare.start(time);
+  // if (Tracks[2].pattern[count]) Tracks[2].start(time);
+
+  Tracks.forEach(track => {
+    if (track.pattern[count]) 
+      track.start(time);
+  });
+
   highlightStep(count);
   updateDisplay(time);
   updateCount();
