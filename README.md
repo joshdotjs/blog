@@ -3,12 +3,28 @@
 
 # TODO:
 - Refactor
-  - Tracks array of Track objects
   - Track class
     - properties:
-      - name
       - steps (DOM elements)
-      - pattern (array of 1s and 0s)
     - methods:
-      - toggleStep()
-      - play()
+      - toggle() [todo: toggle step in UI]
+
+- Load sounds
+  - click listener on the track name that loads .mp3 file from users computer into the app
+
+- Graphing
+  - Per track:
+    - time domain
+    - frequency domain
+  - Master:
+    - time domain
+    - frequency domain
+
+- Effects
+  - ...
+
+- E.Q.
+  - Biquad filtering
+
+- Piano roll
+  - Sequence steps in frequency as well as time
