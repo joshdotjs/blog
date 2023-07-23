@@ -6,12 +6,12 @@ const qsa = x => document.querySelectorAll(x);
 class Track {
   pattern = [];
   name = '';
-  player = new Tone.Player("/assets/samples/drums/kick.mp3").toDestination();
+  player = new Tone.Player().toDestination();
 
-  constructor({ pattern, name, player }) {
+  constructor({ pattern, name, path }) {
     this.pattern = pattern;
     this.name = name;
-    this.player = player;
+    this.player.load(path);
   }
 
   toggle(index) {
@@ -30,17 +30,17 @@ const Tracks = [
   new Track({ 
     pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
     name: 'hi-hat',
-    player: new Tone.Player("/assets/samples/drums/hi-hat.mp3").toDestination(),
+    path: '/assets/samples/drums/hi-hat.mp3',
   }),
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
     name: 'kick',
-    player: new Tone.Player("/assets/samples/drums/kick.mp3").toDestination(),
+    path: '/assets/samples/drums/kick.mp3',
   }),
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
     name: 'snare',
-    player: new Tone.Player("/assets/samples/drums/snare.mp3").toDestination(),
+    path: '/assets/samples/drums/snare.mp3',
   }),
 ];
 
