@@ -13,7 +13,7 @@ class Track {
     this.pattern = pattern;
     this.name = name;
     this.player.load(path);
-    this.steps = steps.querySelectorAll('.step');
+    this.steps = steps;
     // <div class="steps">
     //   <div class="step step-A"></div>
     //   ...
@@ -22,9 +22,18 @@ class Track {
     // </div>
   }
 
-  toggle(index) {
+  toggleUI(index) {
+    this.steps[index].classList.toggle('step-on');
+  }
+
+  togglePattern(index) {
     // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
     this.pattern[index] = this.pattern[index] ? 0 : 1;
+  }
+
+  toggle(index) {
+    this.togglePattern(index);
+    this.toggleUI(index);
   }
 
   start(time) {
@@ -40,12 +49,6 @@ const patterns = [
   [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], // snare
 ];
 
-// TODO: move into Track class with bettern name (consider modifying markup class-name)
-// TODO: move into Track class with bettern name (consider modifying markup class-name)
-// TODO: move into Track class with bettern name (consider modifying markup class-name)
-const tracks = qsa('.track > .steps'); // tracks stores one row of .steps
-
-
 // ==============================================
 
 const Tracks = [
@@ -53,19 +56,19 @@ const Tracks = [
     pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
     name: 'hi-hat',
     path: '/assets/samples/drums/hi-hat.mp3',
-    steps: tracks[0],
+    steps: qsa('.track-0 > .steps > .step'),
   }),
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
     name: 'kick',
     path: '/assets/samples/drums/kick.mp3',
-    steps: tracks[1],
+    steps: qsa('.track-1 > .steps > .step'),
   }),
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
     name: 'snare',
     path: '/assets/samples/drums/snare.mp3',
-    steps: tracks[2],
+    steps: qsa('.track-2 > .steps > .step'),
   }),
 ];
 
@@ -73,6 +76,7 @@ console.log(Tracks[0].steps);
 
 // ==============================================
 
+// const tracks = qsa('.track > .steps'); // tracks stores one row of .steps
 let Steps = []; // Steps stores all .step elements in one .steps
 // tracks.forEach((track, i) => {
 Tracks.forEach((Track, i) => {
@@ -83,16 +87,21 @@ Tracks.forEach((Track, i) => {
 
     // initialize the UI to match initial patterns
     // if (patterns[i][j])
-    if (Tracks[i].pattern[j])
-      steps[j].classList.toggle('step-on'); // TODO
+    // if (Tracks[i].pattern[j])
+    if (Track.pattern[j]) {
+      // steps[j].classList.toggle('step-on'); // TODO
+      Track.toggleUI(j);
+    }
 
     // toggle the pattern and UI when a step is clicked
     step.addEventListener('click', () => {
       // patterns[i][j] = patterns[i][j] ? 0 : 1;
       // Tracks[i].pattern[j] = Tracks[i].pattern[j] ? 0 : 1;
-      Tracks[i].toggle(j);
+      // Tracks[i].toggle(j);
+      Track.toggle(j);
 
-      steps[j].classList.toggle('step-on'); // TODO
+      // steps[j].classList.toggle('step-on');
+      // absorbed into Track.toggle()
     });
   });
 });
@@ -118,16 +127,24 @@ const highlightStep = (count) => {
   const prev_idx = count - 1;
   const is_prev_idx_pos = prev_idx >= 0;
   
-  Steps.forEach((steps, i) => {
-    steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
-    steps[count].classList.add('current');
+  // Steps.forEach((steps, i) => {
+  Tracks.forEach((Track, i) => {
+    // steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+    Track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+
+    // steps[count].classList.add('current');
+    Track.steps[count].classList.add('current');
   });
 };
 
 const resetHighlightedSteps = () => {
   console.log('resetting highlighted steps');
-  Steps.forEach(steps => {
-    steps.forEach(step => step.classList.remove('current'));
+  // Steps.forEach(steps => {
+  //   steps.forEach(step => step.classList.remove('current'));
+  // });
+
+  Tracks.forEach(Track => {
+    Track.steps.forEach(step => step.classList.remove('current'));
   });
 }
 
