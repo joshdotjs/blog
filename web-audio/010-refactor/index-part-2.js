@@ -87,12 +87,6 @@ const Tracks = [
   }),
 ];
 
-console.log(Tracks[0].steps);
-
-// ==============================================
-
-
-
 // ==============================================
 
 const kick = new Tone.Player("/assets/samples/drums/kick.mp3").toDestination();
@@ -126,9 +120,6 @@ const highlightStep = (count) => {
 
 const resetHighlightedSteps = () => {
   console.log('resetting highlighted steps');
-  // Steps.forEach(steps => {
-  //   steps.forEach(step => step.classList.remove('current'));
-  // });
 
   Tracks.forEach(Track => {
     Track.steps.forEach(step => step.classList.remove('current'));
@@ -265,8 +256,8 @@ const bpm_display_value = bpm_display.querySelector('.bpm-display-value');
 const bpm_button_up = bpm_display.querySelector('.bpm-display-button-up');
 const bpm_button_down = bpm_display.querySelector('.bpm-display-button-down');
 
-const increaseBPM = ()  => setBPM(Math.min(T.bpm.value + 10, 300));
-const decreaseBPM = ()  => setBPM(Math.max(10, T.bpm.value - 10));
+const increaseBPM = ()  =>  setBPM(Math.min(T.bpm.value + 10, 300));
+const decreaseBPM = ()  =>  setBPM(Math.max(10, T.bpm.value - 10));
 function setBPM(x) {
   T.bpm.value = x;
   bpm_display_value.innerText = x;
