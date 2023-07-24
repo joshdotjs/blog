@@ -238,24 +238,49 @@ main {
         margin-right: $mr;
       }
 
-      &-title { 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 75px !important;
-        // height: $track-height;
-        padding: 4px 0;
-        font-size: 15px;
-        user-select: none;
-        color: white;
-        border-radius: 2px;
-        border: $border-1;
-        background: $background-grey-1;
-        background: $gradient-grey-1;
-        // cursor: pointer;
-        @include shadow(1);
-        margin-right: $mr;
-      } 
+      .track-title-container { position: relative;
+
+        label.track-title { 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-width: 75px !important;
+          // height: $track-height;
+          padding: 4px 0;
+          font-size: 15px;
+          user-select: none;
+          color: white;
+          border-radius: 2px;
+          border: $border-1;
+          background: $background-grey-1;
+          background: $gradient-grey-1;
+          // cursor: pointer;
+          @include shadow(1);
+          margin-right: $mr;
+        }
+
+        input { position: absolute; top: 0; 
+          height: 100%; width: 100%;
+
+          /* https://www.viget.com/articles/styling-native-file-upload-input-field/ */
+          &[type="file"]::file-selector-button {
+            height: 100%;
+            width: 75px; // TODO: variable to match width of parent (WHERE IS THAT SET AT?)
+            cursor: pointer;
+            background-color: transparent;
+            transition: background-color 200ms;
+            margin-right: 10px;
+            font-size: 0px; /* hide 'Choose File' */
+          }
+          &[type="file"]::file-selector-button:hover {
+            background-color: red;
+          }
+          &[type="file"]::file-selector-button:active {
+            background-color: blue;
+          }
+        }
+      }
+
 
       .steps {
         display: inline-flex;
