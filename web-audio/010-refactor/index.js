@@ -243,17 +243,13 @@ const bpm_display_value = bpm_display.querySelector('.bpm-display-value');
 const bpm_button_up = bpm_display.querySelector('.bpm-display-button-up');
 const bpm_button_down = bpm_display.querySelector('.bpm-display-button-down');
 
-function setBPM(value) {
-  const rounded = Math.round(value);
-  T.bpm.value = rounded;
-  bpm_display_value.innerText = rounded;
+const increaseBPM = ()  => setBPM(Math.min(T.bpm.value + 10, 300));
+const decreaseBPM = ()  => setBPM(Math.max(10, T.bpm.value - 10));
+function setBPM(x) {
+  T.bpm.value = x;
+  bpm_display_value.innerText = x;
 }; // setBPM()
 setBPM(140); // initialize to 140 bpm
 
-bpm_button_up.addEventListener('click', () => {
-  setBPM(Math.min(T.bpm.value + 10, 300));
-});
-
-bpm_button_down.addEventListener('click', () => {
-  setBPM(Math.max(10, T.bpm.value - 10));
-});
+bpm_button_up.addEventListener('click', increaseBPM);
+bpm_button_down.addEventListener('click', decreaseBPM);
