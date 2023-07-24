@@ -7,11 +7,19 @@ class Track {
   pattern = [];
   name = '';
   player = new Tone.Player().toDestination();
+  steps = []; // DOM elements
 
-  constructor({ pattern, name, path }) {
+  constructor({ pattern, name, path, steps }) {
     this.pattern = pattern;
     this.name = name;
     this.player.load(path);
+    this.steps = steps.querySelectorAll('.step');
+    // <div class="steps">
+    //   <div class="step step-A"></div>
+    //   ...
+    //   <div class="step step-B"></div>
+    //   </div>
+    // </div>
   }
 
   toggle(index) {
@@ -26,26 +34,6 @@ class Track {
 
 // ==============================================
 
-const Tracks = [
-  new Track({ 
-    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
-    name: 'hi-hat',
-    path: '/assets/samples/drums/hi-hat.mp3',
-  }),
-  new Track({ 
-    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
-    name: 'kick',
-    path: '/assets/samples/drums/kick.mp3',
-  }),
-  new Track({ 
-    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
-    name: 'snare',
-    path: '/assets/samples/drums/snare.mp3',
-  }),
-];
-
-// ==============================================
-
 const patterns = [
   [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], // hi-hat
   [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], // kick
@@ -55,11 +43,41 @@ const patterns = [
 // TODO: move into Track class with bettern name (consider modifying markup class-name)
 // TODO: move into Track class with bettern name (consider modifying markup class-name)
 // TODO: move into Track class with bettern name (consider modifying markup class-name)
-const tracks = qsa('.track > .steps');
-let Steps = [];
+const tracks = qsa('.track > .steps'); // tracks stores one row of .steps
 
-tracks.forEach((track, i) => {
-  const steps = track.querySelectorAll('.step');
+
+// ==============================================
+
+const Tracks = [
+  new Track({ 
+    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
+    name: 'hi-hat',
+    path: '/assets/samples/drums/hi-hat.mp3',
+    steps: tracks[0],
+  }),
+  new Track({ 
+    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
+    name: 'kick',
+    path: '/assets/samples/drums/kick.mp3',
+    steps: tracks[1],
+  }),
+  new Track({ 
+    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
+    name: 'snare',
+    path: '/assets/samples/drums/snare.mp3',
+    steps: tracks[2],
+  }),
+];
+
+console.log(Tracks[0].steps);
+
+// ==============================================
+
+let Steps = []; // Steps stores all .step elements in one .steps
+// tracks.forEach((track, i) => {
+Tracks.forEach((Track, i) => {
+  // const steps = track.querySelectorAll('.step');
+  const steps = Track.steps;
   Steps.push(steps);
   steps.forEach((step, j) => {
 
