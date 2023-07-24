@@ -77,12 +77,12 @@ console.log(Tracks[0].steps);
 // ==============================================
 
 // const tracks = qsa('.track > .steps'); // tracks stores one row of .steps
-let Steps = []; // Steps stores all .step elements in one .steps
+// let Steps = []; // Steps stores all .step elements in one .steps
 // tracks.forEach((track, i) => {
 Tracks.forEach((Track, i) => {
   // const steps = track.querySelectorAll('.step');
   const steps = Track.steps;
-  Steps.push(steps);
+  // Steps.push(steps);
   steps.forEach((step, j) => {
 
     // initialize the UI to match initial patterns
