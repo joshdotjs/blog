@@ -7,9 +7,6 @@
   - Add callback to actually load the sound once file is selected
   - fix the class names on track-title-container
     - better name (.track-title-container / .track-title )
-    - move out inline styles
-    - 
-  - styling on the 
 
 - Graphing
   - Per track:
