@@ -40,10 +40,21 @@ class Track {
     });
 
     // initialize the load button
-    this.load_btn.textContent = this.name;
+    const load_btn_label = this.load_btn.querySelector('label');
+    const load_btn_input = this.load_btn.querySelector('input');
+
+    // console.log('load_btn_label: ', load_btn_label);
+    console.log('load_btn_input: ', load_btn_input);
+
+    load_btn_label.textContent = this.name;
     this.load_btn.addEventListener('click', () => {
       console.log('clicked track load button: ', this.name);
     });
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
+    // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
+    // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
+    load_btn_input.style.opacity = 0.5;
+    load_btn_input.style.textContent = 'absolute';
   }
 
   toggleUI(index) {
@@ -72,21 +83,21 @@ const Tracks = [
     name: 'hi-hat',
     path: '/assets/samples/drums/hi-hat.mp3',
     steps: qsa('.track-0 > .steps > .step'),
-    load_btn: qs('.track-0 > button.track-title'),
+    load_btn: qs('.track-0 > .track-title-container'),
   }),
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
     name: 'kick',
     path: '/assets/samples/drums/kick.mp3',
     steps: qsa('.track-1 > .steps > .step'),
-    load_btn: qs('.track-1 > button.track-title'),
+    load_btn: qs('.track-1 > .track-title-container'),
   }),
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
     name: 'snare',
     path: '/assets/samples/drums/snare.mp3',
     steps: qsa('.track-2 > .steps > .step'),
-    load_btn: qs('.track-2 > button.track-title'),
+    load_btn: qs('.track-2 > .track-title-container'),
   }),
 ];
 

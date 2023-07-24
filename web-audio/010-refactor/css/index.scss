@@ -252,7 +252,7 @@ main {
         border: $border-1;
         background: $background-grey-1;
         background: $gradient-grey-1;
-        cursor: pointer;
+        // cursor: pointer;
         @include shadow(1);
         margin-right: $mr;
       } 
