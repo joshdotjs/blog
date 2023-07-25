@@ -6,7 +6,7 @@ import {
 import {
   Tracks,
   highlightStep, resetHighlightedSteps
-} from './ui.js';
+} from './Tracks.js';
 
 // ==============================================
 
