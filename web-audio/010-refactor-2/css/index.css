@@ -224,10 +224,10 @@ main #tracks .track .track-title-container input[type=file]::file-selector-butto
   transition: background-color 150ms ease-in-out;
 }
 main #tracks .track .track-title-container input[type=file]::file-selector-button:hover {
-  background-color: red;
+  background-color: rgba(145, 165, 175, 0.25);
 }
 main #tracks .track .track-title-container input[type=file]::file-selector-button:active {
-  background-color: blue;
+  background-color: rgba(145, 165, 175, 0.5);
 }
 main #tracks .track .steps {
   display: inline-flex;

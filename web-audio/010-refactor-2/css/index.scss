@@ -240,14 +240,11 @@ main {
 
       .track-title-container { position: relative;
 
-        // transition: background-color 200ms;
-        // &:hover > label { background: red !important; }
-
         $w: 75px;
         $rad: 3px;
         label.track-title { 
           display: inline-block; // ellipsis
-          // min-width: $w !important; // seems to be required fo Safari - TODO: test this
+          // min-width: $w !important; // seems to be required on Safari - TODO: test this
           width: $w;
           // height: $track-height;
 
@@ -282,8 +279,12 @@ main {
             border-radius: $rad;
             transition: background-color 150ms ease-in-out;
           }
-          &[type="file"]::file-selector-button:hover { background-color: red; }
-          &[type="file"]::file-selector-button:active { background-color: blue; }
+          &[type="file"]::file-selector-button:hover { 
+            background-color: rgba(145,165,175,0.25);
+          }
+          &[type="file"]::file-selector-button:active { 
+            background-color: rgba(145,165,175,0.5);
+          }
         }
       }
 
