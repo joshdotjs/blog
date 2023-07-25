@@ -24,3 +24,19 @@
 
 - Piano roll
   - Sequence steps in frequency as well as time
+
+- Local storage
+  - Load previously modified beat from LS
+
+- Save / open
+  - Save to file with dropdown
+
+- Backend:
+  - Node 18 (w. native fetch) with TypeScript
+  - PosgreSQL
+  - Auth via Bcrypt
+  - Docker
+  - GraphQL
+  - Prisma
+  - Stripe API for subscriptions
+  - 
