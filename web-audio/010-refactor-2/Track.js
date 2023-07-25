@@ -69,13 +69,51 @@ class Track {
       this.name = name;
       load_btn_label.textContent = name;
 
-      // TODO: ensure name length does not run off of button
-
       // TODO: notification to user:
-      console.log('uploaded file: ', file.name);
+      const notification = () => {
+        console.log('uploaded file: ', file.name);
+        const elem = document.createElement('div');
+        elem.style.position = 'absolute';
+        elem.style.bottom = '32px';
+        elem.style.left = '32px';
+        // elem.style.width = '100vw';
+        elem.style.zIndex = '100';
+        elem.style.backgroundColor = 'white';
+        elem.style.color = 'black';
+        elem.style.borderRadius = '5px';
+        elem.style.padding = '1rem';
+        elem.style.boxShadow = '0 0 1rem black';
+        elem.textContent = `uploaded file: ${file.name}`;
+        document.body.appendChild(elem);
+
+        elem.style.transform = 'translateX(-100%)';
+        elem.animate([
+          { transform: 'translateX(-100%)', opacity: 0 },
+          { transform: 'translateX(0%)', opacity: 1 }
+        ], {
+          duration: 750,
+          // delay: 75,
+          easing: 'ease-in',
+          fill: 'forwards'
+        });
+
+
+        setTimeout(() => {
+
+          elem.animate([
+            { transform: 'translateX(0%)', opacity: 1 },
+            { transform: 'translateX(-100%)', opacity: 0 }
+          ], {
+            duration: 750,
+            easing: 'ease-in',
+            fill: 'forwards'
+          });
+
+          // document.body.removeChild(elem);
+        }, 2e3);
+      };
+      notification();
     });
-
-
 
   }
 
