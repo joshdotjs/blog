@@ -52,13 +52,27 @@ class Track {
 
     // Actual file upload:
     load_btn_input.addEventListener('change', (e) => {
+
+      // upload file:
       const file = e.target.files[0];
-      console.log('file: ', file);
-
       const url = URL.createObjectURL(file);
-
-      // Load .mp3 into Tone.js
       this.player.load(url);
+
+      // change title:
+      // -if file has file extension, then remove it from name:
+      let name = file.name.split('.');
+      if (name.length > 1) {
+        name.pop();
+        name = name.join('.');
+      }
+      // -write title to button
+      this.name = name;
+      load_btn_label.textContent = name;
+
+      // TODO: ensure name length does not run off of button
+
+      // TODO: notification to user:
+      console.log('uploaded file: ', file.name);
     });
 
 
