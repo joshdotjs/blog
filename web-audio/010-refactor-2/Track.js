@@ -40,27 +40,29 @@ class Track {
     const load_btn_label = this.load_btn.querySelector('label');
     const load_btn_input = this.load_btn.querySelector('input');
 
-    // console.log('load_btn_label: ', load_btn_label);
-    console.log('load_btn_input: ', load_btn_input);
+    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
+    // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
+    // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
 
-
-    // -To display to user:
+    // To display to user:
     load_btn_label.textContent = this.name;
     this.load_btn.addEventListener('click', () => {
       console.log('clicked track load button: ', this.name);
     });
 
-    // -Actual file upload:
+    // Actual file upload:
     load_btn_input.addEventListener('change', (e) => {
-      const file = event.target.files[0];
+      const file = e.target.files[0];
       console.log('file: ', file);
+
+      const url = URL.createObjectURL(file);
+
+      // Load .mp3 into Tone.js
+      this.player.load(url);
     });
 
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
-    // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
-    // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
-    load_btn_input.style.opacity = 0.5;
-    load_btn_input.style.textContent = 'absolute';
+
+
   }
 
   toggleUI(index) {
