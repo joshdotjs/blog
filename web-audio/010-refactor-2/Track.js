@@ -82,7 +82,8 @@ class Track {
         elem.style.color = 'black';
         elem.style.borderRadius = '5px';
         elem.style.padding = '1rem';
-        elem.style.boxShadow = '0 0 1rem black';
+        // elem.style.boxShadow = '0 0 1rem black';
+        elem.style.boxShadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
         elem.textContent = `uploaded file: ${file.name}`;
         document.body.appendChild(elem);
 
@@ -93,7 +94,7 @@ class Track {
         ], {
           duration: 750,
           // delay: 75,
-          easing: 'ease-in',
+          easing: 'ease-in-out',
           fill: 'forwards'
         });
 
@@ -105,12 +106,12 @@ class Track {
             { transform: 'translateX(-100%)', opacity: 0 }
           ], {
             duration: 750,
-            easing: 'ease-in',
+            easing: 'ease-in-out',
             fill: 'forwards'
           });
 
           // document.body.removeChild(elem);
-        }, 2e3);
+        }, 3e3);
       };
       notification();
     });
