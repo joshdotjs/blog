@@ -40,7 +40,6 @@ main {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   width: fit-content;
   margin: 0 auto;
-  margin-top: 200px;
 }
 main #top-bar {
   padding: calc(24px / 2) 24px;
