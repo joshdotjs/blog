@@ -72,10 +72,14 @@ class Track {
 
       // show notification to user:
       const notification = () => {
+
+        const rect = document.querySelector('main').getBoundingClientRect();
+        const { top, right, bottom, left } = rect;
+
         console.log('uploaded file: ', file.name);
         const elem = document.createElement('div');
         elem.style.position = 'absolute';
-        elem.style.bottom = '32px';
+        // elem.style.bottom = '32px';
         elem.style.left = '32px';
         // elem.style.width = '100vw';
         elem.style.zIndex = '100';
@@ -86,7 +90,13 @@ class Track {
         // elem.style.boxShadow = '0 0 1rem black';
         elem.style.boxShadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
         elem.textContent = `uploaded file: ${file.name}`;
+        
+        // elem.style.top = `calc(${bottom}px - ${elem.getBoundingClientRect().height}px)`;
+        elem.style.top = `calc(${bottom}px - 54px - 32px)`;
         document.body.appendChild(elem);
+
+        console.log('elem height: ', elem.getBoundingClientRect().height);
+        console.log('elem height: ', `${elem.getBoundingClientRect().height}px`);
 
         const options = {
           duration: 750,
@@ -109,9 +119,9 @@ class Track {
             ], 
             options
           );
-          setTimeout(() => document.body.removeChild(elem), duration);
+          setTimeout(() => document.body.removeChild(elem), options.duration);
         }, 3e3);
-        
+
       };
       notification();
     });
