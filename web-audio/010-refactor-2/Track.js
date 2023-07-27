@@ -5,6 +5,7 @@ class Track {
   name = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
+  load_btn = null;
 
   constructor({ pattern, name, path, steps, load_btn }) {
     this.pattern = pattern;
@@ -36,7 +37,7 @@ class Track {
       });
     });
 
-    // initialize the load button
+    // grab reference to <input> & <label>
     const load_btn_label = this.load_btn.querySelector('label');
     const load_btn_input = this.load_btn.querySelector('input');
 
@@ -44,21 +45,21 @@ class Track {
     // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
     // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
 
-    // To display to user:
+    // not currently used
     load_btn_label.textContent = this.name;
     this.load_btn.addEventListener('click', () => {
       console.log('clicked track load button: ', this.name);
     });
 
-    // Actual file upload:
+    // file upload:
     load_btn_input.addEventListener('change', (e) => {
 
-      // upload file:
+      // step 1: upload file
       const file = e.target.files[0];
       const url = URL.createObjectURL(file);
       this.player.load(url);
 
-      // change title:
+      // step 2: change title
       // -if file has file extension, then remove it from name:
       let name = file.name.split('.');
       if (name.length > 1) {
@@ -69,7 +70,7 @@ class Track {
       this.name = name;
       load_btn_label.textContent = name;
 
-      // TODO: notification to user:
+      // show notification to user:
       const notification = () => {
         console.log('uploaded file: ', file.name);
         const elem = document.createElement('div');
@@ -87,35 +88,33 @@ class Track {
         elem.textContent = `uploaded file: ${file.name}`;
         document.body.appendChild(elem);
 
+        const options = {
+          duration: 750,
+          easing: 'ease-in-out',
+          fill: 'forwards',
+        };
+    
         elem.style.transform = 'translateX(-100%)';
         elem.animate([
-          { transform: 'translateX(-100%)', opacity: 0 },
-          { transform: 'translateX(0%)', opacity: 1 }
-        ], {
-          duration: 750,
-          // delay: 75,
-          easing: 'ease-in-out',
-          fill: 'forwards'
-        });
-
-
+            { transform: 'translateX(-100%)', opacity: 0 },
+            { transform: 'translateX(0%)', opacity: 1 }
+          ], 
+          options
+        );
+    
         setTimeout(() => {
-
           elem.animate([
-            { transform: 'translateX(0%)', opacity: 1 },
-            { transform: 'translateX(-100%)', opacity: 0 }
-          ], {
-            duration: 750,
-            easing: 'ease-in-out',
-            fill: 'forwards'
-          });
-
-          // document.body.removeChild(elem);
+              { transform: 'translateX(0%)', opacity: 1 },
+              { transform: 'translateX(-100%)', opacity: 0 }
+            ], 
+            options
+          );
+          setTimeout(() => document.body.removeChild(elem), duration);
         }, 3e3);
+        
       };
       notification();
     });
-
   }
 
   toggleUI(index) {
