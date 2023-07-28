@@ -157,7 +157,7 @@ class Track {
         this.enabled = !this.enabled;
 
         // turn off .current styling on all steps
-        if (this.enabled === false)
+        if (!this.enabled)
           this.steps.forEach(step => step.classList.remove('current'));
       });
     };

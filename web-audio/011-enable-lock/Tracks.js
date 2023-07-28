@@ -62,7 +62,7 @@ const highlightStep = (index) => {
 
   Tracks.forEach(track => {
 
-    if (track.enabled === false) return;
+    if (!track.enabled) return;
 
     track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
     // track.steps[count].classList.add('current');

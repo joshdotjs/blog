@@ -188,6 +188,12 @@ main #tracks .track-lock {
   color: #C2C9CD;
   margin-right: 10px;
 }
+main #tracks .track-lock .track-lock-icon-locked {
+  display: none;
+}
+main #tracks .track-lock .track-lock-icon-unlocked {
+  display: inline-block;
+}
 main #tracks .track-title-container {
   position: relative;
 }
@@ -266,13 +272,23 @@ main #tracks .track .steps .step.current {
 main #tracks .track:not(:last-child) {
   margin-bottom: 10px;
 }
+main #tracks .track.track-locked .step {
+  opacity: 0.5;
+  pointer-events: none;
+}
+main #tracks .track.track-locked .step.current {
+  box-shadow: 0 3px 6px rgba(255, 0, 47, 0.16), 0 3px 6px rgba(151, 233, 47, 0.23);
+  transform: scale(1.09);
+}
+main #tracks .track.track-locked .track-lock .track-lock-icon-locked {
+  display: inline-block;
+}
+main #tracks .track.track-locked .track-lock .track-lock-icon-unlocked {
+  display: none;
+}
 main #tracks .track.track-disabled .step {
   opacity: 0.25;
 }
 main #tracks .track.track-disabled .track-led-enable-inner {
   background: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
-}
-main #tracks .track.track-locked .step {
-  opacity: 0.5;
-  pointer-events: none;
 }/*# sourceMappingURL=index.css.map */
