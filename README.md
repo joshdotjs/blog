@@ -3,11 +3,6 @@
 
 # TODO:
 
-- Load sounds
-  - Add callback to actually load the sound once file is selected
-  - fix the class names on track-title-container
-    - better name (.track-title-container / .track-title )
-
 - Graphing
   - Per track:
     - time domain
