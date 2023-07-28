@@ -60,18 +60,21 @@ const highlightStep = (index) => {
   const prev_idx = index - 1;
   const is_prev_idx_pos = prev_idx >= 0;
 
-  Tracks.forEach(Track => {
-    Track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
-    // Track.steps[count].classList.add('current');
-    Track.steps[index].classList.add('current');
+  Tracks.forEach(track => {
+
+    if (track.enabled === false) return;
+
+    track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+    // track.steps[count].classList.add('current');
+    track.steps[index].classList.add('current');
   });
 };
 
 // ==============================================
 
 const resetHighlightedSteps = () => {
-  Tracks.forEach(Track => {
-    Track.steps.forEach(step => step.classList.remove('current'));
+  Tracks.forEach(track => {
+    track.steps.forEach(step => step.classList.remove('current'));
   });
 }
 

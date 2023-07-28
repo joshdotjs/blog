@@ -345,7 +345,7 @@ main {
         .track-led-enable-inner { background: $gradient-led-off; }
       }
       &.track-locked {
-        pointer-events: none;
+        .step { opacity: 0.5; pointer-events: none; }
       }
     }
   }

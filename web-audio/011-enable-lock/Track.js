@@ -155,26 +155,26 @@ class Track {
       enable_btn.addEventListener('click', () => {
         this.elem.classList.toggle('track-disabled');
         this.enabled = !this.enabled;
+
+        // turn off .current styling on all steps
+        if (this.enabled === false)
+          this.steps.forEach(step => step.classList.remove('current'));
       });
     };
     initEnable();
 
     // ------------------------------------------
 
+    const initLock = () => {
+      const lock_btn = this.elem.querySelector('.track-lock');
+      lock_btn.addEventListener('click', () => {
+        this.elem.classList.toggle('track-locked');
+        this.locked = !this.locked;
+      });
+    };
+    initLock();
 
     // ------------------------------------------
-  }
-
-  // ============================================
-
-  toggleEnable() {
-
-  }
-
-  // ============================================
-
-  toggleLock() {
-    // TODO
   }
 
   // ============================================

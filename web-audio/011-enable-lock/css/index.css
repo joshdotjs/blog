@@ -272,6 +272,7 @@ main #tracks .track.track-disabled .step {
 main #tracks .track.track-disabled .track-led-enable-inner {
   background: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
 }
-main #tracks .track.track-locked {
+main #tracks .track.track-locked .step {
+  opacity: 0.5;
   pointer-events: none;
 }/*# sourceMappingURL=index.css.map */
