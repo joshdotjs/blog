@@ -4,7 +4,8 @@ import {
 } from './util.js';
 
 import {
-  Tracks,
+  // Tracks, 
+  playTracks,
   highlightStep, resetHighlightedSteps
 } from './Tracks.js';
 
@@ -18,13 +19,28 @@ const updateCount = () => count = (count + 1) % 16;
 // ==============================================
 
 const loopCallback = (time) => {  
-  Tracks.forEach(track => {
-    if (track.pattern[count]) 
-      track.start(time);
-  });
 
-  highlightStep(count);
-  updateDisplay(time);
+  console.log(
+    'time: ', time,
+    '\nTone.now(): ', Tone.now(),
+  );
+
+
+  // Tracks.forEach(track => {
+  //   if (track.pattern[count]) 
+  //     track.start(time);
+  // });
+  playTracks(count, time);
+
+
+  // https://github.com/Tonejs/Tone.js/wiki/Performance#syncing-visuals
+  Tone.Draw.schedule(function(){
+		//this callback is invoked from a requestAnimationFrame
+		//and will be invoked close to AudioContext time
+    highlightStep(count);
+    updateDisplay(time);
+	}, time) //use AudioContext time of the event
+
   updateCount();
 }; // loopCallback()
 
@@ -142,7 +158,7 @@ const increaseBPM = ()  =>  setBPM(Math.min(T.bpm.value + 10, 300));
 const decreaseBPM = ()  =>  setBPM(Math.max(10, T.bpm.value - 10));
 function setBPM(x) {
   T.bpm.value = x;
-  bpm_display_value.innerText = x;
+  bpm_display_value.innerText = Math.round(x);
 }; // setBPM()
 setBPM(140); // initialize to 140 bpm
 

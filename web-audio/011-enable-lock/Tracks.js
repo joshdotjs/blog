@@ -34,6 +34,15 @@ const Tracks = [
 
 // ==============================================
 
+const playTracks = (count, time) => {
+  Tracks.forEach((track) => {
+    if (track.pattern[count]) 
+      track.start(time);
+  });
+};
+
+// ==============================================
+
 const highlightStep = (count) => {
   const prev_idx = count - 1;
   const is_prev_idx_pos = prev_idx >= 0;
@@ -55,6 +64,6 @@ const resetHighlightedSteps = () => {
 // ==============================================
 
 export { 
-  Tracks, 
-  highlightStep, resetHighlightedSteps
+  Tracks, playTracks,
+  highlightStep, resetHighlightedSteps,
 };
