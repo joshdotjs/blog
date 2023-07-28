@@ -1,7 +1,7 @@
 // Keep UI functional (non OOP)
 
 import Track from './Track.js';
-import {  qs, qsa } from './util.js';
+import {  qs } from './util.js';
 
 // ==============================================
 

@@ -1,13 +1,11 @@
 // Minimal OOP - an object is the right structure for Track info
 
-import {  qs, qsa } from './util.js';
-
 class Track {
   pattern = [];
   name = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
-  load_btn = null;
+  // load_btn = null;
   enabled = true;
   locked = false; // TODO
 
@@ -19,7 +17,6 @@ class Track {
     this.pattern = pattern;
     this.name = name;
     this.player.load(path);
-
 
     this.elem = elem;
 
@@ -33,7 +30,7 @@ class Track {
     // </div>
 
     // this.load_btn = load_btn;
-    this.load_btn = elem.querySelector('.track-title-container');
+    // this.load_btn = elem.querySelector('.track-title-container');
 
     this.initUI();
   }
@@ -63,18 +60,22 @@ class Track {
 
     const initLoad = () => {
           // grab reference to <input> & <label>
-      const load_btn_label = this.load_btn.querySelector('label');
-      const load_btn_input = this.load_btn.querySelector('input');
+      // const load_btn_label = this.load_btn.querySelector('label');
+      // const load_btn_input = this.load_btn.querySelector('input');
+      const load_btn_label = this.elem.querySelector('.track-title-container > label');
+      const load_btn_input = this.elem.querySelector('.track-title-container > input');
 
       // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
       // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
       // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
 
-      // not currently used
+      // write name in button
       load_btn_label.textContent = this.name;
-      this.load_btn.addEventListener('click', () => {
-        console.log('clicked track load button: ', this.name);
-      });
+
+            // // not currently used
+      // this.load_btn.addEventListener('click', () => {
+      //   console.log('clicked track load button: ', this.name);
+      // });
 
       // file upload:
       load_btn_input.addEventListener('change', (e) => {
