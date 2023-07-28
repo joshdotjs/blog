@@ -209,10 +209,7 @@ main {
           border: $border-1;
           
           // transition: background-color 0.2s ease-in-out; // gradient transitions not fully supported in CSS yet :(
-          background: $gradient-led-off;
-          &.led-on { 
-            background: $gradient-green-led-on;
-          }
+          background: $gradient-green-led-on;
 
           &-line {
             height: 50%;
@@ -337,6 +334,14 @@ main {
 
       &:not(:last-child) {
         margin-bottom: 10px;
+      }
+
+      &.track-disabled {
+        .step { opacity: 0.25; }
+        .track-led-enable-inner { background: $gradient-led-off; }
+      }
+      &.track-locked {
+        pointer-events: none;
       }
     }
   }

@@ -158,9 +158,6 @@ main #tracks .track-led-enable-inner {
   width: calc(12px - 2px);
   border-radius: calc(calc(12px - 2px) / 2);
   border: solid 1px #252D31;
-  background: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
-}
-main #tracks .track-led-enable-inner.led-on {
   background: linear-gradient(0deg, #DCF7AB 0%, #6EDB00 100%);
 }
 main #tracks .track-led-enable-inner-line {
@@ -264,4 +261,13 @@ main #tracks .track .steps .step.current {
 }
 main #tracks .track:not(:last-child) {
   margin-bottom: 10px;
+}
+main #tracks .track.track-disabled .step {
+  opacity: 0.25;
+}
+main #tracks .track.track-disabled .track-led-enable-inner {
+  background: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
+}
+main #tracks .track.track-locked {
+  pointer-events: none;
 }/*# sourceMappingURL=index.css.map */

@@ -152,11 +152,12 @@ class Track {
 
     const initEnable = () => {
       const enable_btn = this.elem.querySelector('.track-led-enable');
-      const led = enable_btn.querySelector('.track-led-enable-inner');
+      // const led = enable_btn.querySelector('.track-led-enable-inner');
 
       enable_btn.addEventListener('click', () => {
       
-        led.classList.toggle('led-on');
+        // led.classList.toggle('track-disabled');
+        this.elem.classList.toggle('track-disabled');
         this.enabled = !this.enabled;
       });
     };

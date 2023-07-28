@@ -169,7 +169,7 @@ function setBPM(x) {
   T.bpm.value = x;
   bpm_display_value.innerText = Math.round(x);
 }; // setBPM()
-setBPM(50); // initialize to 140 bpm
+setBPM(140); // initialize to 140 bpm
 
 bpm_button_up.addEventListener('click', increaseBPM);
 bpm_button_down.addEventListener('click', decreaseBPM);
