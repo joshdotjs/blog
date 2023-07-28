@@ -1,17 +1,30 @@
 // Minimal OOP - an object is the right structure for Track info
 
+import {  qs, qsa } from './util.js';
+
 class Track {
   pattern = [];
   name = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
   load_btn = null;
+  enabled = true;
+  locked = false; // TODO
 
-  constructor({ pattern, name, path, steps, load_btn }) {
+  elem = null;
+
+  // ============================================
+
+  constructor({ pattern, name, path, /*steps, load_btn, */ elem }) {
     this.pattern = pattern;
     this.name = name;
     this.player.load(path);
-    this.steps = steps;
+
+
+    this.elem = elem;
+
+    // this.steps = steps;
+    this.steps = elem.querySelectorAll('.steps > .step');
     // <div class="steps">
     //   <div class="step step-A"></div>
     //   ...
@@ -19,130 +32,177 @@ class Track {
     //   </div>
     // </div>
 
-    this.load_btn = load_btn;
+    // this.load_btn = load_btn;
+    this.load_btn = elem.querySelector('.track-title-container');
 
     this.initUI();
   }
 
+  // ============================================
+
   initUI() {
+
+    // ------------------------------------------
+
     // initialize the UI and set step click listeners
-    this.steps.forEach((step, j) => {
-  
-      // initialize the UI to match initial patterns
-      if (this.pattern[j]) this.toggleUI(j);
-  
-      // toggle the pattern and UI when a step is clicked
-      step.addEventListener('click', () => {
-        this.toggle(j);
+    const initSteps = () => {
+      this.steps.forEach((step, j) => {
+    
+        // initialize the UI to match initial patterns
+        if (this.pattern[j]) this.toggleStep(j);
+    
+        // toggle the pattern and UI when a step is clicked
+        step.addEventListener('click', () => {
+          this.toggle(j);
+        });
       });
-    });
+    };
+    initSteps();
 
-    // grab reference to <input> & <label>
-    const load_btn_label = this.load_btn.querySelector('label');
-    const load_btn_input = this.load_btn.querySelector('input');
+    // ------------------------------------------
 
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
-    // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
-    // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
+    const initLoad = () => {
+          // grab reference to <input> & <label>
+      const load_btn_label = this.load_btn.querySelector('label');
+      const load_btn_input = this.load_btn.querySelector('input');
 
-    // not currently used
-    load_btn_label.textContent = this.name;
-    this.load_btn.addEventListener('click', () => {
-      console.log('clicked track load button: ', this.name);
-    });
+      // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
+      // -we hide the <input> element — we do this because file inputs tend to be ugly, difficult to style, and inconsistent in their design across browsers.
+      // -You can activate the input element by clicking its <label>, so it is better to visually hide the input and style the label like a button, so the user will know to interact with it if they want to upload files.
 
-    // file upload:
-    load_btn_input.addEventListener('change', (e) => {
+      // not currently used
+      load_btn_label.textContent = this.name;
+      this.load_btn.addEventListener('click', () => {
+        console.log('clicked track load button: ', this.name);
+      });
 
-      // step 1: upload file
-      const file = e.target.files[0];
-      const url = URL.createObjectURL(file);
-      this.player.load(url);
+      // file upload:
+      load_btn_input.addEventListener('change', (e) => {
 
-      // step 2: change title
-      // -if file has file extension, then remove it from name:
-      let name = file.name.split('.');
-      if (name.length > 1) {
-        name.pop();
-        name = name.join('.');
-      }
-      // -write title to button
-      this.name = name;
-      load_btn_label.textContent = name;
+        // step 1: upload file
+        const file = e.target.files[0];
+        const url = URL.createObjectURL(file);
+        this.player.load(url);
 
-      // show notification to user:
-      const notification = () => {
+        // step 2: change title
+        // -if file has file extension, then remove it from name:
+        let name = file.name.split('.');
+        if (name.length > 1) {
+          name.pop();
+          name = name.join('.');
+        }
+        // -write title to button
+        this.name = name;
+        load_btn_label.textContent = name;
 
-        const rect = document.querySelector('main').getBoundingClientRect();
-        const { top, right, bottom, left } = rect;
+        // show notification to user:
+        const notification = () => {
 
-        console.log('uploaded file: ', file.name);
-        const elem = document.createElement('div');
-        elem.style.position = 'absolute';
-        // elem.style.bottom = '32px';
-        elem.style.left = '32px';
-        // elem.style.width = '100vw';
-        elem.style.zIndex = '100';
-        elem.style.backgroundColor = 'white';
-        elem.style.color = 'black';
-        elem.style.borderRadius = '5px';
-        elem.style.padding = '1rem';
-        // elem.style.boxShadow = '0 0 1rem black';
-        elem.style.boxShadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
-        elem.textContent = `uploaded file: ${file.name}`;
-        
-        // elem.style.top = `calc(${bottom}px - ${elem.getBoundingClientRect().height}px)`;
-        elem.style.top = `calc(${bottom}px - 54px - 32px)`;
-        document.body.appendChild(elem);
+          const rect = document.querySelector('main').getBoundingClientRect();
+          const { top, right, bottom, left } = rect;
 
-        console.log('elem height: ', elem.getBoundingClientRect().height);
-        console.log('elem height: ', `${elem.getBoundingClientRect().height}px`);
+          console.log('uploaded file: ', file.name);
+          const elem = document.createElement('div');
+          elem.style.position = 'absolute';
+          // elem.style.bottom = '32px';
+          elem.style.left = '32px';
+          // elem.style.width = '100vw';
+          elem.style.zIndex = '100';
+          elem.style.backgroundColor = 'white';
+          elem.style.color = 'black';
+          elem.style.borderRadius = '5px';
+          elem.style.padding = '1rem';
+          // elem.style.boxShadow = '0 0 1rem black';
+          elem.style.boxShadow = '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
+          elem.textContent = `uploaded file: ${file.name}`;
+          
+          // elem.style.top = `calc(${bottom}px - ${elem.getBoundingClientRect().height}px)`;
+          elem.style.top = `calc(${bottom}px - 54px - 32px)`;
+          document.body.appendChild(elem);
 
-        const options = {
-          duration: 750,
-          easing: 'ease-in-out',
-          fill: 'forwards',
-        };
-    
-        elem.style.transform = 'translateX(-100%)';
-        elem.animate([
-            { transform: 'translateX(-100%)', opacity: 0 },
-            { transform: 'translateX(0%)', opacity: 1 }
-          ], 
-          options
-        );
-    
-        setTimeout(() => {
+          console.log('elem height: ', elem.getBoundingClientRect().height);
+          console.log('elem height: ', `${elem.getBoundingClientRect().height}px`);
+
+          const options = {
+            duration: 750,
+            easing: 'ease-in-out',
+            fill: 'forwards',
+          };
+      
+          elem.style.transform = 'translateX(-100%)';
           elem.animate([
-              { transform: 'translateX(0%)', opacity: 1 },
-              { transform: 'translateX(-100%)', opacity: 0 }
+              { transform: 'translateX(-100%)', opacity: 0 },
+              { transform: 'translateX(0%)', opacity: 1 }
             ], 
             options
           );
-          setTimeout(() => document.body.removeChild(elem), options.duration);
-        }, 3e3);
+      
+          setTimeout(() => {
+            elem.animate([
+                { transform: 'translateX(0%)', opacity: 1 },
+                { transform: 'translateX(-100%)', opacity: 0 }
+              ], 
+              options
+            );
+            setTimeout(() => document.body.removeChild(elem), options.duration);
+          }, 3e3);
 
-      };
-      notification();
-    });
+        };
+        notification();
+      });
+    };
+    initLoad();
+
+    // ------------------------------------------
+
+    const initEnable = () => {
+
+    };
+
+    // ------------------------------------------
+
+
+    // ------------------------------------------
   }
 
-  toggleUI(index) {
+  // ============================================
+
+  toggleEnable() {
+
+  }
+
+  // ============================================
+
+  toggleLock() {
+    // TODO
+  }
+
+  // ============================================
+
+  toggleStep(index) {
     this.steps[index].classList.toggle('step-on');
   }
+
+  // ============================================
 
   togglePattern(index) {
     this.pattern[index] = this.pattern[index] ? 0 : 1;
   }
 
+  // ============================================
+
   toggle(index) {
     this.togglePattern(index);
-    this.toggleUI(index);
+    this.toggleStep(index);
   }
+
+  // ============================================
 
   start(time) {
     this.player.start(time);
   }
+
+  // ============================================
 }
 
 export default Track;
