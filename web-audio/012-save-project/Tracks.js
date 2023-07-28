@@ -1,7 +1,7 @@
 // Keep UI functional (non OOP)
 
 import Track from './Track.js';
-import { qs } from './util.js';
+import { qs, listeForEvent } from './util.js';
 
 // ==============================================
 
@@ -31,6 +31,12 @@ const Tracks = [
 
 // ==============================================
 
+listeForEvent('josh', (event) => {
+  console.log('event fired and caught!');
+  console.log(event.detail.data);
+
+  // TODO: Write to LS
+});
 
 // ==============================================
 

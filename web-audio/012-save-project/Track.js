@@ -1,5 +1,7 @@
 // Minimal OOP - an object is the right structure for Track info
 
+import { setLS, fireEvent } from './util.js' ;
+
 class Track {
   pattern = [];
   name = '';
@@ -19,7 +21,7 @@ class Track {
     this.name = name;
     this.player.load(path);
     this.steps = elem.querySelectorAll('.steps > .step');
-    this.initUI();
+    this.initUI();    
   }
 
   // ============================================
@@ -168,6 +170,8 @@ class Track {
 
   togglePattern(index) {
     this.pattern[index] = this.pattern[index] ? 0 : 1;
+
+    fireEvent('josh', { data_key: 'data_value' });
   }
 
   // ============================================
