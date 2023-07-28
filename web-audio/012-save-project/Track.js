@@ -188,6 +188,16 @@ class Track {
   }
 
   // ============================================
+
+  getData() {
+    return {
+      pattern: this.pattern,
+      name: this.name,
+      enabled: this.enabled,
+    };
+  }
+
+  // ============================================
 }
 
 export default Track;

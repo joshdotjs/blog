@@ -1,13 +1,18 @@
 // Keep UI functional (non OOP)
 
 import Track from './Track.js';
-import { qs, listeForEvent } from './util.js';
+import { qs, listeForEvent, setLS } from './util.js';
 
 // ==============================================
 
-const Tracks = [
+let Tracks = [];
+
+const ls_tracks = JSON.parse(localStorage.getItem('tracks'));
+
+if (ls_tracks) {
+ Tracks = [
   new Track({ 
-    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
+    pattern: ls_tracks[0].pattern, 
     name: 'hi-hat',
     path: '/assets/samples/drums/hi-hat.mp3',
     elem: qs('.track-0'),
@@ -28,6 +33,31 @@ const Tracks = [
     enabled: true,
   }),
 ];
+} else {
+  Tracks = [
+    new Track({ 
+      pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
+      name: 'hi-hat',
+      path: '/assets/samples/drums/hi-hat.mp3',
+      elem: qs('.track-0'),
+      enabled: true,
+    }),
+    new Track({ 
+      pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
+      name: 'kick',
+      path: '/assets/samples/drums/kick.mp3',
+      elem: qs('.track-1'),
+      enabled: false,
+    }),
+    new Track({ 
+      pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
+      name: 'snare',
+      path: '/assets/samples/drums/snare.mp3',
+      elem: qs('.track-2'),
+      enabled: true,
+    }),
+  ];
+}
 
 // ==============================================
 
@@ -35,8 +65,15 @@ listeForEvent('josh', (event) => {
   console.log('event fired and caught!');
   console.log(event.detail.data);
 
-  // TODO: Write to LS
+  const tracks = Tracks.map(track => track.getData());
+  console.log('tracks: ', tracks);
+
+  setLS('tracks', tracks);
 });
+
+// ==============================================
+
+
 
 // ==============================================
 

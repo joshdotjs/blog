@@ -19,8 +19,9 @@ const round = (x, places) => Number.parseFloat(x).toFixed(places);
 // ==============================================
 // ==============================================
 
-const setLS = (key, value) => 
+const setLS = (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
+};
 
 // ==============================================
 // ==============================================
