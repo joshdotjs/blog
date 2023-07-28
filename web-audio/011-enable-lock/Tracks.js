@@ -13,6 +13,7 @@ const Tracks = [
     // steps: qsa('.track-0 > .steps > .step'),
     // load_btn: qs('.track-0 > .track-title-container'),
     elem: qs('.track-0'),
+    enabled: true,
   }),
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
@@ -21,6 +22,7 @@ const Tracks = [
     // steps: qsa('.track-1 > .steps > .step'),
     // load_btn: qs('.track-1 > .track-title-container'),
     elem: qs('.track-1'),
+    enabled: false,
   }),
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
@@ -29,6 +31,7 @@ const Tracks = [
     // steps: qsa('.track-2 > .steps > .step'),
     // load_btn: qs('.track-2 > .track-title-container'),
     elem: qs('.track-2'),
+    enabled: true,
   }),
 ];
 
@@ -40,6 +43,9 @@ const Tracks = [
 const playTracks = (time, index) => {
 
   Tracks.forEach((track) => {
+
+    if (track.enabled === false) return;
+
     // if (track.pattern[count]) 
     if (track.pattern[index]) 
       track.start(time);

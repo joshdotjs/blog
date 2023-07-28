@@ -22,12 +22,6 @@ class Track {
 
     // this.steps = steps;
     this.steps = elem.querySelectorAll('.steps > .step');
-    // <div class="steps">
-    //   <div class="step step-A"></div>
-    //   ...
-    //   <div class="step step-B"></div>
-    //   </div>
-    // </div>
 
     // this.load_btn = load_btn;
     // this.load_btn = elem.querySelector('.track-title-container');
@@ -157,8 +151,16 @@ class Track {
     // ------------------------------------------
 
     const initEnable = () => {
+      const enable_btn = this.elem.querySelector('.track-led-enable');
+      const led = enable_btn.querySelector('.track-led-enable-inner');
 
+      enable_btn.addEventListener('click', () => {
+      
+        led.classList.toggle('led-on');
+        this.enabled = !this.enabled;
+      });
     };
+    initEnable();
 
     // ------------------------------------------
 

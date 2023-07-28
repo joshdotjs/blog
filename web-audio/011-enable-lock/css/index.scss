@@ -208,11 +208,11 @@ main {
           border-radius: calc(#{$sz2} / 2);
           border: $border-1;
           
-          
-          background: $grey-1;
-
-          &.led-on { background: $gradient-green-led-on; }
-          &.led-off { background: $gradient-led-off; }
+          // transition: background-color 0.2s ease-in-out; // gradient transitions not fully supported in CSS yet :(
+          background: $gradient-led-off;
+          &.led-on { 
+            background: $gradient-green-led-on;
+          }
 
           &-line {
             height: 50%;

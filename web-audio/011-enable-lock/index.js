@@ -19,13 +19,6 @@ const { Transport: T } = Tone;
 const getIndex = () => {
   const [bar, beat, sixteenth] = Tone.Transport.position.split(':').map(x => Number(x));
   const index = ((bar % 2) * 8) + (beat * 2) + (Math.floor(sixteenth) / 2);
-
-  // console.log(
-  //   'Tone.now(): ', Tone.now(),
-  //   '\nT.ticks: ', Tone.Transport.ticks,
-  //   '\nindex: ', index,
-  // );
-
   return { bar, beat, sixteenth, index };
 };
 
