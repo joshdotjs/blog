@@ -1,0 +1,10 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "sass": "      sass  --watch  ./css/index.scss:./css/index.css",
+    "sass:build": "sass           ./css/index.scss:./css/index.css"
+  },
+  "devDependencies": {
+    "sass": "^1.63.6"
+  }
+}
