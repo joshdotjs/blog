@@ -6,42 +6,57 @@ import {
 import {
   // Tracks, 
   playTracks,
-  highlightStep, resetHighlightedSteps
+  highlightStep, resetHighlightedSteps,
 } from './Tracks.js';
 
 // ==============================================
 
 const { Transport: T } = Tone;
 
-let count = 0;
-const updateCount = () => count = (count + 1) % 16;
+// let count = 0;
+// const updateCount = () => count = (count + 1) % 16;
+
+const getIndex = () => {
+  const [bar, beat, sixteenth] = Tone.Transport.position.split(':').map(x => Number(x));
+  const index = ((bar % 2) * 8) + (beat * 2) + (Math.floor(sixteenth) / 2);
+
+  // console.log(
+  //   'Tone.now(): ', Tone.now(),
+  //   '\nT.ticks: ', Tone.Transport.ticks,
+  //   '\nindex: ', index,
+  // );
+
+  return { bar, beat, sixteenth, index };
+};
 
 // ==============================================
 
 const loopCallback = (time) => {  
 
-  console.log(
-    'time: ', time,
-    '\nTone.now(): ', Tone.now(),
-  );
+  const { bar, beat, sixteenth, index } = getIndex();
 
+  console.log(
+    'Tone.now(): ', Tone.now(),
+    '\nT.ticks: ', Tone.Transport.ticks,
+    '\nindex: ', index,
+  );
 
   // Tracks.forEach(track => {
   //   if (track.pattern[count]) 
   //     track.start(time);
   // });
-  playTracks(count, time);
-
+  playTracks(time, index);
 
   // https://github.com/Tonejs/Tone.js/wiki/Performance#syncing-visuals
   Tone.Draw.schedule(function(){
 		//this callback is invoked from a requestAnimationFrame
 		//and will be invoked close to AudioContext time
-    highlightStep(count);
-    updateDisplay(time);
+    // highlightStep(count);
+    highlightStep(index);
+    updateDisplay({ bar, beat, sixteenth, index });
 	}, time) //use AudioContext time of the event
 
-  updateCount();
+  // updateCount();
 }; // loopCallback()
 
 // ==============================================
@@ -125,19 +140,20 @@ const count_display  = timing_display.querySelector('.timing-display-count');
 const bars_display   = timing_display.querySelector('.timing-display-bars');
 const beats_display  = timing_display.querySelector('.timing-display-beats');
 
-function updateDisplay(time) {
-  const [bars, beats, sixteenths] = T.position.split(':');
+function updateDisplay({ bar, beat, sixteenth, index }) {
+  // const [bars, beats, sixteenths] = T.position.split(':');
+  
   // time_display.textContent = round(time, 2);
-  bars_display.textContent = pad(bars, 3);
-  beats_display.textContent = beats;
-  count_display.textContent = pad(count, 2);
+  bars_display.textContent = pad(bar + 1, 3);
+  beats_display.textContent = beat + 1;
+  count_display.textContent = pad(index + 1, 2);
 } // updateDisplay()
 
 function resetCount() {
   bars_display.textContent = '000';
   beats_display.textContent = '0';
   count_display.textContent = '00';
-  count = 0;
+  // count = 0;
 } // resetCount()
 
 // ==============================================
@@ -160,7 +176,7 @@ function setBPM(x) {
   T.bpm.value = x;
   bpm_display_value.innerText = Math.round(x);
 }; // setBPM()
-setBPM(140); // initialize to 140 bpm
+setBPM(50); // initialize to 140 bpm
 
 bpm_button_up.addEventListener('click', increaseBPM);
 bpm_button_down.addEventListener('click', decreaseBPM);

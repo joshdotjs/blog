@@ -34,22 +34,30 @@ const Tracks = [
 
 // ==============================================
 
-const playTracks = (count, time) => {
+
+// ==============================================
+
+const playTracks = (time, index) => {
+
   Tracks.forEach((track) => {
-    if (track.pattern[count]) 
+    // if (track.pattern[count]) 
+    if (track.pattern[index]) 
       track.start(time);
   });
 };
 
 // ==============================================
 
-const highlightStep = (count) => {
-  const prev_idx = count - 1;
+const highlightStep = (index) => {
+
+  // const prev_idx = count - 1;
+  const prev_idx = index - 1;
   const is_prev_idx_pos = prev_idx >= 0;
 
   Tracks.forEach(Track => {
     Track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
-    Track.steps[count].classList.add('current');
+    // Track.steps[count].classList.add('current');
+    Track.steps[index].classList.add('current');
   });
 };
 
