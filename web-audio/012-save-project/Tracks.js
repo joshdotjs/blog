@@ -8,15 +8,16 @@ import { qs, listeForEvent, setLS } from './util.js';
 let Tracks = [];
 
 const ls_tracks = JSON.parse(localStorage.getItem('tracks'));
+console.log('ls_tracks: ', ls_tracks);
 
 if (ls_tracks) {
  Tracks = [
   new Track({ 
-    pattern: ls_tracks[0].pattern, 
-    name: 'hi-hat',
-    path: '/assets/samples/drums/hi-hat.mp3',
+    pattern: ls_tracks[0].pattern,
+    name: ls_tracks[0].name,
+    path: ls_tracks[0].path,
     elem: qs('.track-0'),
-    enabled: true,
+    enabled: ls_tracks[0].enabled,
   }),
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
@@ -41,6 +42,7 @@ if (ls_tracks) {
       path: '/assets/samples/drums/hi-hat.mp3',
       elem: qs('.track-0'),
       enabled: true,
+      locked: false,
     }),
     new Track({ 
       pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
@@ -48,6 +50,7 @@ if (ls_tracks) {
       path: '/assets/samples/drums/kick.mp3',
       elem: qs('.track-1'),
       enabled: false,
+      locked: false,
     }),
     new Track({ 
       pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
@@ -55,6 +58,7 @@ if (ls_tracks) {
       path: '/assets/samples/drums/snare.mp3',
       elem: qs('.track-2'),
       enabled: true,
+      locked: true,
     }),
   ];
 }

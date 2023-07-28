@@ -5,22 +5,27 @@ import { setLS, fireEvent } from './util.js' ;
 class Track {
   pattern = [];
   name = '';
+  path = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
   // load_btn = null;
   enabled = true;
-  locked = false; // TODO
+  locked = false;
 
   elem = null;
 
   // ============================================
 
-  constructor({ pattern, name, path, /*steps, load_btn, */ elem }) {
+  constructor({ pattern, name, path, /*steps, load_btn, */ elem, enabled, locked }) {
     this.elem = elem;
     this.pattern = pattern;
     this.name = name;
+    this.path = path;
     this.player.load(path);
     this.steps = elem.querySelectorAll('.steps > .step');
+    this.enabled = enabled;
+    this.locked = locked;
+
     this.initUI();    
   }
 
@@ -142,6 +147,8 @@ class Track {
         // turn off .current styling on all steps
         if (!this.enabled)
           this.steps.forEach(step => step.classList.remove('current'));
+        
+        fireEvent('josh', { data_key: 'data_value' });
       });
     };
     initEnable();
@@ -153,6 +160,7 @@ class Track {
       lock_btn.addEventListener('click', () => {
         this.elem.classList.toggle('track-locked');
         this.locked = !this.locked;
+        fireEvent('josh', { data_key: 'data_value' });
       });
     };
     initLock();
@@ -190,11 +198,19 @@ class Track {
   // ============================================
 
   getData() {
-    return {
+
+    const data = {
       pattern: this.pattern,
       name: this.name,
       enabled: this.enabled,
+      path: this.path,
+      enabled: this.enabled,
+      locked: this.locked,
     };
+
+    console.log('getData(): ', data);
+
+    return data;
   }
 
   // ============================================
