@@ -9,7 +9,7 @@ $border-3: solid 1px #404B50;
 
 $grey-1: #5E696D;
 
-$light-gray-1: #C2C9CD;
+$light-grey-1: #C2C9CD;
 
 $green-1: #97E92F;
 
@@ -73,7 +73,7 @@ main {
       &-line {
         height: 50%;
         width: 1px;
-        background: $light-gray-1;
+        background: $light-grey-1;
         margin: 0 auto;
         border-radius: 1px;
       }
@@ -97,7 +97,7 @@ main {
         padding: 3px 4px;
 
         svg { 
-          color: $light-gray-1;
+          color: $light-grey-1;
           height: 15px;
         }
 
@@ -234,7 +234,7 @@ main {
         &-line {
           height: 50%;
           width: 1px;
-          background: $light-gray-1;
+          background: $light-grey-1;
           margin: 0 auto;
           border-radius: 1px;
         }
@@ -242,7 +242,12 @@ main {
         margin-right: $mr;
       }
 
-      .track-title-container { position: relative;
+      &-lock {
+        color: $light-grey-1;
+        margin-right: $mr;
+      }
+
+      &-title-container { position: relative;
 
         $w: 75px;
         $rad: 3px;
@@ -291,7 +296,6 @@ main {
           }
         }
       }
-
 
       .steps {
         display: inline-flex;
