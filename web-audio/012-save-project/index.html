@@ -28,10 +28,10 @@
       .j-dropdown { position: relative;
         outline: solid blue 3px;
         width: fit-content;
-
+        user-select: none;
         cursor: pointer;
         .j-dropdown-trigger {
-          background: orange;
+          background: black;
   
           .j-dropdown-menu { position: absolute;
             list-style: none; 
@@ -48,6 +48,7 @@
             .j-dropdown-item {
               outline: solid black 1px;
               display: block;
+              
             }
           }
         }
@@ -85,11 +86,20 @@
         let opened = false;
 
         dropdown_trigger.addEventListener('click', () => {
+
+          const duration = 0.2;
+
           if (!opened) {
             dropdown_menu.classList.add('show');
-            gsap.to(dropdown_menu, { opacity: 1, duration: 0.2 });
+            gsap.fromTo(dropdown_menu, { 
+              opacity: 0, yPercent: -10, duration
+            },
+            { 
+              opacity: 1, yPercent: 0, duration
+            }
+            );
           } else {
-            gsap.to(dropdown_menu, { opacity: 0, duration: 0.2, onComplete: () => {
+            gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration, onComplete: () => {
               dropdown_menu.classList.remove('show');
             }});
           }
@@ -102,15 +112,18 @@
 
 
             const tl = gsap.timeline();
-            const duration = 0.1;
-            tl.to(item, { background: 'black', duration });
-            tl.to(item, { background: 'white', duration });
-            tl.to(item, { background: 'black', duration });
-            tl.to(item, { background: 'white', duration, onComplete: () => {
-              gsap.to(dropdown_menu, { opacity: 0, duration: 0.2, onComplete: () => {
-              dropdown_menu.classList.remove('show');
-              opened = false;
-            }});
+            const duration = 0.075;
+            tl.to(item, { background: 'black', color: 'white', duration });
+            tl.to(item, { background: 'white', color: 'black', duration });
+            tl.to(item, { background: 'black', color: 'whie',  duration });
+            tl.to(item, { background: 'white', color: 'black', duration });
+            tl.to(item, { background: 'black', color: 'white', duration });
+            tl.to(item, { background: 'white', color: 'black', duration, 
+              onComplete: () => {
+                gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration: 0.2, onComplete: () => {
+                dropdown_menu.classList.remove('show');
+                opened = false;
+              }});
             }});
           });
         });
