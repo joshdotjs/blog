@@ -116,15 +116,18 @@ const bars_display   = timing_display.querySelector('.timing-display-bars');
 const beats_display  = timing_display.querySelector('.timing-display-beats');
 
 function updateDisplay({ bar, beat, sixteenth, index }) {
+  // bars_display.textContent = pad(bar + 1, 3);
+  // beats_display.textContent = beat + 1;
+  // count_display.textContent = pad(index + 1, 2);
   bars_display.textContent = pad(bar + 1, 3);
-  beats_display.textContent = beat + 1;
-  count_display.textContent = pad(index + 1, 2);
+  beats_display.textContent = Math.floor(index / 4) + 1;
+  count_display.textContent = (index) % 4 + 1;
 } // updateDisplay()
 
 function resetCount() {
   bars_display.textContent = '000';
   beats_display.textContent = '0';
-  count_display.textContent = '00';
+  count_display.textContent = '0';
   // count = 0;
 } // resetCount()
 
@@ -148,7 +151,7 @@ function setBPM(x) {
   T.bpm.value = x;
   bpm_display_value.innerText = Math.round(x);
 }; // setBPM()
-setBPM(140); // initialize to 140 bpm
+setBPM(40); // initialize to 140 bpm
 
 bpm_button_up.addEventListener('click', increaseBPM);
 bpm_button_down.addEventListener('click', decreaseBPM);

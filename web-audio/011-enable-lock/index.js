@@ -134,18 +134,18 @@ const bars_display   = timing_display.querySelector('.timing-display-bars');
 const beats_display  = timing_display.querySelector('.timing-display-beats');
 
 function updateDisplay({ bar, beat, sixteenth, index }) {
-  // const [bars, beats, sixteenths] = T.position.split(':');
-  
-  // time_display.textContent = round(time, 2);
+  // bars_display.textContent = pad(bar + 1, 3);
+  // beats_display.textContent = beat + 1;
+  // count_display.textContent = pad(index + 1, 2);
   bars_display.textContent = pad(bar + 1, 3);
-  beats_display.textContent = beat + 1;
-  count_display.textContent = pad(index + 1, 2);
+  beats_display.textContent = Math.floor(index / 4) + 1;
+  count_display.textContent = (index) % 4 + 1;
 } // updateDisplay()
 
 function resetCount() {
   bars_display.textContent = '000';
   beats_display.textContent = '0';
-  count_display.textContent = '00';
+  count_display.textContent = '0';
   // count = 0;
 } // resetCount()
 

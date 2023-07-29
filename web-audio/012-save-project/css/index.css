@@ -13333,7 +13333,6 @@ main #tracks .track:not(:last-child) {
   margin-bottom: 10px;
 }
 main #tracks .track.track-locked .step {
-  opacity: 0.5;
   pointer-events: none;
 }
 main #tracks .track.track-locked .step.current {
