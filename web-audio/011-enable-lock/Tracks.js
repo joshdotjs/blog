@@ -72,10 +72,17 @@ const highlightStep = (index) => {
 
 // ==============================================
 
-const resetHighlightedSteps = () => {
-  Tracks.forEach(track => {
+const resetHighlightedSteps = () => { 
+
+  // NOTE: this function was buggy in that sometimes when you click stop it does not actually remove the current class.
+  // -The hack used to insure the styles are removed is to reset immediately,
+  //  then for those times it does not remove just repeat the remove 100ms later to ensure it is actualy reset.
+
+  const reset = () => Tracks.forEach(track => {
     track.steps.forEach(step => step.classList.remove('current'));
   });
+  reset();
+  setTimeout(reset, 500);
 }
 
 // ==============================================

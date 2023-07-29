@@ -61,10 +61,19 @@ const playBeat = () => {
 
 // ==============================================
 
+let paused = false;
 const startBeat = async () => {
   // Tone.start().then(() => playBeat());
-  await Tone.start();
-  playBeat();
+  
+  if (paused) { // unpause
+    T.start();
+    paused = false;
+  }
+  else  {
+    await Tone.start();
+    playBeat();
+  }
+  
 }; // startBeat()
 
 // ==============================================
@@ -72,17 +81,16 @@ const startBeat = async () => {
 const stopBeat = () => {
   T.stop();
   T.cancel();
-  resetHighlightedSteps();
+  resetHighlightedSteps(); // this is buggy - sometimes it doesn't reset the highlighted steps
   resetCount();
+  paused = false;
 }; // stopBeat()
 
 // ==============================================
 
-let paused = false;
 const pauseBeat = () => {
-  if (paused) T.start();
-  else  T.pause();
-  paused = !paused;
+  T.pause();
+  paused = true;
 }; // stopBeat()
 
 // ==============================================
@@ -109,15 +117,9 @@ const changeBeatState = (next) => () => {
 
   if (next === 'pause') {
     pauseBeat();
-    if (paused) {
-      start_btn.disabled = true;
-      stop_btn.disabled = true;
-      pause_btn.disabled = false;
-    } else {
-      start_btn.disabled = true;
-      stop_btn.disabled = false;
-      pause_btn.disabled = false;
-    }
+    start_btn.disabled = false;
+    stop_btn.disabled  = false;
+    pause_btn.disabled = true;
   } // if (next === 'stop')
 }
 

@@ -7,7 +7,7 @@ class Track {
   steps = []; // DOM elements
   // load_btn = null;
   enabled = true;
-  locked = false; // TODO
+  locked = false;
 
   elem = null;
 
