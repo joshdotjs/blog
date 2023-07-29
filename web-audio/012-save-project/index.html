@@ -5,9 +5,11 @@
     <!-- <link rel="stylesheet" href="/web-audio/012-save-project/css/index.css"> -->
     <link rel="stylesheet" href="./css/index.css">
     <script src="/assets/lib/Tone/Tone.js" defer></script>
-    <script src="/assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/assets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> -->
+    <script src="/assets/lib/gsap/gsap.min.js"></script>
     
     <!-- <script type="module" src="/web-audio/012-save-project/index.js"></script> -->
     <script type="module" src="./index.js"></script>
@@ -21,35 +23,74 @@
     </div> -->
 
 
-    <ul class="nav nav-pills">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">File</a>
-        <ul id="josh-dropdown" class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Save project</a></li>
-          <li><a class="dropdown-item" href="#">Load project</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Reset</a></li>
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-      </li>
-    </ul>
+
+    <style>
+      .j-dropdown { position: relative;
+        outline: solid blue 3px;
+        width: fit-content;
+
+        cursor: pointer;
+        .j-dropdown-trigger {
+          background: orange;
+  
+          .j-dropdown-menu { position: absolute;
+            list-style: none; 
+            padding: 0;
+            border: solid red 10px;
+            width: 100px;
+
+            display: none;
+            &.show {
+              display: block;
+            }
+  
+            .j-dropdown-item {
+              outline: solid black 1px;
+              display: block;
+            }
+          }
+        }
+      }
+    </style>
+    <div class="j-dropdown">
+      <buton class="j-dropdown-trigger">File</button>
+      <ul class="j-dropdown-menu">
+        <li class="j-dropdown-item">Option 1</li>
+        <li class="j-dropdown-item">Option 2</li>
+        <li class="j-dropdown-item">Option 3</li>
+      </ul>
+    </div>
+
     <script type="module">
-      const elem = document.querySelector('#josh-dropdown');
-      console.log('elem: ', elem);
-      const lis = elem.querySelectorAll('li');
-      lis.forEach(li => {
-        li.addEventListener('click', () => {
-          console.log('clicked');
-        })
-      })
+
+      const qs = (str, root=document) => {
+        const elem = root.querySelector(str);
+        if (!elem) throw new Error(`qs( ${str} ) not found`);
+        return elem;
+      };
+
+      const qsa = (str, root=document) => {
+        const elems = root.querySelectorAll(str);
+        if (elems.length === 0) throw new Error(`qsa( ${str} ) not found`);
+        return elems;
+      };
+
+      try {
+        const dropdown = qs('.j-dropdown');
+        const dropdown_trigger = qs('.j-dropdown-trigger', dropdown);
+        const dropdown_menu = qs('.j-dropdown-menu', dropdown);
+        const dropdown_menu_items = qsa('.j-dropdown-item', dropdown);
+        
+        dropdown_trigger.addEventListener('click', () => {
+          dropdown_menu.classList.toggle('show');
+        });
+
+      } catch(e) {
+        console.log(`%c${e}`, 'padding: 0.5rem 1rem; border: solid hotpink 4px; background: lightgreen; color: darkorchid;');
+      }
+
+
+
     </script>
 
     <main>
