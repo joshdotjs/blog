@@ -1,7 +1,7 @@
 // Keep UI functional (non OOP)
 
 import Track from './Track.js';
-import {  qs } from './util.js';
+import { qs } from './util.js';
 
 // ==============================================
 
@@ -44,7 +44,7 @@ const playTracks = (time, index) => {
 
   Tracks.forEach((track) => {
 
-    if (track.enabled === false) return;
+    if (!track.enabled) return;
 
     // if (track.pattern[count]) 
     if (track.pattern[index]) 
