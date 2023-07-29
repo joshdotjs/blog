@@ -344,7 +344,7 @@ main {
 
       &.track-locked {
         .step { 
-          opacity: 0.5;
+          // opacity: 0.5;
           pointer-events: none;
           &.current {
             box-shadow: 0 3px 6px rgba(255, 0, 47, 0.16), 0 3px 6px rgba(151, 233, 47, 0.23);
@@ -356,6 +356,8 @@ main {
           .track-lock-icon-locked { display: inline-block; }
           .track-lock-icon-unlocked { display: none; }
         }
+        .track-knob-volume,
+        .track-title-container { opacity: 0.25; pointer-events: none; }
       }
       &.track-disabled {
         .step { opacity: 0.25; }

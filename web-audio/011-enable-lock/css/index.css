@@ -273,7 +273,6 @@ main #tracks .track:not(:last-child) {
   margin-bottom: 10px;
 }
 main #tracks .track.track-locked .step {
-  opacity: 0.5;
   pointer-events: none;
 }
 main #tracks .track.track-locked .step.current {
@@ -285,6 +284,11 @@ main #tracks .track.track-locked .track-lock .track-lock-icon-locked {
 }
 main #tracks .track.track-locked .track-lock .track-lock-icon-unlocked {
   display: none;
+}
+main #tracks .track.track-locked .track-knob-volume,
+main #tracks .track.track-locked .track-title-container {
+  opacity: 0.25;
+  pointer-events: none;
 }
 main #tracks .track.track-disabled .step {
   opacity: 0.25;
