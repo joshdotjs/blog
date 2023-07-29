@@ -81,7 +81,7 @@ const startBeat = async () => {
 const stopBeat = () => {
   T.stop();
   T.cancel();
-  resetHighlightedSteps(); // this is buggy - sometimes it doesn't reset the highlighted steps
+  resetHighlightedSteps();
   resetCount();
   paused = false;
 }; // stopBeat()

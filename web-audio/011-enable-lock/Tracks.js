@@ -22,7 +22,7 @@ const Tracks = [
     // steps: qsa('.track-1 > .steps > .step'),
     // load_btn: qs('.track-1 > .track-title-container'),
     elem: qs('.track-1'),
-    enabled: false,
+    enabled: true,
   }),
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
