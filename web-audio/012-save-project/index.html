@@ -39,6 +39,7 @@
             border: solid red 10px;
             width: 100px;
 
+            opacity: 0;
             display: none;
             &.show {
               display: block;
@@ -81,8 +82,37 @@
         const dropdown_menu = qs('.j-dropdown-menu', dropdown);
         const dropdown_menu_items = qsa('.j-dropdown-item', dropdown);
         
+        let opened = false;
+
         dropdown_trigger.addEventListener('click', () => {
-          dropdown_menu.classList.toggle('show');
+          if (!opened) {
+            dropdown_menu.classList.add('show');
+            gsap.to(dropdown_menu, { opacity: 1, duration: 0.2 });
+          } else {
+            gsap.to(dropdown_menu, { opacity: 0, duration: 0.2, onComplete: () => {
+              dropdown_menu.classList.remove('show');
+            }});
+          }
+          opened = !opened;
+        });
+
+        dropdown_menu_items.forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+
+            const tl = gsap.timeline();
+            const duration = 0.1;
+            tl.to(item, { background: 'black', duration });
+            tl.to(item, { background: 'white', duration });
+            tl.to(item, { background: 'black', duration });
+            tl.to(item, { background: 'white', duration, onComplete: () => {
+              gsap.to(dropdown_menu, { opacity: 0, duration: 0.2, onComplete: () => {
+              dropdown_menu.classList.remove('show');
+              opened = false;
+            }});
+            }});
+          });
         });
 
       } catch(e) {
