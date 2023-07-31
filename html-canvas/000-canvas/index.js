@@ -44,7 +44,7 @@ class Entity {
 
   update() {
     this.draw();
-    this.position.y += this.velocity.y;
+    // this.position.y += this.velocity.y;
   }
 
   // --------------------------------------------
@@ -71,3 +71,27 @@ function animate() {
   t0 = t1;
 }
 animate();
+
+// ==============================================
+
+addEventListener('keydown', ({ key }) => {
+
+
+  console.log('key: ', key);
+
+  const dist = 5;
+
+  if (key === 'ArrowUp') {
+    entity.position.y -= dist;
+  }
+  if (key === 'ArrowDown') {
+    entity.position.y += dist;
+  }
+  if (key === 'ArrowLeft') {
+    entity.position.x -= dist;
+  }
+  if (key === 'ArrowRight') {
+    entity.position.x += dist;
+  }
+
+});
