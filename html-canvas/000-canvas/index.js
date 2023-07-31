@@ -56,11 +56,18 @@ const entity = new Entity();
 
 // ==============================================
 
+let t0 = 0;
+
 function animate() {
+  const t1 = performance.now();
+
   requestAnimationFrame(animate);
-  console.log('go');
-  const { width: w, height: h} = canvas;
-  c.clearRect(0, 0, w, h);
+  
+  c.clearRect(0, 0, canvas.width, canvas.height);
   entity.update();
+
+  const dt = Math.round(t1 - t0);
+  console.log(`animate() \ndt: ${dt}`);
+  t0 = t1;
 }
 animate();
