@@ -13,7 +13,7 @@ canvas.height = window.innerHeight - 10; // 5px each side
 
 // ==============================================
 
-class Player {
+class Entity {
 
   // --------------------------------------------
 
@@ -52,7 +52,7 @@ class Player {
 
 // ==============================================
 
-const player = new Player();
+const entity = new Entity();
 
 // ==============================================
 
@@ -61,6 +61,6 @@ function animate() {
   console.log('go');
   const { width: w, height: h} = canvas;
   c.clearRect(0, 0, w, h);
-  player.update();
+  entity.update();
 }
 animate();
