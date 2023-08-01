@@ -1,11 +1,105 @@
 <html>
   <head>
-    <link rel="stylesheet" href="./index.css">
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    <script type="module" src="./index.js"></script>
+      canvas {
+        background: deepskyblue;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+
   </head>
 
   <body>
     <canvas></canvas>
+
+    <script type="module">
+        
+      const canvas = document.querySelector('canvas');
+
+      // ==============================================
+
+      const ctx = canvas.getContext('2d');
+
+      // ==============================================
+
+      canvas.width = window.innerWidth - 10; // 5px each side
+      canvas.height = window.innerHeight - 10; // 5px each side
+
+      // ==============================================
+
+      class Entity {
+
+        // --------------------------------------------
+
+        constructor() {
+          this.width = 30;
+          this.height = 30;
+
+          this.position = {
+            x: canvas.width / 2 - this.width / 2,
+            y: canvas.height / 2 - this.height / 2 ,
+          };
+        }
+
+        // --------------------------------------------
+
+        draw() {
+          ctx.fillStyle = 'darkorange';
+          ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+        }
+
+        // --------------------------------------------
+      }
+
+      // ==============================================
+
+      const entity = new Entity();
+
+      // ==============================================
+
+      let t0 = 0;
+
+      function animate(t1) {
+        requestAnimationFrame(animate);
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        entity.draw();
+
+        const dt = Math.round(t1 - t0);
+        console.log(`animate() \ndt: ${dt}ms.`);
+        t0 = t1;
+      }
+      animate();
+
+      // ==============================================
+
+      addEventListener('keydown', ({ key }) => {
+
+        console.log('key: ', key);
+
+        const dist = 5;
+
+        if (key === 'ArrowUp') {
+          entity.position.y -= dist;
+        }
+        if (key === 'ArrowDown') {
+          entity.position.y += dist;
+        }
+        if (key === 'ArrowLeft') {
+          entity.position.x -= dist;
+        }
+        if (key === 'ArrowRight') {
+          entity.position.x += dist;
+        }
+
+      });
+    </script>
   </body>
 </html>
