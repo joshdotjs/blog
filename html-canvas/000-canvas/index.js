@@ -67,7 +67,7 @@ function animate() {
   entity.update();
 
   const dt = Math.round(t1 - t0);
-  console.log(`animate() \ndt: ${dt}`);
+  // console.log(`animate() \ndt: ${dt}`);
   t0 = t1;
 }
 animate();

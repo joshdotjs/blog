@@ -44,7 +44,7 @@ app.whenReady().then(() => {
 // ==============================================
 
 app.on('window-all-closed', () => {
-  if (IS_MAC) {
+  if (!IS_MAC) {
     app.quit();
   }
 });
