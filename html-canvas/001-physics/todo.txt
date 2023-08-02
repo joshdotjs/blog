@@ -1,0 +1,5 @@
+1. position
+2. velocity
+3. y-dimension acceleration via gravity
+4. collisions
+5. particle explosion

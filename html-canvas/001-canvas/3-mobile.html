@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    canvas {
+      background: deepskyblue;
+    }
+
+    .controller {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .controller .row {
+      display: flex;
+    }
+
+    .controller button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      border-radius: 50%;
+      background: darkorange;
+      border: none;
+      color: white;
+      font-size: 20px;
+      line-height: 50px;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+  <canvas></canvas>
+
+  <!-- Controller Buttons -->
+  <div class="controller">
+    <div class="row">
+      <button id="up">↑</button>
+    </div>
+    <div class="row">
+      <button id="left">←</button>
+      <button id="right">→</button>
+    </div>
+    <div class="row">
+      <button id="down">↓</button>
+    </div>
+  </div>
+
+  <script type="module">
+      
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth - 10; // 5px each side
+    canvas.height = window.innerHeight - 10; // 5px each side
+
+    class Entity {
+      constructor() {
+        this.width = 30;
+        this.height = 30;
+
+        this.position = {
+          x: canvas.width / 2 - this.width / 2,
+          y: canvas.height / 2 - this.height / 2 ,
+        };
+
+        this.velocity = {
+          x: 0,
+          y: 0,
+        };
+      }
+
+      draw() {
+        ctx.fillStyle = 'darkorange';
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+      }
+
+      update() {
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+
+        // Gravity
+        this.velocity.y += 0.5;
+        
+        if (this.position.y + this.height > canvas.height) {
+          this.position.y = canvas.height - this.height;
+          this.velocity.y = 0;
+        }
+      }
+    }
+
+    const entity = new Entity();
+
+    let t0 = 0;
+
+    function animate(t1) {
+      requestAnimationFrame(animate);
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      entity.update();
+      entity.draw();
+
+      const dt = Math.round(t1 - t0);
+      console.log(`animate() \ndt: ${dt}ms.`);
+      t0 = t1;
+    }
+    animate();
+
+    // On screen controller
+    const dist = 5;
+    document.getElementById('up').addEventListener('click', () => {
+      entity.position.y -= dist;
+    });
+    document.getElementById('down').addEventListener('click', () => {
+      entity.position.y += dist;
+    });
+    document.getElementById('left').addEventListener('click', () => {
+      entity.position.x -= dist;
+    });
+    document.getElementById('right').addEventListener('click', () => {
+      entity.position.x += dist;
+    });
+
+  </script>
+</body>
+</html>
