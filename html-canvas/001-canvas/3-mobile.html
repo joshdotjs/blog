@@ -71,6 +71,8 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
+    // ==========================================
+
     class Entity {
       constructor() {
         this.width = canvas.height / 8;
@@ -109,9 +111,13 @@
       }
     }
 
+    // ==========================================
+
     const entity = new Entity();
 
     let t0 = 0;
+
+    // ==========================================
 
     function animate(t1) {
       requestAnimationFrame(animate);
@@ -126,40 +132,41 @@
     }
     animate();
 
-    addEventListener('keydown', ({ key }) => {
+    // ==========================================
+
+    addEventListener('keydown', (e) => {
+
+      const { key } = e;
+
       console.log('key: ', key);
       const dist = 5;
 
-      if (key === 'ArrowUp') {
-        // entity.position.y -= dist;
-        // entity.velocity.y -= dist;
-      }
-      // if (key === 'ArrowDown') {
-      //   entity.position.y += dist;
-      // }
       if (key === 'ArrowLeft') {
         entity.position.x -= dist;
       }
       if (key === 'ArrowRight') {
         entity.position.x += dist;
       }
+
+      // [3]
+      if (key === 'ArrowUp' || key === 'ArrowDown') {
+        e.preventDefault();
+      }
+      
     });
 
+
+    // ==========================================
 
     // [3] On screen controller
     const dist = 5;
-    document.getElementById('up').addEventListener('click', () => {
-      entity.position.y -= dist;
-    });
-    document.getElementById('down').addEventListener('click', () => {
-      entity.position.y += dist;
-    });
     document.getElementById('left').addEventListener('click', () => {
       entity.position.x -= dist;
     });
     document.getElementById('right').addEventListener('click', () => {
       entity.position.x += dist;
     });
+
   </script>
 </body>
 </html>
