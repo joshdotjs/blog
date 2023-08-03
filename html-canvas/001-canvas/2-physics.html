@@ -17,6 +17,8 @@
     canvas {
       background: deepskyblue;
       border-radius: 7px;
+      height: 100vh;
+      width: 100vw;
     }
   </style>
 
@@ -29,13 +31,13 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // canvas.width = window.innerWidth - 2;
+    // canvas.height = window.innerHeight  - 2;
 
     class Entity {
       constructor() {
-        this.width = 25;//canvas.height / 8;
-        this.height = 25;//this.width;
+        this.width = canvas.height / 8;
+        this.height = this.width;
 
         this.position = {
           x: canvas.width / 2 - this.width / 2,
