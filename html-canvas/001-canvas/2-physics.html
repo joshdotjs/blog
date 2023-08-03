@@ -18,7 +18,7 @@
       background: deepskyblue;
       /* width: 100vw;
       height: 100vh; */
-      border-radius: 5px;
+      border-radius: 7px;
     }
   </style>
 
@@ -31,8 +31,8 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth - 10; // 5px each side
-    canvas.height = window.innerHeight - 10; // 5px each side
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     class Entity {
       constructor() {
