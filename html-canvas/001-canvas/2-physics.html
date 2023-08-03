@@ -8,8 +8,15 @@
       padding: 0;
     }
 
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+
     canvas {
       background: deepskyblue;
+      border-radius: 7px;
       width: 100vw;
       height: 100vh;
     }
@@ -24,13 +31,13 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth - 10; // 5px each side
-    canvas.height = window.innerHeight - 10; // 5px each side
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     class Entity {
       constructor() {
-        this.width = 30;
-        this.height = 30;
+        this.width = canvas.height / 8;
+        this.height = this.width;
 
         this.position = {
           x: canvas.width / 2 - this.width / 2,
@@ -87,11 +94,12 @@
       const dist = 5;
 
       if (key === 'ArrowUp') {
-        entity.position.y -= dist;
+        // entity.position.y -= dist;
+        // entity.velocity.y -= dist;
       }
-      if (key === 'ArrowDown') {
-        entity.position.y += dist;
-      }
+      // if (key === 'ArrowDown') {
+      //   entity.position.y += dist;
+      // }
       if (key === 'ArrowLeft') {
         entity.position.x -= dist;
       }
