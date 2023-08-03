@@ -8,12 +8,18 @@
       padding: 0;
     }
 
-    canvas {
-      background: deepskyblue;
-      width: 100vw;
+    body {
+      display: grid;
+      place-items: center;
       height: 100vh;
     }
 
+    canvas {
+      background: deepskyblue;
+      border-radius: 7px;
+    }
+
+    /* [3] */
     .controller {
       position: fixed;
       bottom: 20px;
@@ -28,15 +34,13 @@
     }
 
     .controller button {
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
       margin: 5px;
       border-radius: 50%;
-      background: darkorange;
+      background: darkorchid;
       border: none;
       color: white;
-      font-size: 20px;
-      line-height: 50px;
       text-align: center;
     }
   </style>
@@ -45,7 +49,7 @@
 <body>
   <canvas></canvas>
 
-  <!-- Controller Buttons -->
+  <!-- [3] Controller Buttons -->
   <div class="controller">
     <div class="row">
       <button id="up">↑</button>
@@ -64,19 +68,20 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth - 10; // 5px each side
-    canvas.height = window.innerHeight - 10; // 5px each side
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     class Entity {
       constructor() {
-        this.width = 30;
-        this.height = 30;
+        this.width = canvas.height / 8;
+        this.height = this.width;
 
         this.position = {
           x: canvas.width / 2 - this.width / 2,
           y: 0, // canvas.height / 2 - this.height / 2 ,
         };
 
+        // Added velocity property
         this.velocity = {
           x: 0,
           y: 0,
@@ -88,6 +93,7 @@
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
       }
 
+      // Added update method to adjust position and apply gravity
       update() {
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
@@ -95,6 +101,7 @@
         // Gravity
         this.velocity.y += 0.5;
         
+        // Check for collision with canvas bottom
         if (this.position.y + this.height > canvas.height) {
           this.position.y = canvas.height - this.height;
           this.velocity.y = 0;
@@ -119,7 +126,27 @@
     }
     animate();
 
-    // On screen controller
+    addEventListener('keydown', ({ key }) => {
+      console.log('key: ', key);
+      const dist = 5;
+
+      if (key === 'ArrowUp') {
+        // entity.position.y -= dist;
+        // entity.velocity.y -= dist;
+      }
+      // if (key === 'ArrowDown') {
+      //   entity.position.y += dist;
+      // }
+      if (key === 'ArrowLeft') {
+        entity.position.x -= dist;
+      }
+      if (key === 'ArrowRight') {
+        entity.position.x += dist;
+      }
+    });
+
+
+    // [3] On screen controller
     const dist = 5;
     document.getElementById('up').addEventListener('click', () => {
       entity.position.y -= dist;
@@ -133,7 +160,6 @@
     document.getElementById('right').addEventListener('click', () => {
       entity.position.x += dist;
     });
-
   </script>
 </body>
 </html>
