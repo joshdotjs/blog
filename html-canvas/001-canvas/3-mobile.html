@@ -17,6 +17,8 @@
     canvas {
       background: deepskyblue;
       border-radius: 7px;
+      height: 100vh;
+      width: 100vw;
     }
 
     /* [3] */
@@ -68,8 +70,9 @@
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // This breaks iframe
+    // canvas.width = window.innerWidth;
+    // canvas.height = window.innerHeight;
 
     // ==========================================
 
