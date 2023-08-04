@@ -91,8 +91,23 @@ listeForEvent('project-open', (event) => {
 
     const reader = new FileReader();
     reader.onload = function(e) {
-        // The file's text will be printed here
-        console.log(e.target.result);
+      // The file's text will be printed here
+      console.log(e.target.result);
+      const loaded_tracks = JSON.parse(e.target.result);
+      console.log('loaded_tracks: ', loaded_tracks);
+
+      // load tracks from opened project into current project
+      Tracks = loadTracks(loaded_tracks);
+      setLS('tracks', loaded_tracks);
+
+
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
     };
 
     // Read the file as text
