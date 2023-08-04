@@ -52,13 +52,6 @@ listeForEvent('project-save', (event) => {
   const tracks = Tracks.map(track => track.getData());
   console.log('tracks: ', tracks);
 
-  // TODO: save to file
-  // TODO: save to file
-  // TODO: save to file
-  // TODO: save to file
-  // TODO: save to file
-  // TODO: save to file
-
   function download(filename, text) {
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -78,11 +71,6 @@ listeForEvent('project-save', (event) => {
 
 // ==============================================
 
-// -- Load:
-// --- Same pattern as save
-// --- Use current load sample code in initUI()
-// --- Parse content and load into Tracks like done from LS
-
 listeForEvent('project-open', (event) => {
 
   console.log('project-open EVENT fired and caught!');
@@ -97,15 +85,24 @@ listeForEvent('project-open', (event) => {
 
   const callback = (e) => {
 
-    // step 1: upload file
+    // upload file
     const file = e.target.files[0];
+    console.log('file: ', file);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        // The file's text will be printed here
+        console.log(e.target.result);
+    };
+
+    // Read the file as text
+    reader.readAsText(file);
 
     // show notification to user:
     const message = `Opened project: ${file.name}`;
     notification({ message });
 
     document.body.removeChild(element);
-
   }; // callback()
 
   element.addEventListener('change', callback)
