@@ -17,133 +17,51 @@
   </head>
   <body>
 
-    <!-- <div id="volume-control">
-      <label for="volume">Master Volume: </label>
-      <input type="range" id="volume" min="0" max="100" value="50" step="1">
-    </div> -->
-
-
-
-    <style>
-      .j-dropdown { position: relative;
-        outline: solid black 1px;
-        width: fit-content;
-        user-select: none;
-        cursor: pointer;
-        .j-dropdown-trigger {
-          background: white;
-          padding: 20px;
-  
-          .j-dropdown-menu { position: absolute;
-            list-style: none; 
-            padding: 0;
-            border: solid black 1px;
-            width: 120px;
-
-            --mb: 4px;
-
-            opacity: 0;
-            display: none;
-            &.show {
-              display: block;
-            }
-  
-            .j-dropdown-item {
-              display: block;
-              padding-bottom: var(--mb);
-              padding: 0 16px;
-              &:first-child { padding-top: var(--mb); }
-              &:last-child  { padding-bottom: var(--mb); }
-            }
-          }
-          .josh { margin: var(--mb) 0; }
-        }
-      }
-    </style>
-    <div class="j-dropdown">
-      <buton class="j-dropdown-trigger">File</button>
-      <ul class="j-dropdown-menu">
-        <li class="j-dropdown-item">Option 1</li>
-        <li class="j-dropdown-item">Option 2</li>
-        <hr class="josh"/>
-        <li class="j-dropdown-item">Option 3</li>
-      </ul>
-    </div>
-
-    <script type="module">
-
-      const qs = (str, root=document) => {
-        const elem = root.querySelector(str);
-        if (!elem) throw new Error(`qs( ${str} ) not found`);
-        return elem;
-      };
-
-      const qsa = (str, root=document) => {
-        const elems = root.querySelectorAll(str);
-        if (elems.length === 0) throw new Error(`qsa( ${str} ) not found`);
-        return elems;
-      };
-
-      try {
-        const dropdown = qs('.j-dropdown');
-        const dropdown_trigger = qs('.j-dropdown-trigger', dropdown);
-        const dropdown_menu = qs('.j-dropdown-menu', dropdown);
-        const dropdown_menu_items = qsa('.j-dropdown-item', dropdown);
-        
-        let opened = false;
-
-        dropdown_trigger.addEventListener('click', () => {
-
-          const duration = 0.2;
-
-          if (!opened) {
-            dropdown_menu.classList.add('show');
-            gsap.fromTo(dropdown_menu, { 
-              opacity: 0, yPercent: -10, duration
-            },
-            { 
-              opacity: 1, yPercent: 0, duration
-            }
-            );
-          } else {
-            gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration, onComplete: () => {
-              dropdown_menu.classList.remove('show');
-            }});
-          }
-          opened = !opened;
-        });
-
-        dropdown_menu_items.forEach(item => {
-          item.addEventListener('click', (e) => {
-            e.stopPropagation();
-
-
-            const tl = gsap.timeline();
-            const duration = 0.075;
-            tl.to(item, { background: 'black', color: 'white', duration });
-            tl.to(item, { background: 'white', color: 'black', duration });
-            tl.to(item, { background: 'black', color: 'whie',  duration });
-            tl.to(item, { background: 'white', color: 'black', duration });
-            tl.to(item, { background: 'black', color: 'white', duration });
-            tl.to(item, { background: 'white', color: 'black', duration, 
-              onComplete: () => {
-                gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration: 0.2, onComplete: () => {
-                dropdown_menu.classList.remove('show');
-                opened = false;
-              }});
-            }});
-          });
-        });
-
-      } catch(e) {
-        console.log(`%c${e}`, 'padding: 0.5rem 1rem; border: solid hotpink 4px; background: lightgreen; color: darkorchid;');
-      }
-
-
-
-    </script>
-
     <main>
+
+      <div id="task-bar" style="display: flex; position: relative; z-index: 1;">
+
+        <div class="dropdown" id="task-bar__dropdown-file">
+          <buton class="j-dropdown-trigger">File</button>
+          <ul class="j-dropdown-menu">
+            <li class="j-dropdown-item">Save</li>
+            <li class="j-dropdown-item">Open</li>
+            <hr class="josh"/>
+            <li class="j-dropdown-item">Reset</li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <buton class="j-dropdown-trigger">Edit</button>
+          <ul class="j-dropdown-menu">
+            <li class="j-dropdown-item">Option 1</li>
+            <li class="j-dropdown-item">Option 2</li>
+            <hr class="josh"/>
+            <li class="j-dropdown-item">Option 3</li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <buton class="j-dropdown-trigger">Options</button>
+          <ul class="j-dropdown-menu">
+            <li class="j-dropdown-item">Option 1</li>
+            <li class="j-dropdown-item">Option 2</li>
+            <hr class="josh"/>
+            <li class="j-dropdown-item">Option 3</li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <buton class="j-dropdown-trigger">Patterns</button>
+          <ul class="j-dropdown-menu">
+            <li class="j-dropdown-item">Option 1</li>
+            <li class="j-dropdown-item">Option 2</li>
+            <hr class="josh"/>
+            <li class="j-dropdown-item">Option 3</li>
+          </ul>
+        </div>
+
+      </div>
 
       <div id="top-bar">
 
@@ -330,8 +248,6 @@
       </div> <!-- #tracks-->
 
     </main>
-
-
 
    </body>
 </html>

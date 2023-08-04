@@ -3,6 +3,11 @@ import { playTracks, highlightStep, resetHighlightedSteps } from './Tracks.js';
 
 // ==============================================
 
+// Components:
+import './comps/comps.js';
+
+// ==============================================
+
 const { Transport: T } = Tone;
 
 const getIndex = () => {
@@ -130,13 +135,6 @@ function resetCount() {
   count_display.textContent = '0';
   // count = 0;
 } // resetCount()
-
-// ==============================================
-
-// const volume_control = qs('#volume');
-// volume_control.addEventListener('input', ({ target: { value } }) => {
-//   Tone.Destination.volume.value = value - 50; // Tone.js uses a decibel scale for volume where 0 is maximum and -Infinity is minimum.
-// });
 
 // ==============================================
 
