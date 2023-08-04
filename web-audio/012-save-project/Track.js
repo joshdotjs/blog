@@ -16,13 +16,14 @@ class Track {
 
   // ============================================
 
-  constructor({ pattern, name, path, /*steps, load_btn, */ elem, enabled }) {
+  constructor({ pattern, name, path, /*steps, load_btn, */ elem, enabled, locked }) {
     this.elem = elem;
     this.pattern = pattern;
     this.name = name;
     this.path = path;
     this.player.load(path);
     this.enabled = enabled;
+    this.locked = locked;
     this.steps = elem.querySelectorAll('.steps > .step');
     this.initUI();    
   }
@@ -43,6 +44,8 @@ class Track {
         // toggle the pattern and UI when a step is clicked
         step.addEventListener('click', () => {
           this.toggle(j);
+
+          fireEvent('track-change', { data_key: `track: ${this.name}\nstep click: ${j}` });
         });
       });
     };
@@ -130,6 +133,8 @@ class Track {
 
         };
         notification();
+
+        fireEvent('track-change', { data_key: `track: ${this.name}\nload change` });
       });
     };
     initLoad();
@@ -150,6 +155,9 @@ class Track {
         // turn off .current styling on all steps
         if (!this.enabled)
           this.steps.forEach(step => step.classList.remove('current'));
+
+        fireEvent('track-change', { data_key: `track: ${this.name}\nenable click` });
+        
       });
     };
     initEnable();
@@ -157,10 +165,16 @@ class Track {
     // ------------------------------------------
 
     const initLock = () => {
+
+      // set locked styles if track is locked on load
+      if (this.locked)
+        this.elem.classList.add('track-locked');
+
       const lock_btn = this.elem.querySelector('.track-lock');
       lock_btn.addEventListener('click', () => {
         this.elem.classList.toggle('track-locked');
         this.locked = !this.locked;
+        fireEvent('track-change', { data_key: `track: ${this.name}\nlock click` });
       });
     };
     initLock();
@@ -178,8 +192,6 @@ class Track {
 
   togglePattern(index) {
     this.pattern[index] = this.pattern[index] ? 0 : 1;
-
-    fireEvent('josh', { data_key: 'data_value' });
   }
 
   // ============================================

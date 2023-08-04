@@ -44,9 +44,9 @@ if (ls_tracks) {
 
 // ==============================================
 
-listeForEvent('josh', (event) => {
-  console.log('event fired and caught!');
-  console.log(event.detail.data);
+listeForEvent('track-change', (event) => {
+  console.log('track-change EVENT fired and caught!');
+  console.log(event.detail.data.data_key);
 
   const tracks = Tracks.map(track => track.getData());
   console.log('tracks: ', tracks);
