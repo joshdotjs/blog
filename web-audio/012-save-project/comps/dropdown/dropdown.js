@@ -1,4 +1,4 @@
-import { qs, qsa } from '../../util.js';
+import { qs, qsa, fireEvent } from '../../util.js';
 
 // ==============================================
 
@@ -44,11 +44,15 @@ const setupDropdown = ({ id, name, items }) => {
   const query = `.dropdown#${id}`;
   const dropdown = qs(query);
 
+  // --------------------------------------------
+
   // <buton class="dropdown-trigger">File</button>
   const dropdown_trigger = document.createElement('div');
   dropdown_trigger.classList.add('dropdown-trigger');
   dropdown_trigger.textContent = name;
   dropdown.appendChild(dropdown_trigger);
+
+  // --------------------------------------------
 
   // <ul class="dropdown-menu">
   //   <li class="dropdown-item">Save</li>
@@ -67,8 +71,9 @@ const setupDropdown = ({ id, name, items }) => {
   });
   // console.log('dropdown_menu: ', dropdown_menu);
   dropdown.appendChild(dropdown_menu);
-  
 
+  // --------------------------------------------
+  
   let opened = false;
 
   dropdown_trigger.addEventListener('click', () => {
@@ -92,6 +97,8 @@ const setupDropdown = ({ id, name, items }) => {
     opened = !opened;
   });
 
+  // --------------------------------------------
+
   dropdown_menu_items.forEach(item => {
     item.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -111,8 +118,17 @@ const setupDropdown = ({ id, name, items }) => {
           opened = false;
         }});
       }});
+
+      const menuItemCallback = () => {
+        // fireEvent('project-save');
+        fireEvent('project-open');
+      };
+
+      menuItemCallback();
     });
   });
+
+  // --------------------------------------------
 };
 
 // ==============================================

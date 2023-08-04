@@ -2,6 +2,7 @@
 
 import Track from './Track.js';
 import { qs, listeForEvent, setLS, getLS } from './util.js';
+import { notification } from './notification.js';
 import { default_tracks } from './data/track-templates.js';
 
 // ==============================================
@@ -41,6 +42,73 @@ listeForEvent('track-change', (event) => {
   console.log('tracks: ', tracks);
 
   setLS('tracks', tracks);
+});
+
+// ==============================================
+
+listeForEvent('project-save', (event) => {
+  console.log('project-save EVENT fired and caught!');
+
+  const tracks = Tracks.map(track => track.getData());
+  console.log('tracks: ', tracks);
+
+  // TODO: save to file
+  // TODO: save to file
+  // TODO: save to file
+  // TODO: save to file
+  // TODO: save to file
+  // TODO: save to file
+
+  function download(filename, text) {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+  // download("hello.txt", "This is the content of my file :)");
+  download("project.txt", JSON.stringify(tracks));
+  // download("project.wa", JSON.stringify(tracks));
+});
+
+// ==============================================
+
+// -- Load:
+// --- Same pattern as save
+// --- Use current load sample code in initUI()
+// --- Parse content and load into Tracks like done from LS
+
+listeForEvent('project-open', (event) => {
+
+  console.log('project-open EVENT fired and caught!');
+
+  const element = document.createElement('input');
+  element.setAttribute('type', 'file');
+  element.setAttribute('accept', '.txt');
+  element.setAttribute('style', 'display: none;');
+  document.body.appendChild(element);
+
+  element.click();
+
+  const callback = (e) => {
+
+    // step 1: upload file
+    const file = e.target.files[0];
+
+    // show notification to user:
+    const message = `Opened project: ${file.name}`;
+    notification({ message });
+
+    document.body.removeChild(element);
+
+  }; // callback()
+
+  element.addEventListener('change', callback)
 });
 
 // ==============================================
