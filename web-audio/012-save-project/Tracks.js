@@ -5,45 +5,41 @@ import { qs, listeForEvent, setLS, getLS } from './util.js';
 
 // ==============================================
 
+const default_tracks = [
+  {
+    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
+    name: 'hi-hat',
+    path: '/assets/samples/drums/hi-hat.mp3',
+    elem: qs('.track-0'),
+    enabled: true,
+  },
+  { 
+    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
+    name: 'kick',
+    path: '/assets/samples/drums/kick.mp3',
+    elem: qs('.track-1'),
+    enabled: false,
+  },
+  { 
+    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
+    name: 'snare',
+    path: '/assets/samples/drums/snare.mp3',
+    elem: qs('.track-2'),
+    enabled: true,
+  }
+];
+
+// ==============================================
+
 let Tracks = [];
 
 const ls_tracks = getLS('tracks');
 
 if (ls_tracks) {
-  Tracks = ls_tracks.map((track, idx) => {
-    return new Track({ 
-      pattern: track.pattern, 
-      name: track.name,
-      path: track.path,
-      enabled: track.enabled,
-      locked: track.locked,
-      elem: qs(`.track-${idx}`),
-    });
-  })
+  Tracks = loadTracks(ls_tracks);
 } else {
-  Tracks = [
-    new Track({ 
-      pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
-      name: 'hi-hat',
-      path: '/assets/samples/drums/hi-hat.mp3',
-      elem: qs('.track-0'),
-      enabled: true,
-    }),
-    new Track({ 
-      pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
-      name: 'kick',
-      path: '/assets/samples/drums/kick.mp3',
-      elem: qs('.track-1'),
-      enabled: false,
-    }),
-    new Track({ 
-      pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
-      name: 'snare',
-      path: '/assets/samples/drums/snare.mp3',
-      elem: qs('.track-2'),
-      enabled: true,
-    }),
-  ];
+  Tracks = loadTracks(default_tracks);
+  setLS('tracks', default_tracks);
 }
 
 // ==============================================
@@ -57,10 +53,6 @@ listeForEvent('josh', (event) => {
 
   setLS('tracks', tracks);
 });
-
-// ==============================================
-
-
 
 // ==============================================
 
@@ -104,4 +96,17 @@ const resetHighlightedSteps = () => {
 export { 
   Tracks, playTracks,
   highlightStep, resetHighlightedSteps,
+};
+
+// ==============================================
+
+function loadTracks () {
+  return ls_tracks.map((track, idx) => new Track({ 
+    pattern: track.pattern, 
+    name: track.name,
+    path: track.path,
+    enabled: track.enabled,
+    locked: track.locked,
+    elem: qs(`.track-${idx}`),
+  }));
 };
