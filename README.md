@@ -1,6 +1,7 @@
 # blog
 
 
+
 # TODO:
 
 - Graphing
@@ -35,10 +36,3 @@
   - Prisma
   - Stripe API for subscriptions
   - 
-
-
-
-# jade:
-  - deployed: https://jade-2023-08.vercel.app
-  - repo: same
-  - local: same
