@@ -10,30 +10,16 @@ let Tracks = [];
 const ls_tracks = getLS('tracks');
 
 if (ls_tracks) {
- Tracks = [
-  new Track({ 
-    pattern: ls_tracks[0].pattern, 
-    // name: 'hi-hat',
-    name: ls_tracks[0].name,
-    path: '/assets/samples/drums/hi-hat.mp3',
-    elem: qs(`.track-${0}`),
-    enabled: true,
-  }),
-  new Track({ 
-    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
-    name: 'kick',
-    path: '/assets/samples/drums/kick.mp3',
-    elem: qs(`.track-${1}`),
-    enabled: false,
-  }),
-  new Track({ 
-    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
-    name: 'snare',
-    path: '/assets/samples/drums/snare.mp3',
-    elem: qs(`.track-${2}`),
-    enabled: true,
-  }),
-];
+  Tracks = ls_tracks.map((track, idx) => {
+    return new Track({ 
+      pattern: track.pattern, 
+      name: track.name,
+      path: track.path,
+      enabled: track.enabled,
+      locked: track.locked,
+      elem: qs(`.track-${idx}`),
+    });
+  })
 } else {
   Tracks = [
     new Track({ 

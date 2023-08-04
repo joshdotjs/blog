@@ -5,6 +5,7 @@ import { setLS, fireEvent } from './util.js' ;
 class Track {
   pattern = [];
   name = '';
+  path = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
   // load_btn = null;
@@ -19,6 +20,7 @@ class Track {
     this.elem = elem;
     this.pattern = pattern;
     this.name = name;
+    this.path = path;
     this.player.load(path);
     this.enabled = enabled;
     this.steps = elem.querySelectorAll('.steps > .step');
@@ -140,7 +142,6 @@ class Track {
       if (!this.enabled)
         this.elem.classList.add('track-disabled');
 
-
       const enable_btn = this.elem.querySelector('.track-led-enable');
       enable_btn.addEventListener('click', () => {
         this.elem.classList.toggle('track-disabled');
@@ -200,7 +201,9 @@ class Track {
     return {
       pattern: this.pattern,
       name: this.name,
+      path: this.path,
       enabled: this.enabled,
+      locked: this.locked,
     };
   }
 
