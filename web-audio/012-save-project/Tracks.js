@@ -2,32 +2,21 @@
 
 import Track from './Track.js';
 import { qs, listeForEvent, setLS, getLS } from './util.js';
+import { default_tracks } from './data/track-templates.js';
 
 // ==============================================
 
-const default_tracks = [
-  {
-    pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
-    name: 'hi-hat',
-    path: '/assets/samples/drums/hi-hat.mp3',
-    elem: qs('.track-0'),
-    enabled: true,
-  },
-  { 
-    pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
-    name: 'kick',
-    path: '/assets/samples/drums/kick.mp3',
-    elem: qs('.track-1'),
-    enabled: false,
-  },
-  { 
-    pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
-    name: 'snare',
-    path: '/assets/samples/drums/snare.mp3',
-    elem: qs('.track-2'),
-    enabled: true,
-  }
-];
+function loadTracks (tracks) {
+  return tracks.map((track, idx) => new Track({ 
+    pattern: track.pattern, 
+    name: track.name,
+    path: track.path,
+    enabled: track.enabled,
+    locked: track.locked,
+    // elem: qs(`.track-${idx}`),
+    num: idx,
+  }));
+};
 
 // ==============================================
 
@@ -99,14 +88,3 @@ export {
 };
 
 // ==============================================
-
-function loadTracks () {
-  return ls_tracks.map((track, idx) => new Track({ 
-    pattern: track.pattern, 
-    name: track.name,
-    path: track.path,
-    enabled: track.enabled,
-    locked: track.locked,
-    elem: qs(`.track-${idx}`),
-  }));
-};

@@ -1,6 +1,6 @@
 // Minimal OOP - an object is the right structure for Track info
 
-import { setLS, fireEvent } from './util.js' ;
+import { setLS, fireEvent, qs } from './util.js' ;
 
 class Track {
   pattern = [];
@@ -8,23 +8,22 @@ class Track {
   path = '';
   player = new Tone.Player().toDestination();
   steps = []; // DOM elements
-  // load_btn = null;
   enabled = true;
-  locked = false; // TODO
-
+  locked = false;
   elem = null;
 
   // ============================================
 
-  constructor({ pattern, name, path, /*steps, load_btn, */ elem, enabled, locked }) {
-    this.elem = elem;
+  constructor({ pattern, name, path, /* elem, */ enabled, locked, num }) {
+    this.num = num;
+    this.elem = qs(`.track-${num}`),
     this.pattern = pattern;
     this.name = name;
     this.path = path;
     this.player.load(path);
     this.enabled = enabled;
     this.locked = locked;
-    this.steps = elem.querySelectorAll('.steps > .step');
+    this.steps = this.elem.querySelectorAll('.steps > .step');
     this.initUI();    
   }
 

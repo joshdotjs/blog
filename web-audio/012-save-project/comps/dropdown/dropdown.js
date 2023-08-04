@@ -1,14 +1,4 @@
-const qs = (str, root=document) => {
-  const elem = root.querySelector(str);
-  if (!elem) throw new Error(`qs( ${str} ) not found`);
-  return elem;
-};
-
-const qsa = (str, root=document) => {
-  const elems = root.querySelectorAll(str);
-  if (elems.length === 0) throw new Error(`qsa( ${str} ) not found`);
-  return elems;
-};
+import { qs, qsa } from '../../util.js';
 
 try {
   const dropdown = qs('.dropdown#task-bar__dropdown-file');
