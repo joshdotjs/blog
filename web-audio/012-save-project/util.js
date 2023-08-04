@@ -24,6 +24,10 @@ const setLS = (key, value) => {
 };
 
 // ==============================================
+
+const getLS = (key) => JSON.parse(localStorage.getItem(key));
+
+// ==============================================
 // ==============================================
 // ==============================================
 // ==============================================
@@ -51,6 +55,6 @@ const listeForEvent = (name, fn) => {
 export { 
   qs, qsa,
   round, pad,
-  setLS,
+  setLS, getLS,
   fireEvent, listeForEvent,
 };

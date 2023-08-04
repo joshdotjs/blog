@@ -15,11 +15,12 @@ class Track {
 
   // ============================================
 
-  constructor({ pattern, name, path, /*steps, load_btn, */ elem }) {
+  constructor({ pattern, name, path, /*steps, load_btn, */ elem, enabled }) {
     this.elem = elem;
     this.pattern = pattern;
     this.name = name;
     this.player.load(path);
+    this.enabled = enabled;
     this.steps = elem.querySelectorAll('.steps > .step');
     this.initUI();    
   }
@@ -134,6 +135,12 @@ class Track {
     // ------------------------------------------
 
     const initEnable = () => {
+
+      // set disbled styles if track is disabled on load
+      if (!this.enabled)
+        this.elem.classList.add('track-disabled');
+
+
       const enable_btn = this.elem.querySelector('.track-led-enable');
       enable_btn.addEventListener('click', () => {
         this.elem.classList.toggle('track-disabled');
