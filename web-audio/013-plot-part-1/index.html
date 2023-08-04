@@ -22,80 +22,78 @@
       <button id="playButton">Play/Pause</button>
       <canvas id="canvas"></canvas>
 
-      <script>
+      <script type="module">
 
-            // const url = "../../assets/samples/drums/hi-hat.mp3"; // replace with your audio file
-            const url = "../../assets/samples/songs/oops-i-did-it-again.ogg"; // replace with your audio file
+        // const url = "../../assets/samples/drums/hi-hat.mp3"; // replace with your audio file
+        const url = "../../assets/samples/songs/oops-i-did-it-again.ogg"; // replace with your audio file
 
 
-            let playButton = document.getElementById('playButton');
-            let canvas = document.getElementById('canvas');
-            let ctx = canvas.getContext('2d');
+        let playButton = document.getElementById('playButton');
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
 
-            // Create a new Tone.Player and connect it to the master output.
-            let player = new Tone.Player(url).toDestination();
+        // Create a new Tone.Player and connect it to the master output.
+        let player = new Tone.Player(url).toDestination();
 
-            // Create an analyzer node
-            let analyser = Tone.context.createAnalyser();
-            player.connect(analyser);
+        // Create an analyzer node
+        let analyser = Tone.context.createAnalyser();
+        player.connect(analyser);
 
-            // Set analyzer parameters
-            analyser.fftSize = 2048;
-            let bufferLength = analyser.frequencyBinCount;
-            let dataArray = new Uint8Array(bufferLength);
+        // Set analyzer parameters
+        analyser.fftSize = 2048;
+        let bufferLength = analyser.frequencyBinCount;
+        let dataArray = new Uint8Array(bufferLength);
 
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            function draw() {
-                // Get the frequency data from the currently playing music
-                analyser.getByteTimeDomainData(dataArray);
-              
-                // Clear the canvas
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-              
-                // Set up the canvas properties for the waveform
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'darkorange';
-              
-                // Begin a new path
-                ctx.beginPath();
-              
-                // Determine the width of each segment of the line to be drawn
-                let sliceWidth = canvas.width * 1.0 / bufferLength;
-                let x = 0;
-              
-                // Iterate through the dataArray and draw the waveform
-                for (let i = 0; i < bufferLength; i++) {
-                  let v = dataArray[i] / 128.0; // byte / 2 || 256 / 2
-                  let y = v * canvas.height / 2;
-              
-                  if (i === 0) {
-                    ctx.moveTo(x, y);
-                  } else {
-                    ctx.lineTo(x, y);
-                  }
-              
-                  x += sliceWidth;
-                }
-              
-                // Draw the line to the bottom edge of the canvas
-                ctx.lineTo(canvas.width, canvas.height / 2);
-                ctx.stroke();
-                
-                requestAnimationFrame(draw);
+        function draw() {
+            // Get the frequency data from the currently playing music
+            analyser.getByteTimeDomainData(dataArray);
+          
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+            // Set up the canvas properties for the waveform
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'darkorange';
+          
+            // Begin a new path
+            ctx.beginPath();
+          
+            // Determine the width of each segment of the line to be drawn
+            let sliceWidth = canvas.width * 1.0 / bufferLength;
+            let x = 0;
+          
+            // Iterate through the dataArray and draw the waveform
+            for (let i = 0; i < bufferLength; i++) {
+              let v = dataArray[i] / 128.0; // byte / 2 || 256 / 2
+              let y = v * canvas.height / 2;
+          
+              if (i === 0) {
+                ctx.moveTo(x, y);
+              } else {
+                ctx.lineTo(x, y);
+              }
+          
+              x += sliceWidth;
             }
+          
+            // Draw the line to the bottom edge of the canvas
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            
+            requestAnimationFrame(draw);
+        }
 
-            playButton.onclick = function() {
-                if (player.state == "started") {
-                    player.stop();
-                } else {
-                    player.start();
-                    draw();
-                }
-            };
-
-
+        playButton.onclick = function() {
+            if (player.state == "started") {
+                player.stop();
+            } else {
+                player.start();
+                draw();
+            }
+        };
       </script>
     </main>
 

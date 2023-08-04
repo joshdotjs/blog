@@ -1,16 +1,20 @@
 # blog
 
-
-
 # TODO:
+
+## Web Audio
 
 - Graphing
   - Per track:
+    - amplitude (average over time domain per frame) LED bar for each row
     - time domain
     - frequency domain
   - Master:
     - time domain
     - frequency domain
+
+- Stereo knobs
+- Wire up Volume knobs
 
 - Effects
   - ...

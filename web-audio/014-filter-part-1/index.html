@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh Holloway | Web Audio</title>
+    <!-- <link rel="stylesheet" href="/web-audio/012-save-project/css/index.css"> -->
+    <!-- <link rel="stylesheet" href="./css/index.css"> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.30/Tone.js"></script>
+    <!-- <script src="/assets/lib/Tone/Tone.js" defer></script> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script> -->
+    <!-- <script src="/assets/lib/gsap/gsap.min.js" defer></script> -->
+    
+    <!-- <script type="module" src="/web-audio/012-save-project/index.js"></script> -->
+    <!-- <script type="module" src="./index.js"></script> -->
+
+
+
+  </head>
+  <body style="margin: 0;">
+
+
+
+
+    <main style="background: black;">
+
+      <button id="playButton">Play Audio</button>
+      <input type="range" id="filterFreq" min="20" max="5000" step="10" value="1000">
+      <label for="filterFreq" style="color: white">Filter Frequency: <span id="freqValue">1000</span> Hz</label>
+
+      <script type="module">
+
+        const url = "../../assets/samples/songs/oops-i-did-it-again.ogg"; // replace with your audio file
+
+        const playButton = document.getElementById('playButton');
+        const filterFreq = document.getElementById('filterFreq');
+        const freqValue = document.getElementById('freqValue');
+        const audioFile = document.getElementById('audioFile');
+
+        let player;
+
+        const filter = new Tone.Filter(1000, "lowpass").toDestination();
+
+        if (player) {
+          player.dispose();
+        }
+
+        player = new Tone.Player(url).toDestination();
+        player.connect(filter);
+
+        playButton.addEventListener('click', () => {
+          if (player) {
+            if (player.state === "started") {
+              player.stop();
+            } else {
+              player.start();
+            }
+          }
+        });
+
+        // Update filter frequency when the range input changes
+        filterFreq.addEventListener('input', (event) => {
+          const freq = event.target.value;
+          filter.frequency.value = freq;
+          freqValue.textContent = freq;
+        });
+      </script>
+    </main>
+
+   </body>
+</html>
