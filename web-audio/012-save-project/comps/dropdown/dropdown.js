@@ -1,11 +1,74 @@
 import { qs, qsa } from '../../util.js';
 
-try {
-  const dropdown = qs('.dropdown#task-bar__dropdown-file');
-  const dropdown_trigger = qs('.j-dropdown-trigger', dropdown);
-  const dropdown_menu = qs('.j-dropdown-menu', dropdown);
-  const dropdown_menu_items = qsa('.j-dropdown-item', dropdown);
+// ==============================================
+
+const dropdown_data = [
+  {
+    id: 'task-bar__dropdown-file',
+    name: 'File',
+    items: [
+      {
+        label: 'Save'
+      },
+      {
+        label: 'Open'
+      },
+      {
+        label: 'Reset'
+      },
+    ]
+  },
+  {
+    id: 'task-bar__dropdown-edit',
+    name: 'Edit',
+    items: [
+      {
+        label: 'Option 1'
+      },
+      {
+        label: 'Option 2'
+      },
+    ]
+  },
+  // {
+  //   id: 'task-bar__dropdown-options',
+  // },
+  // {
+  //   id: 'task-bar__dropdown-patterns',
+  // },
+];
+
+// ==============================================
+
+const setupDropdown = ({ id, name, items }) => {
+  const query = `.dropdown#${id}`;
+  const dropdown = qs(query);
+
+  // <buton class="dropdown-trigger">File</button>
+  const dropdown_trigger = document.createElement('div');
+  dropdown_trigger.classList.add('dropdown-trigger');
+  dropdown_trigger.textContent = name;
+  dropdown.appendChild(dropdown_trigger);
+
+  // <ul class="dropdown-menu">
+  //   <li class="dropdown-item">Save</li>
+  //   <li class="dropdown-item">Open</li>
+  //   <li class="dropdown-item">Reset</li>
+  // </ul>
+  const dropdown_menu = document.createElement('ul');
+  const dropdown_menu_items = [];
+  dropdown_menu.classList.add('dropdown-menu');
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.classList.add('dropdown-item');
+    li.textContent = item.label;
+    dropdown_menu_items.push(li);
+    dropdown_menu.appendChild(li);
+  });
+  // console.log('dropdown_menu: ', dropdown_menu);
+  dropdown.appendChild(dropdown_menu);
   
+
   let opened = false;
 
   dropdown_trigger.addEventListener('click', () => {
@@ -49,6 +112,14 @@ try {
         }});
       }});
     });
+  });
+};
+
+// ==============================================
+
+try {
+  dropdown_data.forEach((dropdown_datum) => {
+    setupDropdown(dropdown_datum);
   });
 
 } catch(e) {

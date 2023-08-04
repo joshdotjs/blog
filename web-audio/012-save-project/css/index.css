@@ -31,10 +31,10 @@
   user-select: none;
   cursor: pointer;
 }
-.dropdown .j-dropdown-trigger {
-  padding: 20px;
+.dropdown .dropdown-trigger {
+  padding: 4px 14px;
 }
-.dropdown .j-dropdown-trigger .j-dropdown-menu {
+.dropdown .dropdown-menu {
   position: absolute;
   list-style: none;
   padding: 0;
@@ -45,22 +45,13 @@
   opacity: 0;
   display: none;
 }
-.dropdown .j-dropdown-trigger .j-dropdown-menu.show {
+.dropdown .dropdown-menu.show {
   display: block;
 }
-.dropdown .j-dropdown-trigger .j-dropdown-menu .j-dropdown-item {
+.dropdown .dropdown-menu .dropdown-item {
   display: block;
   padding-bottom: var(--mb);
   padding: 0 16px;
-}
-.dropdown .j-dropdown-trigger .j-dropdown-menu .j-dropdown-item:first-child {
-  padding-top: var(--mb);
-}
-.dropdown .j-dropdown-trigger .j-dropdown-menu .j-dropdown-item:last-child {
-  padding-bottom: var(--mb);
-}
-.dropdown .j-dropdown-trigger .josh {
-  margin: var(--mb) 0;
 }
 
 *, *::before, *::after {
@@ -330,6 +321,4 @@ main #tracks .track.track-disabled .step {
 }
 main #tracks .track.track-disabled .track-led-enable-inner {
   background: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
-}
-
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
