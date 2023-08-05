@@ -101,12 +101,18 @@ class Track {
     const initEnable = () => {
 
       // set disbled styles if track is disabled on load
-      if (!this.enabled)
+      if (!this.enabled) {
         this.elem.classList.add('track-disabled');
+      } else {
+        this.elem.classList.remove('track-disabled');
+      }
 
       const enable_btn = this.elem.querySelector('.track-led-enable');
       enable_btn.addEventListener('click', () => {
-        this.elem.classList.toggle('track-disabled');
+        // this.elem.classList.toggle('track-disabled');
+        if (!this.enabled) this.elem.classList.remove('track-disabled'); // DON'T TOGGLE
+        else this.elem.classList.add('track-disabled');;
+
         this.enabled = !this.enabled;
 
         // turn off .current styling on all steps
