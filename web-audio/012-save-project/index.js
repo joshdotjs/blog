@@ -105,7 +105,7 @@ let Tracks = [];
 // Set Tracks case [1] or [2] - Paage load cases
 const ls_tracks = getLS('tracks');
 if (ls_tracks) {
-  Tracks = setTracks(ls_tracks); // this loads LS even though LS is already set [K.I.S.S.]
+  Tracks = setTracks(ls_tracks); // this sets LS even though LS is already set [K.I.S.S.]
 } else {
   Tracks = setTracks(default_tracks);
 }
@@ -186,17 +186,7 @@ listenForEvent('project-open', (event) => {
       console.log('loaded_tracks: ', loaded_tracks);
 
       // load tracks from opened project into current project
-      Tracks = loadTracks(loaded_tracks);
-      setLS('tracks', loaded_tracks);
-
-
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
-      // THERE IS A BUG HERE LOADING THE FILE
+      Tracks = setTracks(loaded_tracks);
     };
 
     // Read the file as text
@@ -209,7 +199,7 @@ listenForEvent('project-open', (event) => {
     document.body.removeChild(element);
   }; // callback()
 
-  element.addEventListener('change', callback)
+  element.addEventListener('change', callback);
 });
 
 // ==============================================

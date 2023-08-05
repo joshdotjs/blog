@@ -10,7 +10,7 @@ const dropdown_data = [
       {
         label: 'Save',
         callback: () => {
-          fireEvent('project-open');
+          fireEvent('project-save');
         },
       },
       {
