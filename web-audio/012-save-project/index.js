@@ -123,8 +123,8 @@ if (ls_tracks) {
 // ==============================================
 
 listenForEvent('track-change', (event) => {
-  console.log('track-change EVENT fired and caught!');
-  console.log(event.detail.data.data_key);
+  // console.log('track-change EVENT fired and caught!');
+  // console.log(event.detail.data.data_key);
 
   const tracks = Tracks.map(track => track.getData());
   console.log('tracks: ', tracks);
@@ -135,6 +135,7 @@ listenForEvent('track-change', (event) => {
 // ==============================================
 
 listenForEvent('project-save', (event) => {
+  console.clear();
   console.log('project-save EVENT fired and caught!');
 
   const tracks = Tracks.map(track => track.getData());
@@ -160,7 +161,7 @@ listenForEvent('project-save', (event) => {
 // ==============================================
 
 listenForEvent('project-open', (event) => {
-
+  console.clear();
   console.log('project-open EVENT fired and caught!');
 
   const element = document.createElement('input');
@@ -214,6 +215,7 @@ listenForEvent('project-open', (event) => {
 // ==============================================
 
 listenForEvent('project-reset', (event) => {
+  console.clear();
   console.log('project-reset EVENT fired and caught!');
   // Set Tracks case [4] - User clicks 'reset project' button
   Tracks = setTracks(default_tracks);

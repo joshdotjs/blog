@@ -40,12 +40,18 @@ class Track {
     
         // initialize the UI to match initial patterns
         // if (this.pattern[j]) this.toggleStep(j);
-        if (this.pattern[j]) this.turnStepOn(j); // DON'T TOGGLE ON INIT - ONLY TOGGLE ON CLICK
+        if (this.pattern[j]) this.turnStepOn(j); // DON'T TOGGLE
         else this.turnStepOff(j);
 
         // toggle the pattern and UI when a step is clicked
         step.addEventListener('click', () => {
+          
+          console.clear();
+          console.log('%cstep click listener', 'color: green;');
+
           this.toggle(j);
+          if (this.pattern[j]) this.turnOn(j);
+          else this.turnOff(j);
 
           fireEvent('track-change', { data_key: `track: ${this.name}\nstep click: ${j}` });
         });
@@ -135,26 +141,31 @@ class Track {
 
   // ============================================
 
+  toggleStep(index)  { this.steps[index].classList.toggle('step-on'); }
   turnStepOn(index)  { this.steps[index].classList.add('step-on'); }
   turnStepOff(index) { this.steps[index].classList.remove('step-on'); }
 
   // ============================================
 
-  toggleStep(index) {
-    this.steps[index].classList.toggle('step-on');
-  }
-
-  // ============================================
-
-  togglePattern(index) {
-    this.pattern[index] = this.pattern[index] ? 0 : 1;
-  }
+  togglePattern(index) { this.pattern[index] = this.pattern[index] ? 0 : 1; }
+  turnPatternOn(index) { this.pattern[index] = 1; }
+  turnPatternOff(index) { this.pattern[index] = 0; }
 
   // ============================================
 
   toggle(index) {
     this.togglePattern(index);
     this.toggleStep(index);
+  }
+
+  turnOn(index) {
+    this.turnPatternOn(index);
+    this.turnStepOn(index);
+  }
+
+  turnOff(index) {
+    this.turnPatternOff(index);
+    this.turnStepOff(index);
   }
 
   // ============================================
