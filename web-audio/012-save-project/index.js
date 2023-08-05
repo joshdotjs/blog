@@ -1,11 +1,302 @@
-import { qs, pad } from './util.js';
-import { playTracks, highlightStep, resetHighlightedSteps } from './Tracks.js';
+import { qs, listenForEvent, setLS, getLS, pad } from './util.js';
 
 // ==============================================
 
 // Components:
 import './comps/comps.js';
 
+// ==============================================
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
+
+// import { playTracks, highlightStep, resetHighlightedSteps } from './Tracks.js';
+
+import Track from './Track.js';
+// import { qs, listenForEvent, setLS, getLS } from './util.js';
+import { notification } from './notification.js';
+import { default_tracks } from './data/track-templates.js';
+
+// ==============================================
+
+function setTracks (tracks) {
+  console.log('setTracks()');
+  
+  setLS('tracks', tracks);
+
+  const Tracks = tracks.map((track, idx) => new Track({ 
+    pattern: track.pattern, 
+    name: track.name,
+    path: track.path,
+    enabled: track.enabled,
+    locked: track.locked,
+    num: idx,
+  }));
+  return Tracks;
+};
+
+// ==============================================
+
+let Tracks = [];
+
+// Possible ways to set Tracks::
+//
+// 1. program loads for first time (no LS) and intializes with default tracks
+//    - ls_tracks === null
+//    - Tracks = loadTracks(default_tracks);
+//    - setLS('tracks', default_tracks);
+//
+// 2. program loads and LS has tracks, so load those tracks
+//    - ls_tracks !== null
+//    - Tracks = loadTracks(ls_tracks);
+//
+// 3. user opens a project file, so load those tracks and reset LS
+//    - ls_tracks !== null
+//    - Tracks = loadTracks(loaded_tracks);
+//    - setLS('tracks', loaded_tracks);
+//
+// 4. user resets program, so remove LS and reset with default tracks
+//    - ls_tracks !== null
+//    - Tracks = loadTracks(default_tracks);
+//    - setLS('tracks', default_tracks);
+
+// ==============================================
+
+// Set Tracks case [1] or [2] - Paage load cases
+const ls_tracks = getLS('tracks');
+if (ls_tracks) {
+  Tracks = setTracks(ls_tracks); // this loads LS even though LS is already set [K.I.S.S.]
+} else {
+  Tracks = setTracks(default_tracks);
+}
+
+// To reset Tracks, we first assign a new value to Tracks,
+//  then we need to re-run all the code below with the listeners again,
+//  since they reference Tracks, we need to update then to the new Tracks.
+// -So all of this code goes into the setTracks function.
+// -In index.js we interface with Tracks via these functions from Tracks.js, 
+//  and don't actually reference Tracks directly in index.js,
+//  therefore, we don't need to re-run any code in index.js when we reset.
+
+
+
+// ==============================================
+
+listenForEvent('track-change', (event) => {
+  console.log('track-change EVENT fired and caught!');
+  console.log(event.detail.data.data_key);
+
+  const tracks = Tracks.map(track => track.getData());
+  console.log('tracks: ', tracks);
+
+  setLS('tracks', tracks);
+});
+
+// ==============================================
+
+listenForEvent('project-save', (event) => {
+  console.log('project-save EVENT fired and caught!');
+
+  const tracks = Tracks.map(track => track.getData());
+  console.log('tracks: ', tracks);
+
+  function download(filename, text) {
+    const element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+  // download("hello.txt", "This is the content of my file :)");
+  download("project.txt", JSON.stringify(tracks));
+  // download("project.wa", JSON.stringify(tracks));
+});
+
+// ==============================================
+
+listenForEvent('project-open', (event) => {
+
+  console.log('project-open EVENT fired and caught!');
+
+  const element = document.createElement('input');
+  element.setAttribute('type', 'file');
+  element.setAttribute('accept', '.txt');
+  element.setAttribute('style', 'display: none;');
+  document.body.appendChild(element);
+
+  element.click();
+
+  const callback = (e) => {
+
+    // upload file
+    const file = e.target.files[0];
+    console.log('file: ', file);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      // The file's text will be printed here
+      console.log(e.target.result);
+      const loaded_tracks = JSON.parse(e.target.result);
+      console.log('loaded_tracks: ', loaded_tracks);
+
+      // load tracks from opened project into current project
+      Tracks = loadTracks(loaded_tracks);
+      setLS('tracks', loaded_tracks);
+
+
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+      // THERE IS A BUG HERE LOADING THE FILE
+    };
+
+    // Read the file as text
+    reader.readAsText(file);
+
+    // show notification to user:
+    const message = `Opened project: ${file.name}`;
+    notification({ message });
+
+    document.body.removeChild(element);
+  }; // callback()
+
+  element.addEventListener('change', callback)
+});
+
+// ==============================================
+
+listenForEvent('project-reset', (event) => {
+  console.log('project-reset EVENT fired and caught!');
+  // Set Tracks case [4] - User clicks 'reset project' button
+  Tracks = setTracks(default_tracks);
+});
+
+// ==============================================
+
+const playTracks = (time, index) => {
+
+  Tracks.forEach((track) => {
+
+    if (!track.enabled) return;
+
+    if (track.pattern[index]) 
+      track.start(time);
+  });
+};
+
+// ==============================================
+
+const highlightStep = (index) => {
+
+  const prev_idx = index - 1;
+  const is_prev_idx_pos = prev_idx >= 0;
+
+  Tracks.forEach(track => {
+
+    if (!track.enabled) return;
+
+    track.steps[is_prev_idx_pos ? prev_idx : 15].classList.remove('current');
+    track.steps[index].classList.add('current');
+  });
+};
+
+// ==============================================
+
+const resetHighlightedSteps = () => {
+  Tracks.forEach(track => {
+    track.steps.forEach(step => step.classList.remove('current'));
+  });
+}
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 // ==============================================
 
 const { Transport: T } = Tone;

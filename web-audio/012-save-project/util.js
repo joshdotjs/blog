@@ -35,7 +35,7 @@ const fireEvent = (name, data) => {
 
 // ==============================================
 
-const listeForEvent = (name, fn) => {
+const listenForEvent = (name, fn) => {
   document.addEventListener(name, fn);
 };
 
@@ -76,5 +76,5 @@ export {
   qs, qsa,
   round, pad,
   setLS, getLS,
-  fireEvent, listeForEvent,
+  fireEvent, listenForEvent,
 };

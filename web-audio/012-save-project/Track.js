@@ -39,8 +39,10 @@ class Track {
       this.steps.forEach((step, j) => {
     
         // initialize the UI to match initial patterns
-        if (this.pattern[j]) this.toggleStep(j);
-    
+        // if (this.pattern[j]) this.toggleStep(j);
+        if (this.pattern[j]) this.turnStepOn(j); // DON'T TOGGLE ON INIT - ONLY TOGGLE ON CLICK
+        else this.turnStepOff(j);
+
         // toggle the pattern and UI when a step is clicked
         step.addEventListener('click', () => {
           this.toggle(j);
@@ -130,6 +132,11 @@ class Track {
 
     // ------------------------------------------
   }
+
+  // ============================================
+
+  turnStepOn(index)  { this.steps[index].classList.add('step-on'); }
+  turnStepOff(index) { this.steps[index].classList.remove('step-on'); }
 
   // ============================================
 

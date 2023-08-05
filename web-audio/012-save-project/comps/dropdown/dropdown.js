@@ -8,13 +8,22 @@ const dropdown_data = [
     name: 'File',
     items: [
       {
-        label: 'Save'
+        label: 'Save',
+        callback: () => {
+          fireEvent('project-open');
+        },
       },
       {
-        label: 'Open'
+        label: 'Open',
+        callback: () => {
+          fireEvent('project-open');
+        },
       },
       {
-        label: 'Reset'
+        label: 'Reset',
+        callback: () => {
+          fireEvent('project-reset');
+        },
       },
     ]
   },
@@ -39,6 +48,9 @@ const dropdown_data = [
 ];
 
 // ==============================================
+
+// -
+
 
 const setupDropdown = ({ id, name, items }) => {
   const query = `.dropdown#${id}`;
@@ -99,32 +111,34 @@ const setupDropdown = ({ id, name, items }) => {
 
   // --------------------------------------------
 
-  dropdown_menu_items.forEach(item => {
-    item.addEventListener('click', (e) => {
+  const animateItem = (item) => {
+    const tl = gsap.timeline();
+    const duration = 0.075;
+    tl.to(item, { background: 'black', color: 'white', duration });
+    tl.to(item, { background: 'white', color: 'black', duration });
+    tl.to(item, { background: 'black', color: 'whie',  duration });
+    tl.to(item, { background: 'white', color: 'black', duration });
+    tl.to(item, { background: 'black', color: 'white', duration });
+    tl.to(item, { background: 'white', color: 'black', duration, 
+      onComplete: () => {
+        gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration: 0.2, onComplete: () => {
+        dropdown_menu.classList.remove('show');
+        opened = false;
+      }});
+    }});
+  };
+
+  // --------------------------------------------
+
+  dropdown_menu_items.forEach((dropdown_menu_item, idx) => {
+
+    dropdown_menu_item.addEventListener('click', (e) => {
       e.stopPropagation();
 
+      animateItem(dropdown_menu_item);
 
-      const tl = gsap.timeline();
-      const duration = 0.075;
-      tl.to(item, { background: 'black', color: 'white', duration });
-      tl.to(item, { background: 'white', color: 'black', duration });
-      tl.to(item, { background: 'black', color: 'whie',  duration });
-      tl.to(item, { background: 'white', color: 'black', duration });
-      tl.to(item, { background: 'black', color: 'white', duration });
-      tl.to(item, { background: 'white', color: 'black', duration, 
-        onComplete: () => {
-          gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration: 0.2, onComplete: () => {
-          dropdown_menu.classList.remove('show');
-          opened = false;
-        }});
-      }});
-
-      const menuItemCallback = () => {
-        // fireEvent('project-save');
-        fireEvent('project-open');
-      };
-
-      menuItemCallback();
+      // execute callback for menu item
+      items[idx].callback();
     });
   });
 
