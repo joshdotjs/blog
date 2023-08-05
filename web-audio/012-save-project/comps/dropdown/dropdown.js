@@ -32,10 +32,12 @@ const dropdown_data = [
     name: 'Edit',
     items: [
       {
-        label: 'Option 1'
+        label: 'Option 1',
+        callback: () => {},
       },
       {
-        label: 'Option 2'
+        label: 'Option 2',
+        callback: () => {},
       },
     ]
   },
