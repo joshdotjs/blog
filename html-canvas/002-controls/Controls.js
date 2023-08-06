@@ -64,18 +64,13 @@ class Controls {
 
     // Bind event handlers
     document.addEventListener("keydown", e => {
-      // if ([37, 38, 39, 40, 32].indexOf(e.which) >= 0) {
-      //   e.preventDefault();
-      // }
       if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) {
         e.preventDefault();
       }
-      // this.keys[e.keyCode] = true;
       this.keys[e.key] = true;
     }, false);
 
     document.addEventListener("keyup", e => {
-      // this.keys[e.keyCode] = false;
       this.keys[e.key] = false;
     }, false);
   }
