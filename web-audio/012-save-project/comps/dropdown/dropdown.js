@@ -1,5 +1,10 @@
-import { qs, qsa, fireEvent } from '../../util.js';
+import { qs, qsa, fireEvent, listenForEvent } from '../../util.js';
 
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 // ==============================================
 
 const dropdown_data = [
@@ -41,20 +46,88 @@ const dropdown_data = [
       },
     ]
   },
-  // {
-  //   id: 'task-bar__dropdown-options',
-  // },
-  // {
-  //   id: 'task-bar__dropdown-patterns',
-  // },
+  {
+    id: 'task-bar__dropdown-options',
+    name: 'Options',
+    items: [
+      {
+        label: 'Option 1',
+        callback: () => {},
+      },
+      {
+        label: 'Option 2',
+        callback: () => {},
+      },
+    ]
+  },
+  {
+    id: 'task-bar__dropdown-patterns',
+    name: 'Patterns',
+    items: [
+      {
+        label: 'Option 1',
+        callback: () => {},
+      },
+      {
+        label: 'Option 2',
+        callback: () => {},
+      },
+    ]
+  },
+  {
+    id: 'task-bar__dropdown-help',
+    name: 'Help',
+    items: [
+      {
+        label: 'Option 1',
+        callback: () => {},
+      },
+      {
+        label: 'Option 2',
+        callback: () => {},
+      },
+    ]
+  },
 ];
 
 // ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 
-// -
+const animateInDropdown = (dropdown_menu) => {
 
+  const duration = 0.2;
+
+  dropdown_menu.classList.add('show');
+  gsap.fromTo(dropdown_menu, { 
+      opacity: 0, yPercent: -10, duration
+    },
+    { 
+      opacity: 1, yPercent: 0, duration
+    }
+  );
+};
+
+// ==============================================
+
+const animateOutDropdown = (dropdown_menu) => {
+
+  const duration = 0.2;
+
+  gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration, onComplete: () => {
+    dropdown_menu.classList.remove('show');
+  }});
+};
+
+// ==============================================
 
 const setupDropdown = ({ id, name, items }) => {
+  
+  let opened = false;
+  
   const query = `.dropdown#${id}`;
   const dropdown = qs(query);
 
@@ -88,27 +161,30 @@ const setupDropdown = ({ id, name, items }) => {
 
   // --------------------------------------------
   
-  let opened = false;
+  listenForEvent('dropdown-opening', () => {
+    if (opened) { // close dropdown
+      animateOutDropdown(dropdown_menu);
+      opened = false;
+    }
+  });
+
+  // --------------------------------------------
+
+  
 
   dropdown_trigger.addEventListener('click', () => {
 
-    const duration = 0.2;
+    // if opening, then close all other dropdowns
+    fireEvent('dropdown-opening');
 
-    if (!opened) {
-      dropdown_menu.classList.add('show');
-      gsap.fromTo(dropdown_menu, { 
-        opacity: 0, yPercent: -10, duration
-      },
-      { 
-        opacity: 1, yPercent: 0, duration
-      }
-      );
-    } else {
-      gsap.to(dropdown_menu, { opacity: 0, yPercent: -10, duration, onComplete: () => {
-        dropdown_menu.classList.remove('show');
-      }});
+    if (!opened) {// open dropdown
+      animateInDropdown(dropdown_menu);
+      opened = true;
+    } else { // close dropdown
+      animateOutDropdown(dropdown_menu);
+      opened = false;
     }
-    opened = !opened;
+    
   });
 
   // --------------------------------------------
@@ -150,6 +226,26 @@ const setupDropdown = ({ id, name, items }) => {
 // ==============================================
 
 try {
+
+  // Logic: 
+  //  -Each dropdown is implemented in the function setupDropdown()
+  //  -The data for each dropdown is stored in the array dropdown_data
+  //  -The array dropdown_data is iterated over, and each datum is passed to setupDropdown()
+  //  -setupDropdown() creates the dropdown and adds it to the DOM
+  //  -setupDropdown() also adds event listeners to the dropdown
+  //  -The event listeners are responsible for opening and closing the dropdown
+  //  -The event listeners also execute the callback for the menu item that was clicked
+  //  -The callback for the menu item that was clicked is responsible for executing the desired functionality
+  //  -We have two animations here:
+  //    -animateInDropdown() /animateOutDropdown()  animates the dropdown opening and closing
+  //    -animateItem() animates the menu item that was clicked and then closes the dropdown
+  //  -We have a state variable stored as a closure that keeps track of whether the dropdown is open or closed
+  //  -When we open one dropdown, we close all other dropdowns by firing a custom event named 'dropdown-opening'
+  //   and before we open the current dropdown that was clicked we execute animateOutDropdown() on all dropdowns 
+  //   and for the ones that are open they are closed -- this effectively closes the previously opened dropdown 
+  //   without having to keep track of which one the previous one was in terms of sharing state between the dropdowns.
+
+
   dropdown_data.forEach((dropdown_datum) => {
     setupDropdown(dropdown_datum);
   });
