@@ -25,8 +25,9 @@
 }
 .dropdown {
   position: relative;
-  outline: solid black 1px;
-  background: blue;
+  background: #5E696D;
+  color: white;
+  border-bottom: solid 1px #404B50;
   width: fit-content;
   user-select: none;
   cursor: pointer;

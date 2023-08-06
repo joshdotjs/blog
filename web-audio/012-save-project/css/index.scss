@@ -1,34 +1,11 @@
 @forward './scss/fonts';
 @use './scss/mixins' as *;
+@use './scss/vars' as *;
 
 // ==============================================
 
 // Components:
 @forward '../comps/dropdown/dropdown';
-
-// ==============================================
-
-$border-1: solid 1px #252D31;
-$border-2: solid 1px #8B9396;
-$border-3: solid 1px #404B50;
-
-$grey-1: #5E696D;
-
-$light-grey-1: #C2C9CD;
-
-$green-1: #97E92F;
-
-$gradient-grey-1:    linear-gradient(0deg, rgb(73,80,84,)   0%, rgba(97,104,108, 1) 100%);
-$gradient-grey-1-on: linear-gradient(0deg, rgb(145,165,175) 0%, rgba(193,213,223,1) 100%);
-$gradient-grey-2:    linear-gradient(0deg, #252F34 0%, #3A4449 100%);
-
-$gradient-red-1:    linear-gradient(0deg, rgba(93,72,74,1)    0%, rgba(118,97,99,  1) 100%);
-$gradient-red-1-on: linear-gradient(0deg, rgba(195,140,144,1) 0%, rgba(245,190,195,1) 100%);
-
-$gradient-green-1: linear-gradient(0deg, #DCF7AB 0%, #6EDB00 100%);
-
-$gradient-green-led-on: $gradient-green-1;
-$gradient-led-off: linear-gradient(0deg, #70787B 0%, #4E5659 100%);
 
 // ==============================================
 
