@@ -262,6 +262,7 @@ try {
   //   and before we open the current dropdown that was clicked we execute animateOutDropdown() on all dropdowns 
   //   and for the ones that are open they are closed -- this effectively closes the previously opened dropdown 
   //   without having to keep track of which one the previous one was in terms of sharing state between the dropdowns.
+  //  -Clicking outside the dropdown closes the dropdown.
 
 
   dropdown_data.forEach((dropdown_datum) => {
