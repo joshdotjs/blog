@@ -33,6 +33,13 @@ main {
   
   // ==============================================
 
+  #task-bar {
+    background: $grey-1;
+    border-bottom: $border-3;
+  }
+
+  // ==============================================
+
   $pad: 24px;
   #top-bar {
     padding: calc(#{$pad} / 2) $pad;

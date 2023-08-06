@@ -27,7 +27,6 @@
   position: relative;
   background: #5E696D;
   color: white;
-  border-bottom: solid 1px #404B50;
   width: fit-content;
   user-select: none;
   cursor: pointer;
@@ -72,6 +71,10 @@ main {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   width: fit-content;
   margin: 0 auto;
+}
+main #task-bar {
+  background: #5E696D;
+  border-bottom: solid 1px #404B50;
 }
 main #top-bar {
   padding: calc(24px / 2) 24px;
