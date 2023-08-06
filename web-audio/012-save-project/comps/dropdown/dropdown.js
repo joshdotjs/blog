@@ -174,7 +174,21 @@ const setupDropdown = ({ id, name, items }) => {
 
   // --------------------------------------------
 
-  dropdown_trigger.addEventListener('click', () => {
+  listenForEvent('click', (e) => {
+    
+
+    if (opened) { // close dropdown
+      console.log('clicked outside dropdown');
+      animateOutDropdown(dropdown_menu);
+      opened = false;
+    }
+  });
+
+  // --------------------------------------------
+
+  dropdown_trigger.addEventListener('click', (e) => {
+    e.stopPropagation(); // if you click the trigger, don't also click the window
+    console.log('clicked dropdown trigger!');
 
 
     console.log('%cdropdown_trigger clicked!', 'color: green');
