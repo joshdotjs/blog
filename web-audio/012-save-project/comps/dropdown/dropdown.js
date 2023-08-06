@@ -99,6 +99,8 @@ const dropdown_data = [
 
 const animateInDropdown = (dropdown_menu) => {
 
+  console.log('animateInDropdown()');
+
   const duration = 0.2;
 
   dropdown_menu.classList.add('show');
@@ -114,6 +116,8 @@ const animateInDropdown = (dropdown_menu) => {
 // ==============================================
 
 const animateOutDropdown = (dropdown_menu) => {
+
+  console.log('%canimateOutDropdown()', 'color: red');
 
   const duration = 0.2;
 
@@ -170,17 +174,17 @@ const setupDropdown = ({ id, name, items }) => {
 
   // --------------------------------------------
 
-  
-
   dropdown_trigger.addEventListener('click', () => {
 
-    // if opening, then close all other dropdowns
-    fireEvent('dropdown-opening');
 
+    console.log('%cdropdown_trigger clicked!', 'color: green');
+
+    
     if (!opened) {// open dropdown
-      animateInDropdown(dropdown_menu);
+      fireEvent('dropdown-opening'); // close all dropdowns (effectively only the previously opened one)
+      animateInDropdown(dropdown_menu); // open the currently clicked dropdown
       opened = true;
-    } else { // close dropdown
+    } else { // close only the current dropdown (it is currently opened, and we clicked it again)
       animateOutDropdown(dropdown_menu);
       opened = false;
     }
