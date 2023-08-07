@@ -4,11 +4,17 @@ import Entity from './Entity.js';
 
 // ==========================================
 
-let entity;
+let entity_1;
+let entity_2;
 
 const reset = () => {
-  entity = new Entity({ 
+  entity_1 = new Entity({ 
     size: { width: 50, height: 50 },
+  })
+  entity_2 = new Entity({ 
+    color: 'black',
+    size: { width: 50, height: 50 },
+    position: { x: canvas.width / 2, y: canvas.height / 2},
   })
 };
 reset();
@@ -20,29 +26,17 @@ reset_button.addEventListener('click', () => reset());
 
 // ==========================================
 
-// let x = canvas.width  / 2 - 25;
-// let y = canvas.height / 2 - 25;
-
-// const update = () => {
-//   x += controls.x() * 3;
-//   y += controls.y() * 3;
-// };
-
-// const render = () => {
-//   ctx.fillStyle = 'rgba(0, 0, 0)';
-//   ctx.fillRect(x, y, 50, 50);
-// };
-
-// ==========================================
-
 function animate(t1) {
   requestAnimationFrame(animate);
+
+  // Refresh:
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
-  // update();
-  entity.update(controls.x(), controls.y());
+  // Update:
+  entity_1.update(controls.x(), controls.y());
 
-  // render();
-  entity.render();
+  // Render:
+  entity_1.render();
+  entity_2.render();
 }
 animate();

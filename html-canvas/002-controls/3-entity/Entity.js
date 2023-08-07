@@ -4,14 +4,19 @@ class Entity {
 
   // --------------------------------------------
 
-  constructor({ size: { width, height } }) {
+  constructor({
+    size: { width, height }, 
+    position,
+    color='darkorange',
+  }) {
     this.w = width;
     this.h = height;
 
-    // position
+    console.log('position', position);
+
     this.pos = {
-      x: canvas.width / 2 - this.w / 2,
-      y: canvas.height / 2 - this.h / 2 ,
+      x: position?.x || canvas.width / 2 - this.w / 2,
+      y: position?.y || canvas.height / 2 - this.h / 2,
     };
 
     // velocity
@@ -19,6 +24,8 @@ class Entity {
       x: 0,
       y: 0,
     };
+
+    this.color = color;
   }
 
   // --------------------------------------------
@@ -36,8 +43,6 @@ class Entity {
     //   this.velocity.y = 0;
     // }
 
-    // x += controls.x() * 3;
-    // y += controls.y() * 3;
     this.pos.x += x * 3;
     this.pos.y += y * 3;
   }
@@ -45,7 +50,7 @@ class Entity {
   // --------------------------------------------
 
   render() {
-    ctx.fillStyle = 'darkorange';
+    ctx.fillStyle = this.color;
     ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
   }
 
