@@ -1,4 +1,5 @@
-import Controls from "./Controls.js";
+// import Controls from "./Controls.js";
+import controls from "./Controls.js";
 
 // ==========================================
 
@@ -61,19 +62,22 @@ class Entity {
 // ==========================================
 
 const entity = new Entity();
-const controls = new Controls();
 
 // let t0 = 0;
 
 // ==========================================
 
 // Game setup code
-let x = canvas.width  / 2;
-let y = canvas.height / 2;
+let x = canvas.width  / 2 - 25;
+let y = canvas.height / 2 - 25;
 
 const update = () => {
-  x += controls.x * 3;
-  y += controls.y * 3;
+  console.log('x: ', x);
+
+  // x += controls.x * 3;
+  // y += controls.y * 3;
+  x += controls.x() * 3;
+  y += controls.y() * 3;
 };
 
 const render = () => {

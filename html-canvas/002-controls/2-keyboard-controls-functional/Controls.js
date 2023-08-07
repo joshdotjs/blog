@@ -63,9 +63,9 @@ let keys = {};
 
 // ==============================================
 
-document.addEventListener("keydown", ({ key }) => {
-  if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(key) >= 0) e.preventDefault();
-  keys[key] = true;
+document.addEventListener("keydown", (e) => {
+  if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) e.preventDefault();
+  keys[e.key] = true;
 }, false);
 
 // ==============================================
@@ -80,18 +80,18 @@ const x = () => {
   return 0;
 };
 const y = () => {
-  if (this.keys['ArrowUp']   || this.keys['w'])  return -1;
-  if (this.keys['ArrowDown'] || this.keys['s'])  return 1;
+  if (keys['ArrowUp']   || keys['w'])  return -1;
+  if (keys['ArrowDown'] || keys['s'])  return 1;
   return 0;
 };
 
 // ==============================================
 
-const Controls = {
+const controls = {
   x,
   y
 };
 
 // ==============================================
 
-export default Controls;
+export default controls;
