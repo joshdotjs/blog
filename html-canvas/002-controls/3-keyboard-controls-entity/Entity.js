@@ -1,18 +1,21 @@
+import { canvas, ctx } from "./util.js";
+
 class Entity {
 
   // --------------------------------------------
 
-  constructor() {
-    this.width = canvas.height / 8;
-    this.height = this.width;
+  constructor({ size: { width, height } }) {
+    this.w = width;
+    this.h = height;
 
-    this.position = {
-      x: canvas.width / 2 - this.width / 2,
-      y: 0, // canvas.height / 2 - this.height / 2 ,
+    // position
+    this.pos = {
+      x: canvas.width / 2 - this.w / 2,
+      y: canvas.height / 2 - this.h / 2 ,
     };
 
-    // Added velocity property
-    this.velocity = {
+    // velocity
+    this.vel = {
       x: 0,
       y: 0,
     };
@@ -20,26 +23,30 @@ class Entity {
 
   // --------------------------------------------
 
-  // Added update method to adjust position and apply gravity
-  update() {
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+  update(x, y) {
+    // this.position.x += this.velocity.x;
+    // this.position.y += this.velocity.y;
 
-    // Gravity
-    this.velocity.y += 0.5;
+    // // Gravity
+    // this.velocity.y += 0.5;
     
-    // Check for collision with canvas bottom
-    if (this.position.y + this.height > canvas.height) {
-      this.position.y = canvas.height - this.height;
-      this.velocity.y = 0;
-    }
+    // // Check for collision with canvas bottom
+    // if (this.position.y + this.height > canvas.height) {
+    //   this.position.y = canvas.height - this.height;
+    //   this.velocity.y = 0;
+    // }
+
+    // x += controls.x() * 3;
+    // y += controls.y() * 3;
+    this.pos.x += x * 3;
+    this.pos.y += y * 3;
   }
 
   // --------------------------------------------
 
   render() {
     ctx.fillStyle = 'darkorange';
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
   }
 
   // --------------------------------------------

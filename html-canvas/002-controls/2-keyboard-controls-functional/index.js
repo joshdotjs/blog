@@ -15,8 +15,6 @@ let y = canvas.height / 2 - 25;
 // ==========================================
 
 const update = () => {
-  console.log('x: ', x);
-
   // x += controls.x * 3;
   // y += controls.y * 3;
   x += controls.x() * 3;

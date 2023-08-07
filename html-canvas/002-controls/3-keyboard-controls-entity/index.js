@@ -1,51 +1,38 @@
-// import Controls from "./Controls.js";
+import { canvas, ctx } from "./util.js";
 import controls from "./Controls.js";
+import Entity from './Entity.js';
 
 // ==========================================
 
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
+const entity = new Entity({ 
+  size: { width: 50, height: 50 },
+});
 
 // ==========================================
 
-const entity = new Entity();
+// let x = canvas.width  / 2 - 25;
+// let y = canvas.height / 2 - 25;
 
-// let t0 = 0;
+// const update = () => {
+//   x += controls.x() * 3;
+//   y += controls.y() * 3;
+// };
 
-// ==========================================
-
-// Game setup code
-let x = canvas.width  / 2 - 25;
-let y = canvas.height / 2 - 25;
-
-const update = () => {
-  console.log('x: ', x);
-
-  // x += controls.x * 3;
-  // y += controls.y * 3;
-  x += controls.x() * 3;
-  y += controls.y() * 3;
-};
-
-const render = () => {
-  ctx.fillStyle = 'rgba(0, 0, 0)';
-  ctx.fillRect(x, y, 50, 50);
-};
+// const render = () => {
+//   ctx.fillStyle = 'rgba(0, 0, 0)';
+//   ctx.fillRect(x, y, 50, 50);
+// };
 
 // ==========================================
 
 function animate(t1) {
   requestAnimationFrame(animate);
-  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // entity.update();
-  // entity.draw();
+  
+  // update();
+  entity.update(controls.x(), controls.y());
 
-  // const dt = Math.round(t1 - t0);
-  // console.log(`animate() \ndt: ${dt}ms.`);
-  // t0 = t1;
-
-  update();
-  render();
+  // render();
+  entity.render();
 }
 animate();
