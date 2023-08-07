@@ -1,6 +1,7 @@
 import { canvas, ctx } from "./util.js";
 import controls from "./Controls.js";
-import Entity from './Entity.js';
+// import Entity from './Entity.js';
+import { newEntity } from './entity-fn.js';
 
 // ==========================================
 
@@ -8,10 +9,19 @@ let entity_1;
 let entity_2;
 
 const reset = () => {
-  entity_1 = new Entity({ 
+  // entity_1 = new Entity({ 
+  //   size: { width: 50, height: 50 },
+  // })
+  entity_1 = newEntity({ 
     size: { width: 50, height: 50 },
   })
-  entity_2 = new Entity({ 
+
+  // entity_2 = new Entity({ 
+  //   color: 'black',
+  //   size: { width: 50, height: 50 },
+  //   position: { x: canvas.width / 2, y: canvas.height / 2},
+  // })
+  entity_2 = newEntity({ 
     color: 'black',
     size: { width: 50, height: 50 },
     position: { x: canvas.width / 2, y: canvas.height / 2},
