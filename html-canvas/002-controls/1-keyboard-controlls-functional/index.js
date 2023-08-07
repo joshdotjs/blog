@@ -12,6 +12,9 @@ const ctx = canvas.getContext('2d');
 // ==========================================
 
 class Entity {
+
+  // --------------------------------------------
+
   constructor() {
     this.width = canvas.height / 8;
     this.height = this.width;
@@ -28,10 +31,7 @@ class Entity {
     };
   }
 
-  draw() {
-    ctx.fillStyle = 'darkorange';
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-  }
+  // --------------------------------------------
 
   // Added update method to adjust position and apply gravity
   update() {
@@ -47,6 +47,15 @@ class Entity {
       this.velocity.y = 0;
     }
   }
+
+  // --------------------------------------------
+
+  render() {
+    ctx.fillStyle = 'darkorange';
+    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+  }
+
+  // --------------------------------------------
 }
 
 // ==========================================
@@ -54,7 +63,23 @@ class Entity {
 const entity = new Entity();
 const controls = new Controls();
 
-let t0 = 0;
+// let t0 = 0;
+
+// ==========================================
+
+// Game setup code
+let x = canvas.width  / 2;
+let y = canvas.height / 2;
+
+const update = () => {
+  x += controls.x * 3;
+  y += controls.y * 3;
+};
+
+const render = () => {
+  ctx.fillStyle = 'rgba(0, 0, 0)';
+  ctx.fillRect(x, y, 50, 50);
+};
 
 // ==========================================
 
@@ -62,11 +87,15 @@ function animate(t1) {
   requestAnimationFrame(animate);
   
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  entity.update();
-  entity.draw();
+  // entity.update();
+  // entity.draw();
 
-  const dt = Math.round(t1 - t0);
-  console.log(`animate() \ndt: ${dt}ms.`);
-  t0 = t1;
+  // const dt = Math.round(t1 - t0);
+  // console.log(`animate() \ndt: ${dt}ms.`);
+  // t0 = t1;
+
+  update();
+  render();
+
 }
 animate();

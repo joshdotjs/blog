@@ -62,54 +62,32 @@ class Controls {
   constructor() {
     this.keys = {};
 
-    // Bind event handlers
     document.addEventListener("keydown", e => {
-      if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) {
-        e.preventDefault();
-      }
+      if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) e.preventDefault();
       this.keys[e.key] = true;
     }, false);
 
-    document.addEventListener("keyup", e => {
-      this.keys[e.key] = false;
-    }, false);
+    document.addEventListener("keyup", e => this.keys[e.key] = false, false);
   }
 
   key(key, value) {
-    if (value !== undefined) {
-      this.keys[key] = value;
-    }
+    if (value !== undefined) this.keys[key] = value;
     return this.keys[key];
   }
 
-  reset () {
-    for (let key in this.keys) {
-      this.keys[key] = false;
-    }
-  }
+  reset () { for (let key in this.keys) this.keys[key] = false; }
 
-  // Handle key actions
-  get action() {
-    return this.keys[' '];
-  }
+  get action() { return this.keys[' ']; }
 
   get x() {
-    if (this.keys['ArrowLeft'] || this.keys['a']) {
-      return -1;
-    }
-    if (this.keys['ArrowRight'] || this.keys['d']) {
-      return 1;
-    }
+    if (this.keys['ArrowLeft']  || this.keys['a'])  return -1;
+    if (this.keys['ArrowRight'] || this.keys['d'])  return 1;
     return 0;
   }
 
   get y() {
-    if (this.keys['ArrowUp'] || this.keys['w']) {
-      return -1;
-    }
-    if (this.keys['ArrowDown'] || this.keys['s']) {
-      return 1;
-    }
+    if (this.keys['ArrowUp']   || this.keys['w'])  return -1;
+    if (this.keys['ArrowDown'] || this.keys['s'])  return 1;
     return 0;
   }
 }
