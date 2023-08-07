@@ -4,9 +4,19 @@ import Entity from './Entity.js';
 
 // ==========================================
 
-const entity = new Entity({ 
-  size: { width: 50, height: 50 },
-});
+let entity;
+
+const reset = () => {
+  entity = new Entity({ 
+    size: { width: 50, height: 50 },
+  })
+};
+reset();
+
+// ==========================================
+
+const reset_button = document.querySelector('#reset-button');
+reset_button.addEventListener('click', () => reset());
 
 // ==========================================
 

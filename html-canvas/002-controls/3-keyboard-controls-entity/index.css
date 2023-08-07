@@ -14,3 +14,17 @@ canvas {
   background: deepskyblue;
   border-radius: 7px;
 }
+
+main { position:  relative;
+
+  #reset-button { position: absolute;
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    border-radius: 7px;
+    background: white;
+    color: black;
+  } 
+  /* #reset-button */
+} 
+/* main */
