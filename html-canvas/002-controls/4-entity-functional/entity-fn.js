@@ -1,6 +1,5 @@
 import { canvas, ctx } from "./util.js";
 
-
 // constructor({
 //   size: { width, height }, 
 //   position,
