@@ -70,14 +70,14 @@ class Controls {
     document.addEventListener("keyup", e => this.keys[e.key] = false, false);
   }
 
-  key(key, value) {
-    if (value !== undefined) this.keys[key] = value;
-    return this.keys[key];
-  }
+  // key(key, value) {
+  //   if (value !== undefined) this.keys[key] = value;
+  //   return this.keys[key];
+  // }
 
-  reset () { for (let key in this.keys) this.keys[key] = false; }
+  // reset () { for (let key in this.keys) this.keys[key] = false; }
 
-  get action() { return this.keys[' ']; }
+  // get action() { return this.keys[' ']; }
 
   get x() {
     if (this.keys['ArrowLeft']  || this.keys['a'])  return -1;
@@ -91,6 +91,5 @@ class Controls {
     return 0;
   }
 }
-
 
 export default Controls;

@@ -60,7 +60,7 @@ class Entity {
 
 // ==========================================
 
-const entity = new Entity();
+// const entity = new Entity();
 const controls = new Controls();
 
 // let t0 = 0;
@@ -68,8 +68,8 @@ const controls = new Controls();
 // ==========================================
 
 // Game setup code
-let x = canvas.width  / 2;
-let y = canvas.height / 2;
+let x = canvas.width  / 2 - 25;
+let y = canvas.height / 2 - 25;
 
 const update = () => {
   x += controls.x * 3;

@@ -57,40 +57,41 @@
 // y	          89	            y	            KeyY	
 // z	          90	            z	            KeyZ
 
+// ==============================================
 
-class Controls {
-  constructor() {
-    this.keys = {};
+let keys = {};
 
-    document.addEventListener("keydown", e => {
-      if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) e.preventDefault();
-      this.keys[e.key] = true;
-    }, false);
+// ==============================================
 
-    document.addEventListener("keyup", e => this.keys[e.key] = false, false);
-  }
+document.addEventListener("keydown", ({ key }) => {
+  if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(key) >= 0) e.preventDefault();
+  keys[key] = true;
+}, false);
 
-  key(key, value) {
-    if (value !== undefined) this.keys[key] = value;
-    return this.keys[key];
-  }
+// ==============================================
 
-  reset () { for (let key in this.keys) this.keys[key] = false; }
+document.addEventListener("keyup", ({ key }) => keys[key] = false, false);
 
-  get action() { return this.keys[' ']; }
+// ==============================================
 
-  get x() {
-    if (this.keys['ArrowLeft']  || this.keys['a'])  return -1;
-    if (this.keys['ArrowRight'] || this.keys['d'])  return 1;
-    return 0;
-  }
+const x = () => {
+  if (keys['ArrowLeft']  || keys['a'])  return -1;
+  if (keys['ArrowRight'] || keys['d'])  return 1;
+  return 0;
+};
+const y = () => {
+  if (this.keys['ArrowUp']   || this.keys['w'])  return -1;
+  if (this.keys['ArrowDown'] || this.keys['s'])  return 1;
+  return 0;
+};
 
-  get y() {
-    if (this.keys['ArrowUp']   || this.keys['w'])  return -1;
-    if (this.keys['ArrowDown'] || this.keys['s'])  return 1;
-    return 0;
-  }
-}
+// ==============================================
 
+const Controls = {
+  x,
+  y
+};
+
+// ==============================================
 
 export default Controls;
