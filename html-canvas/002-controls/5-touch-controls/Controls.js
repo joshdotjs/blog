@@ -12,7 +12,14 @@
 const main = document.querySelector('main');
 main.addEventListener('touchstart', e => {
     // disable touch zooming / scrolling
-    e.preventDefault();
+    e.preventDefault(); // NOTE: this also disables click events via touch
+    
+    // detect multi-touch gestures
+    if (e.targetTouches.length >= 2)
+      console.log('multi-touch');
+
+    // -can implement swipe gestures by evaluating the 
+    //  change in touch coordinates during touch move
 });
 
 // ==============================================
@@ -42,13 +49,16 @@ document.addEventListener("touchmove",  e => {
 
 // ==============================================
 
-document.addEventListener("touchend",   e => {
+const touchEnd = (e) => {
   // console.log('end');
   [...e.changedTouches].forEach((touch) => {
     const div = document.getElementById(touch.identifier);
     if (div) div.remove();
   });
-});
+};
+
+document.addEventListener("touchend", touchEnd);
+document.addEventListener("touchcancel", touchEnd);
 
 // ==============================================
 // ==============================================
