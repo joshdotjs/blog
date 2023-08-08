@@ -9,9 +9,16 @@
 
 // ==============================================
 
-document.addEventListener("touchstart", e => {
-  console.log('start');
+const main = document.querySelector('main');
+main.addEventListener('touchstart', e => {
+    // disable touch zooming / scrolling
+    e.preventDefault();
+});
 
+// ==============================================
+
+document.addEventListener("touchstart", e => {
+  // console.log('start');
   [...e.changedTouches].forEach((touch) => {
     const div = document.createElement('div');
     div.classList.add('touch');
@@ -25,8 +32,7 @@ document.addEventListener("touchstart", e => {
 // ==============================================
 
 document.addEventListener("touchmove",  e => {
-  console.log('move');
-
+  // console.log('move');
   [...e.changedTouches].forEach((touch) => {
     const dot = document.getElementById(touch.identifier);
     dot.style.top = `${touch.pageY}px`;
@@ -37,7 +43,7 @@ document.addEventListener("touchmove",  e => {
 // ==============================================
 
 document.addEventListener("touchend",   e => {
-  console.log('end');
+  // console.log('end');
   [...e.changedTouches].forEach((touch) => {
     const div = document.getElementById(touch.identifier);
     if (div) div.remove();
@@ -50,6 +56,49 @@ document.addEventListener("touchend",   e => {
 // ==============================================
 // ==============================================
 // ==============================================
+
+const touch_controller_up = document.querySelector('#touch-controller-up');
+const touch_controller_down = document.querySelector('#touch-controller-down');
+const touch_controller_left = document.querySelector('#touch-controller-left');
+const touch_controller_right = document.querySelector('#touch-controller-right');
+
+const consoleBorder = () => console.log('%c                  ', 'border-bottom: 1px solid red; width: 300px;');
+
+touch_controller_up.addEventListener('touchstart', e => {
+  console.log('up');
+  console.log('touches: ', e.touches.length);
+  console.log('targets: ', e.targetTouches.length);
+  consoleBorder();
+});
+
+touch_controller_down.addEventListener('touchstart', e => {
+  console.log('down');
+  console.log('touches: ', e.touches.length);
+  console.log('targets: ', e.targetTouches.length);
+  consoleBorder();
+});
+
+touch_controller_left.addEventListener('touchstart', e => {
+  console.log('left');
+  console.log('touches: ', e.touches.length);
+  console.log('targets: ', e.targetTouches.length);
+  consoleBorder();
+});
+
+touch_controller_right.addEventListener('touchstart', e => {
+  console.log('right');
+  console.log('touches: ', e.touches.length);
+  console.log('targets: ', e.targetTouches.length);
+  consoleBorder();
+});
+
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+
 
 class Controls {
   constructor() {
