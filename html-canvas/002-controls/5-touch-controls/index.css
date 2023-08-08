@@ -8,6 +8,7 @@
 
 :root {
   --rad: 7px;
+  --controller-size: 25px;
 }
 
 /* =========================================== */
@@ -25,42 +26,53 @@ main { position:  relative;
   border-radius: var(--rad);
   overflow: hidden;
 
+  background: rgba(0, 0, 0, 0.1);
+  padding: var(--controller-size);
+
   .touch-controller-up,
   .touch-controller-down,
   .touch-controller-left,
   .touch-controller-right { position: absolute;
     display: grid;
     place-items: center;
-    background: rgba(0, 0, 0, 0.1);
   }
+
+
 
   .touch-controller-up {
     top: 0;
     left: 0;
     width: 100%;
+    height: var(--controller-size);
   }
   .touch-controller-down {
     bottom: 0;
     left: 0;
     width: 100%;
+    height: var(--controller-size);
   }
   .touch-controller-left {
     top: 0;
     left: 0;
     height: 100%;
+    width: var(--controller-size);
   }
   .touch-controller-right {
     top: 0;
     right: 0;
     height: 100%;
+    width: var(--controller-size);
   }
 } 
 
 /* =========================================== */
 
-canvas {
+canvas { 
   background: deepskyblue;
   border-radius: var(--rad);
+
+
+  
 }
 
 /* =========================================== */
