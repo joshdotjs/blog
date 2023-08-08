@@ -1,0 +1,25 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+canvas {
+  background: deepskyblue;
+  border-radius: 7px;
+}
+
+.touch {
+  background: darkorchid;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
