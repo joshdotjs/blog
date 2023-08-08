@@ -7,6 +7,8 @@
 // -targetTouches: where you are touching within the element
 // -changedTouches: all of the touches that have changes since the last time the event fired
 
+// ==============================================
+
 document.addEventListener("touchstart", e => {
   console.log('start');
 
@@ -19,19 +21,35 @@ document.addEventListener("touchstart", e => {
     document.body.appendChild(div);
   });
 });
+
+// ==============================================
+
 document.addEventListener("touchmove",  e => {
   console.log('move');
+
+  [...e.changedTouches].forEach((touch) => {
+    const dot = document.getElementById(touch.identifier);
+    dot.style.top = `${touch.pageY}px`;
+    dot.style.left = `${touch.pageX}px`;
+  });
 });
+
+// ==============================================
+
 document.addEventListener("touchend",   e => {
   console.log('end');
-
   [...e.changedTouches].forEach((touch) => {
     const div = document.getElementById(touch.identifier);
     if (div) div.remove();
   });
 });
 
-
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
+// ==============================================
 
 class Controls {
   constructor() {
