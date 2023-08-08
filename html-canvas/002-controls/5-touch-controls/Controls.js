@@ -114,12 +114,43 @@ class Controls {
   constructor() {
     this.keys = {};
 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+
+    // Keyboard Controls:
+
     document.addEventListener("keydown", e => {
       if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) e.preventDefault();
       this.keys[e.key] = true;
     }, false);
 
     document.addEventListener("keyup", e => this.keys[e.key] = false, false);
+
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+
+    // Touch Controls:
+
+    touch_controller_up.addEventListener('touchstart', () => this.keys['ArrowUp'] = true);
+    touch_controller_up.addEventListener('touchend',   () => this.keys['ArrowUp'] = false);
+    
+    touch_controller_down.addEventListener('touchstart', () => this.keys['ArrowDown'] = true);
+    touch_controller_down.addEventListener('touchend',   () => this.keys['ArrowDown'] = false);
+
+    touch_controller_left.addEventListener('touchstart', () => this.keys['ArrowLeft'] = true);
+    touch_controller_left.addEventListener('touchend',   () => this.keys['ArrowLeft'] = false);
+
+    touch_controller_right.addEventListener('touchstart', () => this.keys['ArrowRight'] = true);
+    touch_controller_right.addEventListener('touchend',   () => this.keys['ArrowRight'] = false);
+
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
+    // - - - - - - - - - - - - - - - - - - - - - 
   }
 
   get x() {
