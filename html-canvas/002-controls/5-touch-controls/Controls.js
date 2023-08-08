@@ -5,7 +5,7 @@
 // event object:
 // -touches:       where screen is touched
 // -targetTouches: where you are touching within the element
-// -changeTouches: all of the touches that have changes since the last time the event fired
+// -changedTouches: all of the touches that have changes since the last time the event fired
 
 document.addEventListener("touchstart", e => {
   console.log('start');
@@ -24,6 +24,11 @@ document.addEventListener("touchmove",  e => {
 });
 document.addEventListener("touchend",   e => {
   console.log('end');
+
+  [...e.changedTouches].forEach((touch) => {
+    const div = document.getElementById(touch.identifier);
+    if (div) div.remove();
+  });
 });
 
 
