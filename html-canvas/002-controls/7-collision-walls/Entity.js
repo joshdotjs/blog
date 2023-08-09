@@ -20,27 +20,18 @@ const newEntity = ({
 
     // collision detection [walls]
     console.log('pos.x', pos.x);
-    if (
-      0 <= pos.x // on right side of left wall
-      && pos.x + w < canvas.width // on left side of right wall
-    )  {
 
-      const new_x = pos.x + x * speed;
-      if (new_x < 0) 
-        pos.x = 0; // clamp at left-wall
-      else if (new_x + w >= canvas.width)
-        pos.x = canvas.width - w - 1; // clamp at right-wall
-      else 
-        pos.x = new_x; // move (indide left/right walls)
+    // move X (with wall collision detection)
+    const new_x = pos.x + x * speed;
+    if (new_x < 0)  pos.x = 0; // clamp at left-wall
+    else if (new_x + w >= canvas.width) pos.x = canvas.width - w - 1; // clamp at right-wall
+    else  pos.x = new_x; // move (inside left/right walls)
 
-      const new_y = pos.y + y * speed;
-      if (new_y < 0) 
-        pos.y = 0; // clamp at top-wall
-      else if (new_y + h >= canvas.height)
-        pos.y = canvas.height - h - 1; // clamp at bottom-wall
-      else 
-        pos.y = new_y; // move (indide top/bottom walls)
-    }
+    // move Y (with wall collision detection)
+    const new_y = pos.y + y * speed;
+    if (new_y < 0) pos.y = 0; // clamp at top-wall
+    else if (new_y + h >= canvas.height) pos.y = canvas.height - h - 1; // clamp at bottom-wall
+    else pos.y = new_y; // move (inside top/bottom walls)
   };
   
   const render = () => {
