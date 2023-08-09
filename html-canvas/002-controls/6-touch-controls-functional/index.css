@@ -75,7 +75,7 @@ main { position:  relative;
 /* =========================================== */
 
 canvas { 
-  background: deepskyblue;
+  background: lightgreen;
   border-radius: var(--rad);
 }
 
