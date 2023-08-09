@@ -4,6 +4,9 @@ let keys = {};
 
 // ==============================================
 
+const main = document.querySelector('main');
+main.addEventListener('touchstart', e => e.preventDefault() ); // disable touch zooming / scrolling  
+
 const touch_controller_up = document.querySelector('#touch-controller-up');
 const touch_controller_down = document.querySelector('#touch-controller-down');
 const touch_controller_left = document.querySelector('#touch-controller-left');
