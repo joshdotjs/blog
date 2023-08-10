@@ -1,18 +1,19 @@
 import { canvas, ctx } from "./util.js";
 import controls from "./Controls.js";
 import { newEntity } from './Entity.js';
+import { newHero } from './Hero.js';
 
 // ==========================================
 
-let entity_1;
-let entity_2;
+let hero;
+let enemy;
 
 const reset = () => {
-  entity_1 = newEntity({ 
+  enemy = newEntity({ 
     size: { width: 50, height: 50 },
   })
 
-  entity_2 = newEntity({ 
+  hero = newHero({ 
     color: 'black',
     size: { width: 50, height: 50 },
     position: { x: canvas.width / 2 + 50, y: canvas.height / 2 + 50},
@@ -35,9 +36,9 @@ function animate(t1) {
 
   // Update:
   // entity_1.update(controls.x(), controls.y());
+  // entity_1.update(controls.x, controls.y);
+  hero.update(controls, enemy);
 
-  if (entity_1.x) {
-  entity_1.update(controls.x, controls.y);
-  entity_2.update(0, 0);
+  enemy.update(0, 0);
 }
 animate();
