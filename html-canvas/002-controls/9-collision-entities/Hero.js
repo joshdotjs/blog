@@ -1,6 +1,6 @@
 import { canvas, ctx } from "./util.js";
 
-const newEntity = ({
+const newHero = ({
   size: { width, height }, 
   position,
   color='darkorange', // this.color = color;
@@ -12,6 +12,8 @@ const newEntity = ({
   let pos = { 
     x: position?.x || canvas.width / 2 - w / 2,
     y: position?.y || canvas.height / 2 - h / 2,
+    xr: position?.x + w || canvas.width / 2 - w / 2 + w,
+    yb: position?.x + h || canvas.height / 2 - h / 2 + h,
   };
 
   // velocity
@@ -56,4 +58,4 @@ const newEntity = ({
   });
 }
 
-export { newEntity };
+export { newHero };

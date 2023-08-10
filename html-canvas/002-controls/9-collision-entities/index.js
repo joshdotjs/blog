@@ -35,10 +35,9 @@ function animate(t1) {
 
   // Update:
   // entity_1.update(controls.x(), controls.y());
-  entity_1.update(controls.x, controls.y);
 
-  // Render:
-  // entity_1.render();
-  // entity_2.render();
+  if (entity_1.x) {
+  entity_1.update(controls.x, controls.y);
+  entity_2.update(0, 0);
 }
 animate();

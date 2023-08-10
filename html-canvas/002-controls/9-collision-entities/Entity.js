@@ -13,7 +13,7 @@ const newEntity = ({
     x: position?.x || canvas.width / 2 - w / 2,
     y: position?.y || canvas.height / 2 - h / 2,
     xr: position?.x + w || canvas.width / 2 - w / 2 + w,
-    y1: position?.x + h || canvas.height / 2 - h / 2 + h,
+    yb: position?.x + h || canvas.height / 2 - h / 2 + h,
   };
 
   // velocity
@@ -30,6 +30,7 @@ const newEntity = ({
         && new_xr < canvas.width // right-wall
     ) { 
       pos.x = new_x;
+      pos.xr = new_xr;
     }
 
     // move Y (with wall collision detection)
@@ -41,6 +42,7 @@ const newEntity = ({
         && new_yb < canvas.height // bottom-wall
     ) { 
       pos.y = new_y;
+      pos.yb = new_yb;
     }
 
     render();
@@ -54,7 +56,8 @@ const newEntity = ({
   return ({
     update,
     render,
-    pos,
+    get xl() { return pos.x; },
+    get y() { return pos.y; },
   });
 }
 
