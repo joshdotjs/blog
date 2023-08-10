@@ -9,14 +9,14 @@ let hero;
 let enemy;
 
 const reset = () => {
-  enemy = newEntity({ 
+  hero = newHero({ 
     size: { width: 50, height: 50 },
   })
 
-  hero = newHero({ 
+  enemy = newEntity({ 
     color: 'black',
     size: { width: 50, height: 50 },
-    position: { x: canvas.width / 2 + 50, y: canvas.height / 2 + 50},
+    position: { x: canvas.width / 2 + 35, y: canvas.height / 2 + 35},
   })
 };
 reset();
