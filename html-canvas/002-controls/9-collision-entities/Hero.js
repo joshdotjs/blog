@@ -85,13 +85,10 @@ const newHero = ({
       AXRinBXL(new_xr, enemy.xl) && AXLinBXR(new_xl, enemy.xr) &&
       AYBinBYT(new_yb, enemy.yt) && AYTinBYB(new_yt, enemy.yb)
     ) {
-      console.log('%ccollision', 'color: red');
+      canvas.style.backgroundColor = 'darkorchid';
     }  else {
-      console.log('%cNo collision', 'color: green');
+      canvas.style.backgroundColor = 'lightgreen';
     }
-
-
-
 
     render();
   };
