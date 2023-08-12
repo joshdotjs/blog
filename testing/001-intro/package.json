@@ -1,0 +1,10 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest  --run  --reporter  verbose  --globals"
+  },
+  "author": "Josh Holloway",
+  "devDependencies": {
+    "vitest": "^0.34.1"
+  }
+}

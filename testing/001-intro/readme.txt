@@ -1,0 +1,4 @@
+-Vitest is basically perfectly compatible with Jest.
+-Vitest uses native ES6 modules by default (Jest can use ES6 modules, but the setup is much more complicated)
+-Vitest works easily with TypeScript and JSX (Jest is overly complicated to use this way)
+-Vitest is both a test runner and an assertion library.
