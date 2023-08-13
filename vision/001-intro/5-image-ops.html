@@ -1,0 +1,174 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Operations</title>
+</head>
+<body>
+  <div><a href="../">../</a></div>
+  <h2>Image Operations</h2>
+  <img id="imageSrc" alt="" src="./lena.png" />
+  
+  <button id="run-button">Run</button>
+
+  <div class="inputoutput">
+    <canvas id="canvasOutput" ></canvas>
+    <div class="caption">canvasOutput</div>
+  </div>
+  </div>
+
+  <script src="https://docs.opencv.org/4.8.0/opencv.js" type="text/javascript"></script>
+  
+  <script type="text/javascript">
+
+    console.log('done loading opencv...');
+
+    let imgElement = document.getElementById('imageSrc');
+    let inputElement = document.getElementById('fileInput');
+    
+    const button = document.getElementById('run-button');
+    button.addEventListener('click', () => {
+      let src = cv.imread(imgElement);
+      // cv.imshow('canvasOutput', src);
+
+      // ----------------------------------------
+
+      // 1. Image properties:
+      console.log('image width: ' + src.cols + '\n' +
+        'image height: ' + src.rows + '\n' +
+        'image size: ' + src.size().width + '*' + src.size().height + '\n' +
+        'image depth: ' + src.depth() + '\n' +
+        'image channels ' + src.channels() + '\n' +
+        'image type: ' + src.type() + '\n');
+
+      // ----------------------------------------
+
+      // 2. Construct Mat:
+
+      // - Constructor 1. default constructor
+      let mat1 = new cv.Mat();
+      // - Constructor 2. two-dimensional arrays by size and type
+      const size = new cv.Size(256, 256), type = cv.CV_8UC1;
+      let mat2 = new cv.Mat(size, type);
+      // - Constructor 3. two-dimensional arrays by rows, cols, and type
+      const rows = 256, cols = 256;
+      let mat3 = new cv.Mat(rows, cols, type);
+      // - Constructor 4. two-dimensional arrays by rows, cols, and type with initialization value
+      let mat4 = new cv.Mat(rows, cols, type, new cv.Scalar());
+
+      // - Factor Function 1: Use JS array to construct a mat.
+      //   For example: let mat = cv.matFromArray(2, 2, cv.CV_8UC1, [1, 2, 3, 4]);
+      const array = [1, 2, 3, 4];
+      let mat_f1 = cv.matFromArray(rows, cols, type, array);
+      // - Factor Function 2: Use imgData to construct a mat
+      const canvas = document.querySelector('canvas');
+      let ctx = canvas.getContext("2d");
+      let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      let mat_f2 = cv.matFromImageData(imgData);
+
+      // ----------------------------------------
+
+      // 3. Copy a Mat:
+
+      // Copy Mat 1. Clone
+      let dst = src.clone();
+
+      // Copy Mat 2. CopyTo(only entries indicated in the mask are copied)
+      // src.copyTo(dst, mask);
+
+
+      // ----------------------------------------
+
+      // 4. Convert type of Mat
+
+      // convertTo(m, rtype, alpha = 1, beta = 0)
+
+      // Parameters
+      //  - m:	    output matrix; if it does not have a proper size or type before the operation, it is reallocated.
+      //  - rtype:	desired output matrix type or, rather, the depth since the number of channels are the same as the input has; if rtype is negative, the output matrix will have the same type as the input.
+      //  - alpha:	optional scale factor.
+      //  - beta:	  optional delta added to the scaled values
+
+      const rtype = cv.CV_8UC3;
+
+      src.convertTo(dst, rtype);
+
+
+      // Data Properties	C++ Type	    JavaScript Typed Array	  Mat Type
+      // data	            uchar	        Uint8Array	              CV_8U
+      // data8S	          char	        Int8Array	                CV_8S
+      // data16U	        ushort	      Uint16Array	              CV_16U
+      // data16S	        short	        Int16Array	              CV_16S
+      // data32S	        int	          Int32Array	              CV_32S
+      // data32F	        float	        Float32Array	            CV_32F
+      // data64F	        double	      Float64Array	            CV_64F
+
+      // ----------------------------------------
+
+      // 5. Using a MatVector
+
+      let mat = new cv.Mat();
+      // Initialise a MatVector
+      let matVec = new cv.MatVector();
+      // Push a Mat back into MatVector
+      matVec.push_back(mat);
+      // Get a Mat fom MatVector
+      let cnt = matVec.get(0);
+      mat.delete(); 
+      matVec.delete(); 
+      cnt.delete();
+
+      // ----------------------------------------
+
+      // 6. Accessing and modifying pixel values
+
+      // - 6.1: Data
+      let row = 3, col = 4;
+      if (src.isContinuous()) { // Data manipulation is only valid for continuous Mat. You should use isContinuous() to check first.
+        let R = src.data[row * src.cols * src.channels() + col * src.channels() + 0];
+        let G = src.data[row * src.cols * src.channels() + col * src.channels() + 1];
+        let B = src.data[row * src.cols * src.channels() + col * src.channels() + 2];
+        let A = src.data[row * src.cols * src.channels() + col * src.channels() + 3];
+
+        console.log('R: ', R, 'G: ', G, 'B: ', B, 'A: ', A);
+      }
+
+      // - 6.2: .at() -- At manipulation is only for single channel access and the value can't be modified.
+      (() => {
+        let R = src.ucharAt(row, col * src.channels());
+        let G = src.ucharAt(row, col * src.channels() + 1);
+        let B = src.ucharAt(row, col * src.channels() + 2);
+        let A = src.ucharAt(row, col * src.channels() + 3);
+        console.log('R: ', R, 'G: ', G, 'B: ', B, 'A: ', A);
+      })()
+
+      // - 6.3: .ptr()
+      //  -- mat.ucharPtr(k) gets the k-th row of the mat.
+      //  -- mat.ucharPtr(i, j) get the i th row and the j th column of the mat.
+      let pixel = src.ucharPtr(row, col);
+      let R = pixel[0];
+      let G = pixel[1];
+      let B = pixel[2];
+      let A = pixel[3];
+      console.log('R: ', R, 'G: ', G, 'B: ', B, 'A: ', A);
+
+      // ----------------------------------------
+
+      let dst_crop = new cv.Mat();
+      // You can try more different parameters
+      // let rect = new cv.Rect(0, 0, 200, 200);
+      let rect = {x: 64, y: 64, width: 128, height: 128};
+      dst_crop = src.roi(rect);
+      cv.imshow('canvasOutput', dst_crop);
+      // dst_crop.delete();
+
+      // ----------------------------------------
+
+      src.delete();
+    });
+
+    
+
+  </script>
+</body>
+</html>
