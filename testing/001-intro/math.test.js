@@ -9,9 +9,6 @@ it('should pass', () => {
   const expected = 1 + 2;
 
   expect(result).toBe(expected);
-
-
-  
 });
 
 // ==============================================
