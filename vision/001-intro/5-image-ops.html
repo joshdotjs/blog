@@ -160,7 +160,25 @@
       let rect = {x: 64, y: 64, width: 128, height: 128};
       dst_crop = src.roi(rect);
       cv.imshow('canvasOutput', dst_crop);
-      // dst_crop.delete();
+      dst_crop.delete();
+
+      // ----------------------------------------
+
+      // 7. Splitting and Merging Channels
+
+      let rgbaPlanes = new cv.MatVector();
+
+      // - 7.1: Split the Mat
+      cv.split(src, rgbaPlanes);
+
+      // - 7.2: Get R channel
+      let red = rgbaPlanes.get(0);
+
+      // - 7.3: Merge all channels
+      cv.merge(rgbaPlanes, src);
+      
+      rgbaPlanes.delete(); 
+      red.delete();
 
       // ----------------------------------------
 
