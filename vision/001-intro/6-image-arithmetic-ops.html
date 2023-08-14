@@ -7,9 +7,10 @@
 <body>
   <div><a href="../">../</a></div>
   <h2>Image Operations</h2>
-  <img id="imageSrc" alt="" src="./lena.png" />
+  <img id="imageSrc"  alt="" src="./lena.png" />
   <img id="imageSrc1" alt="" src="./fruit-1.png" />
   <img id="imageSrc2" alt="" src="./fruit-2.png" />
+  <img id="logoSrc"   alt="" src="./logo.png" />
   
   <button id="run-button">Run</button>
 
@@ -29,7 +30,7 @@
     let imgElement   = document.getElementById('imageSrc');
     let imgElement1  = document.getElementById('imageSrc1');
     let imgElement2  = document.getElementById('imageSrc2');
-    let inputElement = document.getElementById('fileInput');
+    let logoElement  = document.getElementById('logoSrc');
     
     const button = document.getElementById('run-button');
     button.addEventListener('click', () => {
@@ -43,26 +44,71 @@
       // 1. Image Addition
 
       let dst1 = new cv.Mat();
-      let mask = new cv.Mat();
+      let mask1 = new cv.Mat();
       let dtype = -1;
-      cv.add(src1, src2, dst1, mask, dtype);
+      cv.add(src1, src2, dst1, mask1, dtype);
       cv.imshow('canvasOutput1', dst1);
-      mask.delete();
-
+      
       // ----------------------------------------
 
       // 2. Image Subtraction
 
+      let dst2 = new cv.Mat();
+      let mask2 = new cv.Mat();
+      cv.subtract(src1, src2, dst2, mask2, dtype);
+      cv.imshow('canvasOutput2', dst2);
+
       // ----------------------------------------
 
       // 3. Bitwise Operations
+
+      let logo = cv.imread(logoElement);
+      let dst3 = new cv.Mat();
+      let roi = new cv.Mat();
+      let mask = new cv.Mat();
+      let maskInv = new cv.Mat();
+      let imgBg = new cv.Mat();
+      let imgFg = new cv.Mat();
+      let sum = new cv.Mat();
+      let rect = new cv.Rect(0, 0, logo.cols, logo.rows);
+
+      // I want to put logo on top-left corner, So I create a ROI
+      roi = src.roi(rect);
+
+      // Create a mask of logo and create its inverse mask also
+      cv.cvtColor(logo, mask, cv.COLOR_RGBA2GRAY, 0);
+      cv.threshold(mask, mask, 100, 255, cv.THRESH_BINARY);
+      cv.bitwise_not(mask, maskInv);
+
+      // Black-out the area of logo in ROI
+      cv.bitwise_and(roi, roi, imgBg, maskInv);
+
+      // Take only region of logo from logo image
+      cv.bitwise_and(logo, logo, imgFg, mask);
+
+      // Put logo in ROI and modify the main image
+      cv.add(imgBg, imgFg, sum);
+
+      dst3 = src.clone();
+      for (let i = 0; i < logo.rows; i++) {
+        for (let j = 0; j < logo.cols; j++) {
+          dst3.ucharPtr(i, j)[0] = sum.ucharPtr(i, j)[0];
+        }
+      }
+      cv.imshow('canvasOutput3', dst3);
+      // maskInv.delete(); imgBg.delete(); imgFg.delete(); sum.delete();
 
       // ----------------------------------------
 
       src.delete();
       src1.delete(); 
       src2.delete(); 
-      dst.delete();
+      dst1.delete();
+      dst2.delete();
+      dst3.delete();
+      mask1.delete();
+      mask2.delete();
+      mask.delete(); logo.delete(); roi.delete();
     });
 
     

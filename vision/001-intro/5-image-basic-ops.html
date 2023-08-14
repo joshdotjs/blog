@@ -24,7 +24,6 @@
     console.log('done loading opencv...');
 
     let imgElement = document.getElementById('imageSrc');
-    let inputElement = document.getElementById('fileInput');
     
     const button = document.getElementById('run-button');
     button.addEventListener('click', () => {
@@ -200,7 +199,6 @@
       let s = new cv.Scalar(255, 0, 0, 255);
       cv.copyMakeBorder(src, dst, 10, 10, 10, 10, cv.BORDER_CONSTANT, s);
       cv.imshow('canvasOutput', dst);
-      src.delete();
       dst.delete();
 
       // ----------------------------------------
