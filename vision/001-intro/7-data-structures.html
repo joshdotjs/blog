@@ -7,12 +7,6 @@
 <body>
   <div><a href="../">../</a></div>
   <h2>Image Operations</h2>
-  <img id="imageSrc"  alt="" src="./lena.png" />
-  <img id="imageSrc1" alt="" src="./fruit-1.png" />
-  <img id="imageSrc2" alt="" src="./fruit-2.png" />
-  <img id="logoSrc"   alt="" src="./logo.png" />
-  
-  <button id="run-button">Run</button>
 
   <div>
     <canvas id="canvasOutput1" ></canvas>
@@ -26,17 +20,113 @@
 
     console.log('done loading opencv...');
     
-    const button = document.getElementById('run-button');
-    button.addEventListener('click', () => {
+    // ----------------------------------------
 
-      // ----------------------------------------
+    // 1. Point
 
+    const x = 1;
+    const y = 2;
 
-      // ----------------------------------------
+    // The first way
+    let point1 = new cv.Point(x, y);
+    console.log('point1: ', point1);
 
-    });
+    // The second way
+    let point2 = {x, y};
+    console.log('point2: ', point2);
 
+    // ----------------------------------------
+
+    // 2. Scalar
+
+    const R = 64;
+    const G = 128;
+    const B = 192;
+    const Alpha = 255;
+
+    // The first way
+    let scalar1 = new cv.Scalar(R, G, B, Alpha);
+    console.log('scalar1: ', scalar1);
+
+    // The second way
+    let scalar2 = [R, G, B, Alpha];
+    console.log('scalar2: ', scalar2);
+
+    // ----------------------------------------
+
+    // 3. Size
+
+    const height = 100;
+    const width = 100;
+
+    // The first way
+    let size1 = new cv.Size(width, height);
+    console.log('size1: ', size1);
     
+    // The second way
+    let size2 = {width, height};
+    console.log('size2: ', size2);
+
+    // ----------------------------------------
+
+    // 4. Circle
+
+    const center = 100;
+    const radius = 10;
+
+    // The first way
+    let circle1 = new cv.Circle(center, radius);
+    console.log('circle1: ', circle1);
+
+    // The second way
+    let circle2 = {center : center, radius : radius};
+    console.log('circle2: ', circle2);
+
+    // ----------------------------------------
+
+    // 5. Rect
+
+    // The first way
+    let rect1 = new cv.Rect(x, y, width, height);
+    console.log('rect1: ', rect1);
+
+    // The second way
+    let rect2 = { x, y, width, height};
+    console.log('rect2: ', rect2);
+
+    // ----------------------------------------
+
+    // 6. RotatedRect
+
+    const size = 400;
+    const angle = 45;
+    // angle is	the rotation angle in a clockwise direction. 
+    //  - When the angle is 0, 90, 180, 270 etc., the rectangle becomes an up-right rectangle.
+
+    // The first way
+    let rotatedRect1 = new cv.RotatedRect(center, size, angle);
+    console.log('rotatedRect1: ', rotatedRect1);
+
+    // The second way
+    let rotatedRect2 = { center, size, angle };
+    console.log('rotatedRect2: ', rotatedRect2);
+
+    // cv.RotatedRect.points(rotatedRect)
+    // - Get the vertices from rotatedRect:
+    //  - rotatedRect:	rotated rectangle
+
+    // let vertices = cv.RotatedRect.points(rotatedRect1);
+    // let Point1 = vertices[0];
+    // let Point2 = vertices[1];
+    // let Point3 = vertices[2];
+    // let Point4 = vertices[3];
+    // console.log('vertices: ', vertices);
+    // console.log('Point1: ', Point1);
+    // console.log('Point2: ', Point2);
+    // console.log('Point3: ', Point3);
+    // console.log('Point4: ', Point4);
+
+    // ----------------------------------------
 
   </script>
 </body>
