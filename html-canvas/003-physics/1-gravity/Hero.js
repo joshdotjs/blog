@@ -70,7 +70,7 @@ const newHero = ({
   
     pos.y = new_yt;
     // vel.y = controls.y;
-    vel.y += 0.5;
+    vel.y += 0.65;
 
     // Check for collision with canvas bottom
     if (pos.y + h > canvas.height) {
