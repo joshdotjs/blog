@@ -73,6 +73,13 @@ export default function newHero({
   let jumps = 0;
 
   // ============================================
+
+  // physics constants
+  const GRAVITY = 0.5;
+  const JUMP = 10;
+  const MAX_JUMPS = 2;
+
+  // ============================================
   // ============================================
   // ============================================
   // ============================================
@@ -102,8 +109,6 @@ export default function newHero({
   // ============================================
   // ============================================
   // ============================================
-
-  const GRAVITY = 0.5;
 
   // const update = (x, y) => {
   const update = (enemy) => {
@@ -154,31 +159,34 @@ export default function newHero({
     if (['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown', ' '].indexOf(e.key) >= 0) e.preventDefault();
     keys[e.key] = true;
 
-    if (e.key === 'ArrowUp' && jumps < 2) {
-      vel.y = -10;
+    if (e.key === 'ArrowUp' && jumps < MAX_JUMPS) {
+      vel.y = -JUMP;
       jumps++;
     }
   }, false);
 
-  document.addEventListener("keyup", ({ key }) => {
-    keys[key] = false;
-  }, false);
+  document.addEventListener("keyup", ({ key }) => keys[key] = false, false);
 
   // ==============================================
 
   // Touch Controls:
-
-  touch_controller_up.addEventListener('touchstart',    () => keys['ArrowUp']    = true);
-  touch_controller_up.addEventListener('touchend',      () => keys['ArrowUp']    = false);
-
-  touch_controller_down.addEventListener('touchstart',  () => keys['ArrowDown']  = true);
-  touch_controller_down.addEventListener('touchend',    () => keys['ArrowDown']  = false);
-
-  touch_controller_left.addEventListener('touchstart',  () => keys['ArrowLeft']  = true);
-  touch_controller_left.addEventListener('touchend',    () => keys['ArrowLeft']  = false);
-
-  touch_controller_right.addEventListener('touchstart', () => keys['ArrowRight'] = true);
-  touch_controller_right.addEventListener('touchend',   () => keys['ArrowRight'] = false);
+  
+  touch_controller_down.addEventListener('touchstart',  ()  =>    keys['ArrowDown']  = true);
+  touch_controller_down.addEventListener('touchend',    ()  =>    keys['ArrowDown']  = false);
+  
+  touch_controller_left.addEventListener('touchstart',  ()  =>    keys['ArrowLeft']  = true);
+  touch_controller_left.addEventListener('touchend',    ()  =>    keys['ArrowLeft']  = false);
+  
+  touch_controller_right.addEventListener('touchstart', ()  =>    keys['ArrowRight'] = true);
+  touch_controller_right.addEventListener('touchend',   ()  =>    keys['ArrowRight'] = false);
+  
+  touch_controller_up.addEventListener('touchend',      ()  =>    keys['ArrowUp']    = false);
+  touch_controller_up.addEventListener('touchstart',    ()  =>  { keys['ArrowUp']    = true;
+    if (jumps < MAX_JUMPS) {
+      vel.y = -JUMP;
+      jumps++;
+    }
+  });
 
   // ============================================
 
