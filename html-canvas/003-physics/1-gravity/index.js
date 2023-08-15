@@ -1,5 +1,5 @@
 import { canvas, ctx } from "./util.js";
-import controls from "./Controls.js";
+// import controls from "./Controls.js";
 import { newEntity } from './Entity.js';
 import { newHero } from './Hero.js';
 
@@ -12,13 +12,13 @@ const reset = () => {
   hero = newHero({ 
     size: { width: 50, height: 50 },
     position: { x: 5, y: 1}
-  })
+  });
 
   enemy = newEntity({ 
     color: 'black',
     size: { width: 50, height: 50 },
     position: { x: canvas.width / 2 + 35, y: canvas.height / 2 + 35},
-  })
+  });
 };
 reset();
 
@@ -38,7 +38,8 @@ function animate(t1) {
   // Update:
   // entity_1.update(controls.x(), controls.y());
   // entity_1.update(controls.x, controls.y);
-  hero.update(controls, enemy);
+  // hero.update(controls, enemy);
+  hero.update(enemy);
 
   enemy.update(0, 0);
 }
