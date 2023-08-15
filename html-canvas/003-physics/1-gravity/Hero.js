@@ -56,6 +56,8 @@ const newHero = ({
   // ============================================
   // ============================================
 
+  const GRAVITY = 0.5;
+
   // const update = (x, y) => {
   const update = (controls, enemy) => {
 
@@ -68,14 +70,14 @@ const newHero = ({
     pos.x = new_xl;
     vel.x = controls.x;
   
-    pos.y = new_yt;
-    // vel.y = controls.y;
-    vel.y += 0.65;
-
+    
     // Check for collision with canvas bottom
-    if (pos.y + h > canvas.height) {
+    if (new_yb >= canvas.height) {
       pos.y = canvas.height - h;
       vel.y = 0;
+    } else {
+      pos.y = new_yt;
+      vel.y += GRAVITY;
     }
 
     render();

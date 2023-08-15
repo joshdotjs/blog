@@ -48,7 +48,7 @@ const speed = 3;
 //   if (keys['ArrowRight'] || keys['d'])  return 1 * speed;
 //   return 0;
 // };
-// const y = () => {
+// const y = (hero) => {
 //   if (keys['ArrowUp']   || keys['w'])  return -1 * speed;
 //   if (keys['ArrowDown'] || keys['s'])  return 1 * speed;
 //   return 0;
@@ -66,7 +66,7 @@ const controls = {
     if (keys['ArrowUp']   || keys['w'])  return -1 * speed;
     if (keys['ArrowDown'] || keys['s'])  return 1 * speed;
     return 0;
-  } 
+  }
 };
 
 // ==============================================
