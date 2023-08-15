@@ -1,7 +1,8 @@
 import { canvas, ctx } from "./util.js";
 // import controls from "./Controls.js";
 import { newEntity } from './Entity.js';
-import { newHero } from './Hero.js';
+// import { newHero } from './Hero.js';
+import newHero from './Hero.js';
 
 // ==========================================
 
