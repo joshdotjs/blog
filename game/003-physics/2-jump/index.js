@@ -25,8 +25,9 @@ reset();
 
 // ==========================================
 
-// const reset_button = document.querySelector('#reset-button');
-// reset_button.addEventListener('click', () => reset());
+const reset_button = document.querySelector('#reset-button');
+reset_button.addEventListener('click', () => reset());
+reset_button.addEventListener('touchstart', () => reset());
 
 // ==========================================
 
