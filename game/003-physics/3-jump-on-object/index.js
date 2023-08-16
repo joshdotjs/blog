@@ -16,7 +16,7 @@ const reset = () => {
   enemy = newEntity({ 
     color: 'black',
     size: { width: 50, height: 50 },
-    position: { x: canvas.width / 2 + 35, y: canvas.height / 2 + 35},
+    position: { x: canvas.width / 2, y: canvas.height / 2 + 35},
   });
 };
 reset();
