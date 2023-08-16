@@ -1,5 +1,3 @@
-const add = (a, b) => a + b;
-
 // Tree Data Structure: 
 //  - https://en.wikipedia.org/wiki/Tree_(data_structure)
 
@@ -65,4 +63,4 @@ node__A['children'].push(node__B3);
 // ==============================================
 // ==============================================
 
-export { add, node_A, node__A };
+export { node_A, node__A };
