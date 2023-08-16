@@ -119,9 +119,16 @@ export default function newHero({
     const new_yt = pos.y + vel.y; // top of entity
     const new_yb = new_yt + h;    // bottom of entity
 
+    // - - - - - - - - - - - - -
+    // - - - Update X: - - - - -
+    // - - - - - - - - - - - - -
+
     pos.x = new_xl;
     vel.x = controls.x;
-  
+
+    // - - - - - - - - - - - - -
+    // - - - Update Y: - - - - -
+    // - - - - - - - - - - - - -
     
     // Collision Detection: inside other entity
     if (
@@ -153,6 +160,10 @@ export default function newHero({
       vel.y = 0;
       jumps = 0;
     }
+
+    // - - - - - - - - - - - - -
+    // - -  End Update Y - - - -
+    // - - - - - - - - - - - - -
 
     render();
   };
