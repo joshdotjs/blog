@@ -1,0 +1,48 @@
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================== */
+
+:root {
+  --rad: 7px;
+  --point-size: 50px;
+}
+
+/* =========================================== */
+
+body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+/* =========================================== */
+
+main { position:  relative;
+  border: solid black 2px;
+  border-radius: var(--rad);
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.1);
+} 
+
+/* =========================================== */
+
+canvas { 
+  background: lightgreen;
+  border-radius: var(--rad);
+}
+
+/* =========================================== */
+
+.point { position: absolute;
+  
+  height: var(--point-size);
+  width: var(--point-size);
+  background: red;
+}
+
+/* =========================================== */
