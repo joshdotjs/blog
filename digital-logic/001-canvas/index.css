@@ -8,7 +8,8 @@
 
 :root {
   --rad: 7px;
-  --point-size: 50px;
+  --point-size: 20px;
+  --element-width: 50px;
 }
 
 /* =========================================== */
@@ -21,19 +22,24 @@ body {
 
 /* =========================================== */
 
-main { position:  relative;
+main {
   border: solid black 2px;
   border-radius: var(--rad);
   overflow: hidden;
 
   background: rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  grid-template-columns: 50px 1fr;
 } 
 
 /* =========================================== */
 
-canvas { 
-  background: lightgreen;
-  border-radius: var(--rad);
+section#canvas { position:  relative;
+  canvas { 
+    background: lightgreen;
+    border-radius: var(--rad);
+  }
 }
 
 /* =========================================== */
@@ -46,3 +52,34 @@ canvas {
 }
 
 /* =========================================== */
+
+
+/* =========================================== */
+
+section#elements-picker {
+  outline: solid black 1px;
+
+  #element-and {
+    height: var(--element-width);
+    width: var(--element-width);
+    background: deepskyblue;
+    background-image: url('./AND.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    cursor: pointer;
+  }
+
+  #element-not {
+    height: var(--element-width);
+    width: var(--element-width);
+    background: lightgreen;
+    background-image: url('./NOT.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    cursor: pointer;
+  }
+}
