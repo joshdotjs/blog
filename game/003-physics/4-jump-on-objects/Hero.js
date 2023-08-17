@@ -111,7 +111,7 @@ export default function newHero({
   // ============================================
 
   // const update = (x, y) => {
-  const update = (enemies) => {
+  const update = (platforms) => {
 
     const new_xl = pos.x + vel.x; // left of entity
     const new_xr = new_xl + w;    // right of entity
@@ -141,11 +141,11 @@ export default function newHero({
     }
 
     // Collision Detection: land on top of other entity
-    enemies.forEach((enemy) => {
+    platforms.forEach((platform) => {
       if (
-        new_yb <= enemy.yt && // above enemy
-        new_yb + vel.y >= enemy.yt && // hero is moving downwards while above enemy (landed on top of enemy)
-        AXRinBXL(new_xr, enemy.xl) && AXLinBXR(new_xl, enemy.xr) // hero is within enemy's x bounds
+        new_yb <= platform.yt && // above platform
+        new_yb + vel.y >= platform.yt && // hero is moving downwards while above platform (landed on top of platform)
+        AXRinBXL(new_xr, platform.xl) && AXLinBXR(new_xl, platform.xr) // hero is within enemy's x bounds
       ) {
         vel.y = 0;
         jumps = 0;
