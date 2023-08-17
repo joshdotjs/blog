@@ -61,6 +61,11 @@ const setupElementPicker = () => {
     
     const element_type = dom_element.dataset.type;
 
+
+    // TODO: -When the user clicks the element change the mouse
+    //        to be the image.
+    //       -Click inside the canvas drops it.
+    //       -Click outside or press ESC drops it.
     dom_element.addEventListener('click', () => {
       if (element_type === 'and') {
         selected_element.type = 'and';
