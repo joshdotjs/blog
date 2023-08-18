@@ -10,10 +10,10 @@ const newEntity = ({
 
   // position
   let pos = { 
-    x: position?.x || canvas.width / 2 - w / 2,
-    y: position?.y || canvas.height / 2 - h / 2,
-    xr: position?.x + w || canvas.width / 2 - w / 2 + w,
-    y1: position?.x + h || canvas.height / 2 - h / 2 + h,
+    x: position?.x ?? canvas.width / 2 - w / 2,
+    y: position?.y ?? canvas.height / 2 - h / 2,
+    xr: position?.x + w ?? canvas.width / 2 - w / 2 + w,
+    y1: position?.x + h ?? canvas.height / 2 - h / 2 + h,
   };
 
   // velocity

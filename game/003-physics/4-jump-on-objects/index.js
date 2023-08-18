@@ -10,7 +10,7 @@ let entities = [];
 const reset = () => {
   hero = newHero({ 
     size: { width: 50, height: 50 },
-    position: { x: 5, y: 1}
+    position: { x: 0, y: 1}
   });
 
   entities = [];

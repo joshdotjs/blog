@@ -55,9 +55,9 @@ export default function newHero({
   // ============================================
 
   // position
-  let pos = { // TODO: This logic is wrong if initialized to  (0, 0)
-    x: position?.x || canvas.width / 2 - w / 2,
-    y: position?.y || canvas.height / 2 - h / 2,
+  let pos = {
+    x: position?.x ?? canvas.width / 2 - w / 2,
+    y: position?.y ?? canvas.height / 2 - h / 2,
     // xr: position?.x + w || canvas.width / 2 - w / 2 + w,
     // yb: position?.x + h || canvas.height / 2 - h / 2 + h,
   };
