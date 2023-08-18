@@ -84,26 +84,10 @@ export default function newHero({
   // ============================================
   // ============================================
 
-  const AXRinBXL = (A_xr, B_xl) => {
-    if (A_xr >= B_xl) return true;
-  };
- 
-  const AXLinBXR = (A_xl, B_xr) => {
-    if (A_xl <= B_xr) return true;
-    else return false;
-  }
-
-  // ============================================
-
-  const AYBinBYT = (A_yb, B_yt) => {
-    if (A_yb >= B_yt) return true;
-    else return false;
-  }
-
-  const AYTinBYB = (A_yt, B_yb) => {
-    if (A_yt <= B_yb) return true;
-    else return false;
-  }
+  const AXRinBXL = (A_xr, B_xl) => A_xr >= B_xl ? true : false;
+  const AXLinBXR = (A_xl, B_xr) => A_xl <= B_xr ? true : false;
+  const AYBinBYT = (A_yb, B_yt) => A_yb >= B_yt ? true : false;
+  const AYTinBYB = (A_yt, B_yb) => A_yt <= B_yb ? true : false;
 
   // ============================================
   // ============================================
