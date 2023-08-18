@@ -1,43 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sine Wave Plot</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-</head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sine Wave Plot</title>
+  </head>
 <body>
-    <div id="plot"></div>
-    <script>
-      // Define your data
-      let x = [];
-      let y = [];
-      for (let i = 0; i < 2 * Math.PI; i += 0.1) {
-        x.push(i);
-        y.push(Math.sin(i));
+  <div id="plot"></div>
+
+  <p style="text-align: center;">Graph of \( \sin{(x)} \).</p>
+
+  <!-- <p>$$ \sin{(x)} $$</p> -->
+
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    // Define your data
+    let x = [];
+    let y = [];
+    for (let i = 0; i < 2 * Math.PI; i += 0.1) {
+      x.push(i);
+      y.push(Math.sin(i));
+    }
+
+    // Define the plot layout
+    const layout = {
+      title: 'Sine Wave',
+      xaxis: {
+        title: 'x'
+      },
+      yaxis: {
+        title: 'sin(x)'
       }
+    };
 
-      // Define the plot layout
-      const layout = {
-        title: 'Sine Wave',
-        xaxis: {
-          title: 'x'
-        },
-        yaxis: {
-          title: 'sin(x)'
-        }
-      };
+    // Define the plot data
+    const data = [{
+      x: x,
+      y: y,
+      type: 'scatter'
+    }];
 
-      // Define the plot data
-      const data = [{
-        x: x,
-        y: y,
-        type: 'scatter'
-      }];
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    // ====== Plot an point on the graph ========
+    // ==========================================
+    // ==========================================
+    // ==========================================
 
-      // Plot the graph
-      Plotly.newPlot('plot', data, layout);
-    </script>
+    // Assume you want to highlight the point at index 'pointIndex'
+    var pointIndex = 16;
+
+    // Create a new trace with just the point you want to highlight
+    var highlightTrace = {
+      x: [data[0].x[pointIndex]],
+      y: [data[0].y[pointIndex]],
+      mode: 'markers',
+      marker: {
+        color: 'red', // Highlight color
+        size: 10      // Highlight size
+      }
+    };
+
+    // Add the new trace to the data
+    data.push(highlightTrace);
+
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    // ==========================================
+    
+    // Plot the graph
+    Plotly.newPlot('plot', data, layout);
+  </script>
 </body>
 </html>
