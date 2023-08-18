@@ -1,0 +1,46 @@
+*, ::before, ::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+$pad: 1rem;
+$gap: 1rem;
+
+body {
+  background: deepskyblue;
+  padding: $pad;
+  display: grid;
+  place-items: center;
+}
+
+main {
+
+  #question {
+    padding: $pad;
+    background: white;
+  }
+  
+  #options {
+   
+    display: grid;
+    padding: $pad;
+    gap: $gap;
+    @media (max-width: 600px) {
+      grid-template-rows: repeat(4, 1fr);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 600px) {
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .option {
+    padding: $pad;
+    --width: 100%;
+    // height: var(--width);
+    width: var(--width);
+    background: darkorange;
+  }
+  background: lightgreen;
+}
