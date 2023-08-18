@@ -1,0 +1,115 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <style id="style"></style>
+    <title>HTML Canvas</title>
+</head>
+<body>
+    <a href="/">Home</a> <br>
+    <a href="../">../</a>
+    <h1>HTML Canvas</h1>
+
+    <canvas></canvas>
+    
+<section class="active">
+    <h2>Draw a square</h2>
+    <div class="editor-container">
+        <div class="editor">const elem = document.querySelector('canvas'),
+    elemLeft = elem.offsetLeft,
+    elemTop = elem.offsetTop,
+    context = elem.getContext('2d'),
+    elements = [];
+
+// Add event listener for `click` events.
+elem.addEventListener('click', function(event) {
+    const x = event.pageX - elemLeft,
+        y = event.pageY - elemTop;
+    console.log(x, y);
+    elements.forEach(function(element) {
+        if (y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+            alert('clicked an element');
+        }
+    });
+
+}, false);
+
+// Add element.
+elements.push({
+    colour: '#05EFFF',
+    width: 150,
+    height: 100,
+    top: 20,
+    left: 15
+});
+
+// Render elements.
+elements.forEach(function(element) {
+    context.fillStyle = element.colour;
+    context.fillRect(element.left, element.top, element.width, element.height);
+});
+        </div>
+        <button>Run</button>
+    </div>
+</section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+
+    <!-- Change CSS programatically -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const buttons = document.querySelectorAll('button');
+        const editors = document.querySelectorAll(".editor");
+
+        // Run the first piece of code on page load:
+        const code = ace.edit(editors[0]).getValue();
+        try {
+            new Function(code)();
+        } catch (err) {
+            console.error(err);
+        }
+
+        // Run a single code section upon button click in each section
+        editors.forEach(function(editorElem, idx) {
+            const editor = ace.edit(editorElem);
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/javascript");
+
+            buttons[idx].addEventListener('click', () => {
+                const code = editor.getValue();
+
+                // Run the code
+                try {
+                    new Function(code)();
+                } catch (err) {
+                    console.error(err);
+                }
+
+                for (let i = 0; i < sections.length; ++i) {
+                    if (i == idx) {
+                        console.log('ADD: i: ', i);
+                        sections[i].classList.add('active');
+                    } else {
+                        console.log('REMOVE: i: ', i);
+                        sections[i].classList.remove('active');
+                    }
+                }
+
+            });
+
+        });
+
+        
+
+    </script>
+
+    <section>
+        <strong>References</strong>
+        <ul>
+            <li>JavaScript: The Definitive Guide [7e] by David Flanigan</li>
+            <li><a href="http://www.html5canvastutorials.com/">HTML5 Canvas Tutorials</a></li>
+            <li><a href="https://stackoverflow.com/a/9880302">How do I add a simple onClick event handler to a canvas element?</a></li>
+        </ul>
+    </section>
+</body>
+</html>

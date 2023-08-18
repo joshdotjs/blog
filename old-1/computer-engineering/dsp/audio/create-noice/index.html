@@ -1,0 +1,35 @@
+<html>
+<body>
+    <script>
+
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let audio;
+
+        fetch('./sounds/bass_sample.mp3')
+            .then(data => data.arrayBuffer())
+            .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+            .then(decodedAudio => audio = decodedAudio);
+
+        function playback() {
+            const playSound = ctx.createBufferSource();
+            playSound.buffer = audio;
+            playSound.connect(ctx.destination);
+            playSound.start(ctx.currentTime);
+        }
+
+        window.addEventListener('mousedown', playback);
+
+    </script>
+
+
+    <script>
+        async function josh() {
+            const audioContext = new AudioContext()
+            await audioContext.audioWorklet.addModule('white-noise-processor.js')
+            const whiteNoiseNode = new AudioWorkletNode(audioContext, 'white-noise-processor')
+            whiteNoiseNode.connect(audioContext.destination)
+        }
+        josh();
+    </script>
+</body>
+</html>

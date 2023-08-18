@@ -1,0 +1,42 @@
+* { box-sizing: border-box; }
+body {
+    padding: 1%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.parent {
+    width: 50%;
+    background: skyblue;
+    padding: 1%;
+}
+.child {
+    height: 100px;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+.child-1 {
+    background: deeppink;
+    opacity: 0.9;
+}
+.child-2 {
+    background: darkorchid;
+}
+.child-3 {
+    background: lime;
+}
+.active {
+    /* x-offset, y-offset, blur-size, spread-size */
+    box-shadow: 0 0 5px 5px turquoise;
+}
+.editor-container {
+    border: solid 1px black;
+    padding: 0.5%;
+}
+.editor {
+    height: 100px;
+}

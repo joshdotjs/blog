@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <h5>Circle</h5>
+    <canvas id="circle" width="578" height="200"></canvas>
+    <script>
+      var canvas = document.getElementById('circle');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 70;
+
+      context.beginPath();
+      context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = 'green';
+      context.fill();
+      context.lineWidth = 5;
+      context.strokeStyle = '#003300';
+      context.stroke();
+    </script>
+    <!-- https://www.html5canvastutorials.com/tutorials/html5-canvas-circles/ -->
+
+    <h5>Semi-Circle</h5>
+    <canvas id="semi_circle" width="578" height="200"></canvas>
+    <script>
+      const canvas_semiCircle = document.getElementById('semi_circle');
+      const ctx_semiCircle = canvas_semiCircle.getContext('2d');
+
+      // translate context to center of canvas
+      // ctx_semiCircle.translate(canvas_semiCircle.width / 2, canvas_semiCircle.height / 2);
+      // ctx_semiCircle.rotate(Math.PI / 4);
+
+      ctx_semiCircle.beginPath();
+      ctx_semiCircle.arc(288, 75, 70, 0, Math.PI, false);
+      ctx_semiCircle.closePath();
+      ctx_semiCircle.lineWidth = 5;
+      ctx_semiCircle.fillStyle = 'red';
+      ctx_semiCircle.fill();
+      ctx_semiCircle.strokeStyle = '#550000';
+      ctx_semiCircle.stroke();
+
+      
+    </script>
+    <!-- https://www.html5canvastutorials.com/tutorials/html5-canvas-semicircles/ -->
+
+
+    <h5>Rotate</h5>
+    <canvas id="rectangle" width="578" height="200"></canvas>
+    <script>
+      const canvas_rect = document.getElementById('rectangle');
+      const ctx_rect = canvas_rect.getContext('2d');
+      const rectWidth = 150;
+      const rectHeight = 75;
+
+      // translate context to center of canvas
+      ctx_rect.translate(canvas_rect.width / 2, canvas_rect.height / 2);
+
+      // rotate 45 degrees clockwise
+      ctx_rect.rotate(Math.PI / 4);
+
+      ctx_rect.fillStyle = 'blue';
+      ctx_rect.fillRect(rectWidth / -2, rectHeight / -2, rectWidth, rectHeight);
+    </script>
+    <!-- https://www.html5canvastutorials.com/advanced/html5-canvas-transform-rotate-tutorial/ -->
+
+    <h5>Rotate Semi-Circle</h5>
+    <canvas id="rot_semiCircle" width="512" height="200"></canvas>
+    <script>
+        const canvas_rot_semiCircle = document.getElementById('rot_semiCircle');
+        const ctx_rot_semiCircle = canvas_rot_semiCircle.getContext('2d');
+
+
+
+
+        // translate context to center of canvas
+        ctx_rot_semiCircle.translate(canvas_rot_semiCircle.width / 2, canvas_rot_semiCircle.height / 2);
+
+        // rotate 45 degrees clockwise
+        ctx_rot_semiCircle.rotate(Math.PI / 4);
+
+        ctx_rot_semiCircle.fillStyle = 'blue';
+        ctx_rot_semiCircle.fillRect(rectWidth / -2, rectHeight / -2, rectWidth, rectHeight);
+    </script>
+  </body>
+</html>      

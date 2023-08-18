@@ -1,0 +1,16 @@
+* { box-sizing: border-box; }
+body {
+    padding: 1%;
+}
+
+.active {
+    /* x-offset, y-offset, blur-size, spread-size */
+    box-shadow: 0 0 5px 5px turquoise;
+}
+.editor-container {
+    border: solid 1px black;
+    padding: 0.5%;
+}
+.editor {
+    height: 350px;
+}

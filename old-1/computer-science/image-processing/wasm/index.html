@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="lib/css/editor-styles.css">
+    </head>
+
+    <body>
+        <a href="/">Home</a> <br>
+        <a href="../">../</a>
+        <canvas id="canvas" height="512px" width="512px"></canvas>
+
+        <script>
+            //let input_array = new Int32Array([10, 5, -3, 120, -70]); // array of 32-bit signed int to 
+            let input_array = new Uint8Array(); 
+
+            const img = new Image();   // Create new img element
+            img.src = 'lena.png'; // Set source path
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            img.addEventListener('load', function() {
+                ctx.drawImage(img, 0, 0);
+
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                console.log(imgData.data);
+                //const imgData_Int32 = Int32Array.from(imgData.data);
+                const imgData_Uint8 = Uint8Array.from(imgData.data);
+                
+                console.log(imgData_Uint8);
+                console.log(imgData_Uint8[0]);
+
+                // Shallow copy into array that gets passed to C++
+                input_array = imgData_Uint8;
+            }, false);
+
+        </script>
+
+
+        <script src="hello.js"></script>
+        <script>
+        var addOne = Module.cwrap("addOne", null, ["number", "number", "number"]);
+
+        function pressBtn(){
+            //var input_array = new Int32Array([10, 5, -3, 120, -70]); // array of 32-bit signed int to pass
+            var len = input_array.length;					         // 5 elements
+            var bytes_per_element = input_array.BYTES_PER_ELEMENT;   // 1 bytes each element
+            
+            // alloc memory, in this case 5*4 bytes
+            var input_ptr = Module._malloc(len * bytes_per_element);
+            var output_ptr = Module._malloc(len * bytes_per_element);
+            
+            //Module.HEAP32.set(input_array, input_ptr / bytes_per_element); // write WASM memory calling the set method of the Int32Array, (see below for details)
+            Module.HEAPU8.set(input_array, input_ptr / bytes_per_element); // write WASM memory calling the set method of the Int32Array, (see below for details)
+            
+            addOne(input_ptr, output_ptr, len);   	                       // call the WASM function
+            //var output_array = new Int32Array(Module.HEAP32.buffer, output_ptr, len); // extract data to another JS array
+            var output_array = new Uint8Array(Module.HEAP32.buffer, output_ptr, len); // extract data to another JS array
+            console.log("The starting array was:", input_array);
+            console.log("The result read is:	", output_array);
+
+            const myImageData = ctx.createImageData(canvas.width, canvas.height);
+            //myImageData.data = Uint8ClampedArray.from(output_array);
+            //myImageData.data = output_array;
+            for (let i = 0; i < canvas.width * canvas.height * 4; i++) {
+                myImageData.data[i] = output_array[i];
+            }
+
+            ctx.putImageData(myImageData, 0, 0);
+            console.log('myImageData', myImageData);
+            console.log('output_array', output_array);
+
+
+            // dealloc memory
+            Module._free(input_ptr);
+            Module._free(output_ptr);
+        }
+        </script>
+
+        <button onclick="pressBtn()">Process Image in WebAssembly</button>
+
+
+
+
+
+
+    <div class="editor">
+        <div class="editor__wrapper">
+            <div class="editor__body">
+                <div id="editorCode" class="editor__code"></div>
+            </div>
+            <div class="editor__footer">
+                <div class="editor__footer--left">
+                    <button class="editor__btn editor__run">Run ></button>
+                    <button class="editor__btn editor__reset">Reset ></button>
+                </div>
+                <div class="editor__footer--right">
+                    <div class="editor__console">
+                        <ul class="editor__console-logs"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Required Ace Libraries -->
+    <script src="lib/js/ace-editor/src-min/ace.js"></script>
+    <script src="lib/js/ace-editor/src-min/mode-javascript.js"></script>
+    <script src="lib/js/ace-editor/src-min/ext-language_tools.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="lib/js/editor.js"></script>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<body>
+    <script>
+
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let audio;
+
+        fetch('./sounds/bass_sample.mp3')
+            .then(data => data.arrayBuffer())
+            .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))
+            .then(decodedAudio => audio = decodedAudio);
+
+        function playback() {
+            const playSound = ctx.createBufferSource();
+            playSound.buffer = audio;
+            playSound.connect(ctx.destination);
+            playSound.start(ctx.currentTime);
+        }
+
+        window.addEventListener('mousedown', playback);
+
+    </script>
+
+
+    <script>
+        // navigator.mediaDevices.getUserMedia() method allows JS to request access to the user's mic and/or camera.
+        // -A successful request results in a MediaStream object.
+
+        async function setup_context() {
+            const mic = await get_mic();
+
+            if (ctx.state === 'suspended') // context is not currently playing
+            {
+                // As soon as user interacts with page resume
+                await ctx.resume();
+            }
+            // Connect source (mic) to output (speakers)
+            const source = ctx.createMediaStreamSource(mic);
+            mic.connect(ctx.destination); // connect to output (speakers)
+        }
+        setup_context();
+
+        function get_mic() {
+            return navigator.mediaDevices.getUserMedia({
+                audio: {
+                    echoCancellation: false,
+                    autoGainControl: false,
+                    noiseSuppression: false,
+                    latency: 0
+                }
+            });
+        }
+
+        function draw_visualizer() {
+            requestAnimationFrame(draw_visualizer);
+        }
+    </script>
+</body>
+</html>

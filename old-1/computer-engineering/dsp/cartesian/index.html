@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartesian Coordinate System with HTML5 Canvas</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <canvas style="display: block;"></canvas>
+
+  <script>
+    // ----------------------------------------------------
+    const draw_grid = ({ctx, width, height, grid_size}) => {
+      ctx.beginPath();
+      ctx.strokeStyle = '#ccc';
+
+      for (let x = 0; x <= width; x += grid_size) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+      }
+
+      for (let y = 0; y <= height; y += grid_size) {
+        ctx.moveTo(0,     y);
+        ctx.lineTo(width, y);
+      }
+
+      ctx.stroke();
+    };
+    // ----------------------------------------------------
+    window.onload = function() {
+
+      const c = document.querySelector('canvas');
+      const ctx = c.getContext('2d');
+
+      const canvas = {
+        ctx: ctx,
+        width: c.width = 500,
+        height: c.height = 500,
+        grid_size: 10
+      };
+      
+      draw_grid(canvas);
+    };
+    // ----------------------------------------------------
+  </script>
+
+</body>
+</html>

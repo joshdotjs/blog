@@ -1,0 +1,112 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <style id="style"></style>
+    <title>HTML Canvas</title>
+</head>
+<body>
+    <a href="/">Home</a> <br>
+    <a href="../">../</a>
+    <h1>Scroll Animation: Part 1</h1>
+
+    <div id="box-1" class="box"></div>
+    <style>
+        body { height: 200vh; }
+        #box-1 { background: darkorchid; }
+        .box {
+            height: 100px;
+            width: 100px;
+            z-index: -1;
+            position: fixed;
+        }
+    </style>
+
+<section class="active">
+    <h2></h2>
+    <div class="editor-container">
+        <div class="editor">
+        </div>
+        <button>Run</button>
+    </div>
+</section>
+
+<section>
+    <h2>Scroll Animation</h2>
+    <div class="editor-container">
+        <div class="editor">let x_scroll_pos;
+let y_scroll_pos;
+const box_1 = document.querySelector('#box-1');
+
+function scrollLoop() {
+    x_scroll_pos = window.scrollX;
+    y_scroll_pos = window.scrollY;
+
+    const scale_factor = Math.max(0.01 * y_scroll_pos, 1);
+    setScale(scale_factor, scale_factor, box_1);
+
+    requestAnimationFrame(scrollLoop);
+}
+
+function setTranslate(xPos, yPos, elem) {
+    elem.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+}
+
+function setScale(xScale, yScale, elem) {
+    console.log(`scale3d(${xScale}, ${yScale}, 0)`);
+    elem.style.transform = `scaleX(${xScale}) scaleY(${yScale})`;
+}
+scrollLoop();
+        </div>
+        <button>Run</button>
+    </div>
+</section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+
+    <!-- Change CSS programatically -->
+    <script>
+        const sections = document.querySelectorAll('section');
+        const buttons = document.querySelectorAll('button');
+        const editors = document.querySelectorAll(".editor");
+
+        // Run the first piece of code on page load:
+        const code = ace.edit(editors[0]).getValue();
+        try {
+            new Function(code)();
+        } catch (err) {
+            console.error(err);
+        }
+
+        // Run a single code section upon button click in each section
+        editors.forEach(function(editorElem, idx) {
+            const editor = ace.edit(editorElem);
+            editor.setTheme("ace/theme/monokai");
+            editor.session.setMode("ace/mode/javascript");
+
+            buttons[idx].addEventListener('click', () => {
+                const code = editor.getValue();
+
+                // Run the code
+                try {
+                    new Function(code)();
+                } catch (err) {
+                    console.error(err);
+                }
+
+                for (let i = 0; i < sections.length; ++i) {
+                    if (i == idx) {
+                        console.log('ADD: i: ', i);
+                        sections[i].classList.add('active');
+                    } else {
+                        console.log('REMOVE: i: ', i);
+                        sections[i].classList.remove('active');
+                    }
+                }
+
+            });
+
+        });
+    </script>
+</body>
+</html>

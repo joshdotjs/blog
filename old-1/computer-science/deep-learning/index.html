@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Deep Learning</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+    
+<a href="/">Home</a> <br>
+<a href="../">../</a>
+<h1>
+    Logistic Regression
+</h1>
+<h2>Deep Learning Perspective</h2>
+<h5>
+    <a href="">Logistic Regression</a>
+    is a form of Binary 
+    <a href="/computer-science/machine-learning/tasks/classification">Classification</a>
+</h5>
+    
+
+
+<p>
+    Input vector:
+    $$ x^{(i)} = 
+        \left[
+            \begin{array}{ccc}
+            x_{1}^{(i)} \\
+            \vdots \\
+            x_{n_x}^{(i)} \\
+            \end{array}
+        \right]
+    \in \mathbb{R}^{n_x} $$
+</p>
+
+<p>
+    Label:
+    $$ y^{(i)} \in \{0,1\} $$
+</p>
+
+<p>
+    Training example:
+    $$ \left( x^{(i)}, y^{(i)} \right) = \left( x, y \right) ^{(i)} $$
+</p>
+
+<p>
+    Set of \(m\)-training examples:
+    $$ \{ (x, y)^{(1)}, \ldots, (x, y)^{(i)}, \ldots, (x, y)^{(m)} \} $$
+</p>
+
+<p>
+    Input data matrix:
+    $$ 
+        X = \left[
+        \begin{array}{ccc}
+        | &        & | &        & |  \\
+        x^{(1)} & \ldots & x^{(i)} & \ldots & x^{(m)}  \\
+        | &        & | &        & | 
+        \end{array}
+        \right] 
+        \in \mathbb{R}^{n_x \times m}
+    $$
+</p>
+
+<p>
+    Output vector:
+    $$ 
+        Y = \left[ 
+            \begin{array}{ccc}
+            y^{(1)} & \ldots & y^{(i)} & \ldots & y^{(m)}
+            \end{array}
+        \right]
+        \in \{0,1\}^{1 \times m}
+    $$
+</p>
+
+
+
+<p>
+    <h5>
+        Generate a prediction (an estimate of \(y\) )
+    </h5>
+    <p>
+        Given an input vector \( x \in \mathbb{R}^{n_x} \), e.g. image pixel values, we want to produce \( \hat{y} \in [0, 1] \) where \( \hat{y} \) represents the probability that \( y=1 \) given the input features (entries in the vector) \( x \).
+        $$
+            \hat{y} = P\left( y=1 \mid x \right)
+        $$
+
+        For example, if \( x \) were an image then \( y=1 \) could represent there a cat in the image, where \( y=0 \) could represent there is not a cat in the image.  Therefore, \( \hat{y} \) would represent "what is the chance this image has a cat in it?".
+    </p>
+    <p>
+        Parameters of Logistic Regression
+        $$
+            w =
+            \left[
+                \begin{array}{ccc}
+                w_{1} \\
+                \vdots \\
+                w_{n_x} \\
+                \end{array}
+            \right]
+            \in \mathbb{R}^{n_x}, \hspace{1cm} b \in \mathbb{R}
+        $$
+
+        Given \( x \), \( w \), and \( b \), we generate \( \hat{y} \) by applying a sigmoid to the 
+        <a href="/computer-science/machine-learning/linear-regression">linear regression</a> hypothesis function ( \( z=w^{\rm T}x + b \in \mathbb{R} \)  ).
+
+        $$
+            \hat{y} = \sigma{ \left( w^{\rm T}x + b \right) = \sigma \left( z \right) }
+        $$
+        where \( \sigma( \cdot ) \) is the <a href="/math/calculus/functions/sigmoid">sigmoid function</a>, given as
+        $$
+            \sigma(z) = \frac{1}{1 + e^{-z}}
+        $$
+
+        Note that 
+        $$
+            \lim_{z \to -\infty} g \left( z \right) = 0    \hspace{2cm}    g \left( z=0 \right) = \frac{1}{2}    \hspace{2cm}    \lim_{z \to +\infty} g \left( z \right) = 1    
+        $$
+
+        <h5>
+            TODO: Insert Interactive Graph (with editable code) here!
+        </h5>
+
+
+        Note that 
+        \begin{align}
+            \hat{y} &= P \left( y=1 \mid x \right) \\
+            & = \sigma \left( z \right) \in [0,1]
+        \end{align}
+        represents a probability. 
+    </p>
+
+</p>
+
+<ul>
+    <h5>Sources</h5>
+    <li>Coursera: Deep Learning Specialization: Neural Networks and Deep Learning</li>
+</ul>
+
+</body>
+</html>

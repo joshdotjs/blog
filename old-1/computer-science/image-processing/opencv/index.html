@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Hello OpenCV.js</title>
+    <link rel="stylesheet" href="./lib/css/editor-styles.css">
+</head>
+<body>
+    <a href="/">Home</a> <br>
+    <a href="../">../</a>
+    <h2>Hello OpenCV.js</h2>
+    <p id="status">OpenCV.js is loading...</p>
+    <div>
+    <div class="inputoutput">
+        <img id="imageSrc" alt="No Image" />
+        <div class="caption">imageSrc <input type="file" id="fileInput" name="file" /></div>
+    </div>
+    <div class="inputoutput">
+        <canvas id="canvasOutput" ></canvas>
+        <div class="caption">canvasOutput</div>
+    </div>
+    </div>
+    <script type="text/javascript">
+        let imgElement = document.getElementById('imageSrc');
+        let inputElement = document.getElementById('fileInput');
+        inputElement.addEventListener('change', (e) => {
+            imgElement.src = URL.createObjectURL(e.target.files[0]);
+        }, false);
+        imgElement.onload = function() {
+            let mat = cv.imread(imgElement);
+            cv.imshow('canvasOutput', mat);
+            mat.delete();
+        };
+        function onOpenCvReady() {
+            document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
+        }
+    </script>
+    <!-- <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script> -->
+    <!-- <script src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script> -->
+    <script src="https://docs.opencv.org/3.4.0/opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+
+
+
+
+    <div class="editor">
+        <div class="editor__wrapper">
+            <div class="editor__body">
+                <div id="editorCode" class="editor__code"></div>
+            </div>
+            <div class="editor__footer">
+                <div class="editor__footer--left">
+                    <button class="editor__btn editor__run">Run ></button>
+                    <button class="editor__btn editor__reset">Reset ></button>
+                </div>
+                <div class="editor__footer--right">
+                    <div class="editor__console">
+                        <ul class="editor__console-logs"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Required Ace Libraries -->
+    <script src="./lib/js/ace-editor/src-min/ace.js"></script>
+    <script src="./lib/js/ace-editor/src-min/mode-javascript.js"></script>
+    <script src="./lib/js/ace-editor/src-min/ext-language_tools.js"></script>
+
+    
+
+    <!-- Custom Scripts -->
+    <script src="./lib/js/editor.js"></script>
+    </body>
+
+
+</body>
+</html>

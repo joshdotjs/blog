@@ -1,0 +1,53 @@
+<html>
+<head>
+    <style>
+        canvas {
+            border: solid black 10px;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+    <section>
+
+        <div>
+            Text:
+            <ul>
+                
+                <li>Item 1</li>
+                <li>Item 2</li>
+            </ul>
+        </div>
+
+        <div>
+            Math:
+            <p>
+                Input vector:
+
+                \begin{align}
+                    y_{ \text {offset} } &= f(s) \\
+                        & = 
+                            \begin{cases} 
+                                y_{\text {offset-max} },                                                                & s = 0 \\
+                                \left( \frac{ y_{\text {offset-max} } }{ s_{1} } \right) s +  y_{\text {offset-max} },  & 0 < s \leq s_{1} \\
+                                0                                                                                       & s_{1} \leq s \\
+                            \end{cases}
+                \end{align}
+            </p>
+        </div>
+
+        <div>
+            Graph:
+            <canvas style="display: block;"></canvas>
+        </div>
+        
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

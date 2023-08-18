@@ -1,0 +1,38 @@
+<html>
+<body>
+
+    <button id="josh">JOSH</button>
+
+    <script>
+
+        const AudioContext  = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        let audio;
+        console.log('ctx: ', ctx);
+
+        fetch('./sounds/bass_sample.mp3')
+            .then(data => data.arrayBuffer())
+            .then(arrayBuffer => ctx.decodeAudioData(arrayBuffer))  // returns an AudioBuffer object
+            .then(decodedAudio => audio = decodedAudio);            // Stores the AudioBuffer object globally
+
+        function playback() {
+
+            // -The createBufferSource() method of the BaseAudioContext Interface is used to create a new AudioBufferSourceNode, 
+            //  which can be used to play audio data contained within an AudioBuffer object.
+            const audio_buffer_source_node = ctx.createBufferSource(); 
+            audio_buffer_source_node.buffer = audio;
+            audio_buffer_source_node.connect(ctx.destination);
+            //audio_buffer_source_node.start(ctx.currentTime);
+            audio_buffer_source_node.start();
+        }
+
+        const josh = document.querySelector('#josh');
+        josh.addEventListener('click', () => {
+            console.log('josh');
+        });
+
+        window.addEventListener('mousedown', playback);
+
+    </script>
+</body>
+</html>

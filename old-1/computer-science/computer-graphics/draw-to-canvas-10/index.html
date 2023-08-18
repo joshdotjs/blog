@@ -1,0 +1,55 @@
+<html>
+<body>
+
+    <canvas id="c" height="500" width="500"></canvas>
+    <style>
+        #c {
+            border: solid black 5px;
+        }
+    </style>
+    
+    <script>
+        const canvas = document.querySelector('#c');
+        const width = canvas.width;
+        const height = canvas.height;
+
+        // Get 2d drawing context
+        const ctx = document.getElementById('c').getContext('2d');
+        // Get copy of actual imagedata (for the whole canvas area)
+        const imageData = ctx.getImageData(0, 0, width, height);
+        // Create a buffer that's the same size as our canvas image data
+        const buf = new ArrayBuffer(imageData.data.length);
+        // 'Live' 8 bit clamped view to our buffer, we'll use this for writing to the canvas
+        const buf8 = new Uint8ClampedArray(buf);
+        // 'Live' 32 bit view into our buffer, we'll use this for drawing
+        const buf32 = new Uint32Array(buf);
+        // RGBA stored in a 32bit uint
+        const red = (255 << 24) | 255;
+
+        // Shift center of circle:
+        const radius = 100;
+        const y_shift = radius;
+        const x_shift = radius;
+
+        // Loop through all the pixels.
+        for (let y = -y_shift; y < height + y_shift; y += 1) {
+            //const yw = y * width;
+            const yw = (y + y_shift) * width;
+            
+            for (let x = -x_shift; x < width; x += 1) {
+                if (
+                    y < Math.sqrt(Math.pow(radius, 2) - Math.pow(x, 2)) 
+                &&  y > -Math.sqrt(Math.pow(radius, 2) - Math.pow(x, 2))
+                ) {
+                    buf32[yw + x + x_shift] = red;
+                }
+            }
+        }
+        // Update imageData and put it to our drawing context
+        imageData.data.set(buf8);
+        ctx.putImageData(imageData, 0, 0);
+    </script>
+
+    <!-- https://compile.fi/canvas-filled-three-ways-js-webassembly-and-webgl/ -->
+</body>
+</html>

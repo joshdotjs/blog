@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartesian Coordinate System with HTML5 Canvas</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <canvas style="display: block;"></canvas>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.0/gsap.min.js"></script>
+
+  <script>
+    // ----------------------------------------------------
+    const draw_grid = ({ctx, width, height, grid_size}) => {
+      ctx.beginPath();
+      ctx.strokeStyle = '#ccc';
+
+      const [num_rows, num_cols] = [height / grid_size, width  / grid_size];
+
+      for (let x = 0; x <= num_cols; x++) {
+        const X = x * grid_size;
+        ctx.moveTo(X, 0);
+        ctx.lineTo(X, height);
+      }
+
+      for (let y = 0; y <= height; y += grid_size) {
+        ctx.moveTo(0,     y);
+        ctx.lineTo(width, y);
+      }
+
+      ctx.stroke();
+    };
+    // ----------------------------------------------------
+    const animate_grid = ({ctx, width, height, grid_size}) => {
+      ctx.beginPath();
+      ctx.strokeStyle = '#ccc';
+
+      const [num_rows, num_cols] = [height / grid_size, width  / grid_size];
+      const X = []; for (let x = 0; x <= num_cols; x++) X.push({prop: 0}); // Store the current width  of each col
+      const Y = []; for (let y = 0; y <= num_rows; y++) Y.push({prop: 0}); // Store the current height of each row
+
+
+      // Animate each col
+      gsap.to(Y, {
+        duration: 0.15,
+        prop: height,
+        onUpdate: function() {
+          // Hold the col number constant (col) and vary the height (Y[col])
+          for (let col = 0; col <= num_cols; col++) {
+            ctx.moveTo(col * grid_size, 0);
+            ctx.lineTo(col * grid_size, Y[col].prop);
+            ctx.stroke();
+          }
+        },
+        stagger: 0.008,
+        ease: 'power4'
+      });
+
+      // Animate each row
+      gsap.to(X, {
+        delay: 0.4,
+        duration: 0.15,
+        prop: width,
+        onUpdate: function() {
+          // Hold the row number constant (row) and vary the width (X[row])
+          for (let row = 0; row <= num_rows; row++) {
+            ctx.moveTo(0          , row * grid_size);
+            ctx.lineTo(X[row].prop, row * grid_size);
+            ctx.stroke();
+          }
+        },
+        stagger: 0.008,
+        ease: 'power4'
+      });
+
+      
+    };
+    // ----------------------------------------------------
+    window.onload = function() {
+
+      const c = document.querySelector('canvas');
+      const ctx = c.getContext('2d');
+
+      const canvas = {
+        ctx: ctx,
+        width: c.width = 500,
+        height: c.height = 500,
+        grid_size: 10
+      };
+      
+      //draw_grid(canvas);
+      animate_grid(canvas);
+    };
+    // ----------------------------------------------------
+  </script>
+
+</body>
+</html>

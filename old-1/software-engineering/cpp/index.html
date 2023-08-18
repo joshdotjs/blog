@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>C++</title>
+    </head>
+    <body>
+        <a href="/">Home</a> <br>
+        <a href="../">../</a>
+        <h1>Call by Value vs. Call by Reference</h1>
+        <p>A stack frame is created when a function is called. The stack frame contains information about the function such as the return address and all variables in the local scope.</p>
+
+        <ul>
+            <li>
+                <h5>Pass by Value</h5>
+                <p>
+                    The stack frame corresponding to the function call has a copy of the variable when a variable is passed by value into a function.
+                </p>
+            </li>
+
+            <li>
+                <h5>Pass by Reference</h5>
+                <p>
+                    When a variable is passed by reference the function has access to the actual data (at the original unchanged address) of the variable.
+                </p>
+            </li>
+
+            <li>
+                <h5>Pass a Pointer to a Variable by Value</h5>
+                <p>
+                    Passing a pointer as a parameter into a function creates a local pointer variable on the stack which allows you to access the original data that the pointer points to.
+                </p>
+            </li>
+        </ul>
+
+
+        <h1>Dynamic Memory</h1>
+        <ul>
+            <li><code>malloc</code> and <code>free</code></li>
+            <li><code>new</code> and <code>delete</code></li>
+            <li>Smart pointers</li>
+            <li>Move Semantics</li>
+        </ul>
+
+        <h1>Threading</h1>
+        <ul>
+        </ul>
+
+
+        <ul>
+            <h5>Sources</h5>
+            <li>Udacity, C++ Nano-Degree, Course 3: Memory</li>
+        </ul>
+    </body>
+</html>
