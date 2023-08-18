@@ -40,4 +40,6 @@ main .option {
   --width: 100%;
   width: var(--width);
   background: darkorange;
+  cursor: pointer;
+  text-align: center;
 }/*# sourceMappingURL=index.css.map */
