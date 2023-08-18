@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sine Wave Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="plot"></div>
+    <script>
+      // Define your data
+      let x = [];
+      let y = [];
+      for (let i = 0; i < 2 * Math.PI; i += 0.1) {
+        x.push(i);
+        y.push(Math.sin(i));
+      }
+
+      // Define the plot layout
+      const layout = {
+        title: 'Sine Wave',
+        xaxis: {
+          title: 'x'
+        },
+        yaxis: {
+          title: 'sin(x)'
+        }
+      };
+
+      // Define the plot data
+      const data = [{
+        x: x,
+        y: y,
+        type: 'scatter'
+      }];
+
+      // Plot the graph
+      Plotly.newPlot('plot', data, layout);
+    </script>
+</body>
+</html>
