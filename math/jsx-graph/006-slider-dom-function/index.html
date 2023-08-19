@@ -17,33 +17,28 @@
     <input type="range" id="slider" min="-5" max="5" step="0.1" value="0" />
     <script type="module">
 
-        // Advantage of using DOM to control graph:
-        //  -one slider can affect multiple graphs
-        //  -can style the slider easily with full control
+      // Advantage of using DOM to control graph:
+      //  -one slider can affect multiple graphs
+      //  -can style the slider easily with full control
 
-        // const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-6, 6, 6, -6], axis:true});
-        const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 2, 5, -2], axis: true},);
+      // const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-6, 6, 6, -6], axis:true});
+      const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 2, 5, -2], axis: true},);
 
-        // Create a point with an initial position
-        // const point = board.create('point', [0, 0], {fixed: false});
-        const point = board.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      // Create a point with an initial position
+      // const point = board.create('point', [0, 0], {fixed: false});
+      const point = board.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
 
-        // Function to update the point's position based on the slider value
-        function updatePoint() {
-            const sliderValue = document.getElementById('slider').value;
-            point.setPosition(JXG.COORDS_BY_USER, [sliderValue, 0]);
-            board.update();
-        }
+      // Function to update the point's position based on the slider value
+      const DOM_slider = document.getElementById('slider');
+      function updatePoint() {
+          const sliderValue = DOM_slider.value;
+          point.setPosition(JXG.COORDS_BY_USER, [sliderValue, 0]);
+          board.update();
+      }
 
-        const DOM_slider = document.getElementById('slider');
-        DOM_slider.addEventListener('input', updatePoint);
-
-
-
+      DOM_slider.addEventListener('input', updatePoint);
       board.create('functiongraph', [function(x){return point.X() * Math.sin(x);}], {dash:1});
       
-
-
     </script>
 
   </body>

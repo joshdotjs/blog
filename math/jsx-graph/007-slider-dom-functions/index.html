@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <script type="text/javascript" charset="UTF-8"
+      src="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.0/distrib/jsxgraph.css" />
+
+    <style>
+      #box_licenseText { display: none; }
+      #box-2_licenseText { display: none; }
+    </style>
+  </head>
+  <body>
+
+
+
+    <div id="box" class="jxgbox" style="width:600px; height:300px;"></div>
+    <input type="range" id="slider" min="-5" max="5" step="0.1" value="0" />
+
+    <div id="box-2" class="jxgbox" style="width:600px; height:300px;"></div>
+    <input type="range" id="slider-2" min="-5" max="5" step="0.1" value="0" />
+
+
+    <script type="module">
+
+      const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 2, 5, -2], axis: true},);
+      const point = board.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      board.create('functiongraph', [function(x){return point.X() * Math.sin(x);}], {dash:1});
+
+      const DOM_slider = document.getElementById('slider');
+      DOM_slider.addEventListener('input', ({target: { value }}) => {
+        const sliderValue = value;
+        point.setPosition(JXG.COORDS_BY_USER, [sliderValue, 0]);
+        board.update();
+      });
+
+      // ========================================
+
+      const board2 = JXG.JSXGraph.initBoard('box-2', {boundingbox: [-5, 2, 5, -2], axis: true},);
+      const point2 = board2.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      board2.create('functiongraph', [function(x){return point2.X() * Math.sin(x);}], {dash:1});
+
+      const DOM_slider2 = document.getElementById('slider-2');
+      DOM_slider2.addEventListener('input', ({target: {value}}) => {
+        const sliderValue = value;
+        point2.setPosition(JXG.COORDS_BY_USER, [sliderValue, 0]);
+        board2.update();
+      });
+
+    </script>
+
+  </body>
+</html>
