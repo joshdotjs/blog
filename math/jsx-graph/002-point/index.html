@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <script type="text/javascript" charset="UTF-8"
+      src="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.0/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.6.0/distrib/jsxgraph.css" />
+
+    <style>
+      #jxgbox_licenseText { display: none; }
+    </style>
+  </head>
+  <body>
+
+    <div id="jxgbox" class="jxgbox" style="width:500px; height:200px;"></div>
+
+    <script type="module">
+     const board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-5, 2, 5, -2]});
+     const point = board.create('point',[-3,1]);
+    </script>
+
+  </body>
+</html>
