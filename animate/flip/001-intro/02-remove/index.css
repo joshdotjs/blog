@@ -28,6 +28,7 @@ body {
   height: 100px;
   width: 100px;
   background: lightgreen;
+  cursor: pointer;
   
 
   display: grid;
