@@ -24,6 +24,9 @@
   <body>
 
     <main>
+
+      <p style="text-align: center;">Graph of \( f_3{(x)} = \sin{( \alpha x)} \cdot \beta \sin{( x)} \).</p>
+
       <section>
         <div id="box" class="jxgbox" style="width:600px; height:300px;"></div>
         <input type="range" id="slider" min="-5" max="5" step="0.1" value="0" />
@@ -44,13 +47,21 @@
     <!-- ============================================== -->
     <!-- ============================================== -->
 
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- ============================================== -->
+    <!-- ============================================== -->
+    <!-- ============================================== -->
+    <!-- ============================================== -->
+
     <script type="module">
 
       const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 2, 5, -2], axis: true},);
-      const point = board.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      const point = board.create('point',[-3,1], {size:5,name:'α', color: 'darkorange'});
 
       const board2 = JXG.JSXGraph.initBoard('box-2', {boundingbox: [-5, 2, 5, -2], axis: true},);
-      const point2 = board2.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      const point2 = board2.create('point',[-3,1], {size:5,name:'β', color: 'darkorange'});
 
       // ========================================
 
