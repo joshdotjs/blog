@@ -8,17 +8,36 @@
       #box_licenseText { display: none; }
       #box-2_licenseText { display: none; }
       #box-3_licenseText { display: none; }
+
+      main {
+        padding: 1rem 0;
+      }
+      section {
+        margin: 0 auto;
+        width: fit-content;
+        &:not(:last-child) {
+          padding-bottom: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
 
-    <div id="box" class="jxgbox" style="width:600px; height:300px;"></div>
-    <input type="range" id="slider" min="-5" max="5" step="0.1" value="0" />
+    <main>
+      <section>
+        <div id="box" class="jxgbox" style="width:600px; height:300px;"></div>
+        <input type="range" id="slider" min="-5" max="5" step="0.1" value="0" />
+      </section>
 
-    <div id="box-2" class="jxgbox" style="width:600px; height:300px;"></div>
-    <input type="range" id="slider-2" min="-5" max="5" step="0.1" value="0" />
+      <section>
+        <div id="box-2" class="jxgbox" style="width:600px; height:300px;"></div>
+        <input type="range" id="slider-2" min="-5" max="5" step="0.1" value="0" />
+      </section>
 
-    <div id="box-3" class="jxgbox" style="width:600px; height:300px;"></div>
+      <section>
+        <div id="box-3" class="jxgbox" style="width:600px; height:300px;"></div>
+      </section>
+    </main>
 
     <!-- ============================================== -->
     <!-- ============================================== -->
