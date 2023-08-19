@@ -25,7 +25,7 @@
 
     <main>
 
-      <p style="text-align: center;">Graph of \( f_3{(x)} = \sin{( \alpha x)} \cdot \beta \sin{( x)} \).</p>
+      <p style="text-align: center;">Graph of \( f_3{(x)} = \sin{( \alpha x)} \cdot \beta \cos{( x)} \).</p>
 
       <section>
         <div id="box" class="jxgbox" style="width:600px; height:300px;"></div>
@@ -60,20 +60,22 @@
       const board = JXG.JSXGraph.initBoard('box', {boundingbox: [-5, 2, 5, -2], axis: true},);
       const point = board.create('point',[-3,1], {size:5,name:'α', color: 'darkorange'});
 
+
+
       const board2 = JXG.JSXGraph.initBoard('box-2', {boundingbox: [-5, 2, 5, -2], axis: true},);
       const point2 = board2.create('point',[-3,1], {size:5,name:'β', color: 'darkorange'});
 
       // ========================================
 
       const f1 = (x) => Math.sin(point.X() * x);
-      const f2 = (x) => point2.X() * Math.sin(x);
+      const f2 = (x) => point2.X() * Math.cos(x);
 
       // ========================================
 
       const board3 = JXG.JSXGraph.initBoard('box-3', {boundingbox: [-5, 2, 5, -2], axis: true},);
       board3.create('functiongraph', [function(x){
         const f1 = Math.sin(point.X() * x);
-        const f2 = point2.X() * Math.sin(x);
+        const f2 = point2.X() * Math.cos(x);
         return f1 * f2;
       }], {dash:1});
 
