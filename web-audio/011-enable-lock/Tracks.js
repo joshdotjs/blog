@@ -9,7 +9,7 @@ const Tracks = [
   new Track({ 
     pattern: [1, 1, 1, 1,    1, 1, 1, 1,    1, 1, 1, 1,   1, 1, 1, 1,], 
     name: 'hi-hat',
-    path: '/assets/samples/drums/hi-hat.mp3',
+    path: '/_assets/samples/drums/hi-hat.mp3',
     // steps: qsa('.track-0 > .steps > .step'),
     // load_btn: qs('.track-0 > .track-title-container'),
     elem: qs('.track-0'),
@@ -18,7 +18,7 @@ const Tracks = [
   new Track({ 
     pattern: [1, 0, 1, 0,    0, 0, 0, 1,    0, 1, 1, 0,   0, 1, 0, 1,], 
     name: 'kick',
-    path: '/assets/samples/drums/kick.mp3',
+    path: '/_assets/samples/drums/kick.mp3',
     // steps: qsa('.track-1 > .steps > .step'),
     // load_btn: qs('.track-1 > .track-title-container'),
     elem: qs('.track-1'),
@@ -27,7 +27,7 @@ const Tracks = [
   new Track({ 
     pattern: [0, 0, 0, 0,    1, 0, 0, 0,    0, 0, 0, 0,   1, 0, 0, 0,], 
     name: 'snare',
-    path: '/assets/samples/drums/snare.mp3',
+    path: '/_assets/samples/drums/snare.mp3',
     // steps: qsa('.track-2 > .steps > .step'),
     // load_btn: qs('.track-2 > .track-title-container'),
     elem: qs('.track-2'),

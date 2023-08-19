@@ -5,9 +5,14 @@ import { add } from './math';
 
 it('should pass', () => {
 
-  const result = add(1, 2);
-  const expected = 1 + 2;
+  // Arrange:
+  const numbers = [1, 2];
 
+  // Act:
+  const result = add(numbers);
+
+  // Assert:
+  const expected = 1 + 2;
   expect(result).toBe(expected);
 });
 

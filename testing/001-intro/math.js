@@ -1,3 +1,5 @@
-const add = (a, b) => a + b;
+const add = (numbers) => {
+  return numbers.reduce((acc, curr) => acc + curr, 0);
+};
 
 export { add };
