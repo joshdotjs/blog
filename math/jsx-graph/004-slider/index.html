@@ -13,14 +13,14 @@
     <div id="jxgbox" class="jxgbox" style="width:500px; height:200px;"></div>
 
     <script type="module">
-      const board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-5, 2, 3 * Math.PI, -2], axis: true},);
-      const point = board.create('point',[-3,1], {size:5,name:'Z', color: 'darkorange'});
+      const brd = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-10, 10, 10, -10], axis:true});
+      const a = brd.create('slider',[[2,-5],[7,-5],[-5,1,5]], {name:'a'});
+      const b = brd.create('slider',[[2,-6],[7,-6],[-5,0,5]], {name:'b'});
+      const c = brd.create('slider',[[2,-7],[7,-7],[-5,0,5]], {name:'c'});
+      const f = brd.create('functiongraph',[function(x){
+        return a.Value()*x*x + b.Value()*x + c.Value();
+      }]);
 
-      board.create('functiongraph', [function(x){return Math.sin(x);}, -Math.PI, 2 * Math.PI]);
-
-
-      board.create('functiongraph', [function(x){return point.Y() * Math.sin(x);}], {dash:1});
-      
     </script>
 
   </body>
