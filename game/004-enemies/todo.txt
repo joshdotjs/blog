@@ -1,0 +1,4 @@
+1. break entities up into two abstractions: enemies & platforms
+2. jump on enemy
+3. enemy kills hero
+4. particle explosion
