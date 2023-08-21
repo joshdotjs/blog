@@ -145,8 +145,11 @@ export default function newHero({
       }
     });
 
+    // remove from array
+    const kill = (entities, idx) => setTimeout(() => entities.splice(idx, 1), 0);
+
     // Collision Detection: Enemy
-    enemies.forEach((enemy) => {
+    enemies.forEach((enemy, idx) => {
 
       // -land on top of enemy (kills enemy)
       if (landOnTop(enemy)) {
@@ -154,10 +157,11 @@ export default function newHero({
         jumps = 0;
         
         // bounce hero off of enemy
-        vel.y = -JUMP;       
+        vel.y = -JUMP / 2;   
 
         // kill enemy
         consoleRed('land on top of enemy (kills enemy)');
+        kill(enemies, idx);
       }
 
       // -hit enemy from side (kills hero)
