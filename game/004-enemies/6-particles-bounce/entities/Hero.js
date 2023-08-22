@@ -261,7 +261,6 @@ export default function newHero({
 
   return ({
     update,
-    render,
     get xl() { return pos.x; },
     get yt() { return pos.y; },
     get xr() { return pos.x + w; },
