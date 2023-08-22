@@ -1,7 +1,7 @@
 import "../util/debug.js";
 import Particle from "./Particle.js";
 import { canvas, ctx, GRAVITY } from "../util/util.js";
-import { getRandom, getRandomColor } from "../util/rand.js";
+import { getRandomColor } from "../util/rand.js";
 
 export default function newHero({
   size: { width, height }, 
@@ -160,10 +160,8 @@ export default function newHero({
           particles.push( new Particle({ // create particles
             position: { x: enemy.x_half, y: enemy.yt },
             velocity: { 
-              // x: (Math.random() - 0.5) * 7,
-              // y: (Math.random() - 0.5) * 15
-              x: getRandom(-1, 1) * 3,
-              y: getRandom(-1, 1) * 4
+              x: (Math.random() - 0.5) * 7,
+              y: (Math.random() - 0.5) * 15
             },
             radius: 3 * Math.random(),
             //color: '#654426',

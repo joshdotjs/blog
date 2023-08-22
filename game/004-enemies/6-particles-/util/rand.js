@@ -1,5 +1,5 @@
 // Getting a random number between two values
-const getRandom = (min, max) => {
+const getRandomArbitrary = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
@@ -33,7 +33,7 @@ const getRandomColor = () => {
 // ==============================================
 
 export {
-  getRandom,
+  getRandomArbitrary,
   getRandomIntExcusive,
   getRandomInt,
   getRandomColor
