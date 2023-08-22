@@ -10,24 +10,46 @@ let enemies = [];
 let platforms = [];
 let particles = [];
 
+const HERO  = { h: 50, w: 50};
+const ENEMY = { h: 50, w: 50};
+const FLOOR = { h: 10, w: canvas.width };
+
+const floorOffset = y => canvas.height - y - FLOOR.h; // y is from bottom of screen
+
+// ==========================================
+
 const reset = () => {
+
+  // --------------------------------------------
+
   hero = newHero({ 
-    size: { width: 50, height: 50 },
+    size: { width: HERO.w, height: HERO.h },
     position: { x: 0, y: 1}
   });
 
+  // --------------------------------------------
+
   enemies = [];
   enemies.push(newEnemy({ 
-    size: { width: 50, height: 50 },
-    position: { x: canvas.width / 2 - 25, y: canvas.height - 50},
+    size: { width: ENEMY.w, height: ENEMY.h },
+    position: { x: 100, y: floorOffset(50)},
   }));
+
+  // --------------------------------------------
 
   platforms = [];
   platforms.push(newPlatform({ 
     color: 'black',
-    size: { width: 50, height: 50 },
-    position: { x: canvas.width - 60, y: canvas.height / 2 + 35},
+    size: { width: FLOOR.w, height: FLOOR.h },
+    position: { x: 0, y: floorOffset(0)},
   }));
+  platforms.push(newPlatform({ 
+    color: 'black',
+    size: { width: 100, height: 10 },
+    position: { x: 175, y: floorOffset(75)},
+  }));
+
+  // --------------------------------------------
 };
 reset();
 

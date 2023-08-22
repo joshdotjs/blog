@@ -160,13 +160,10 @@ export default function newHero({
           particles.push( new Particle({ // create particles
             position: { x: enemy.x_half, y: enemy.yt },
             velocity: { 
-              // x: (Math.random() - 0.5) * 7,
-              // y: (Math.random() - 0.5) * 15
               x: getRandom(-1, 1) * 3,
               y: getRandom(-1, 1) * 4
             },
             radius: 3 * Math.random(),
-            //color: '#654426',
             color: getRandomColor(),
           }) );
         }

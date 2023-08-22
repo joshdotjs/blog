@@ -6,10 +6,10 @@ class Particle {
 
   // --------------------------------------------
 
-  constructor({ position, velocity, radius, color }) {
-    this.position = { x: position.x, y: position.y };
-    this.velocity = { x: velocity.x, y: velocity.y };
-    this.radius = radius;
+  constructor({ pos, vel, rad, color }) {
+    this.pos = { x: pos.x, y: pos.y };
+    this.vel = { x: vel.x, y: vel.y };
+    this.rad = rad;
     this.ttl = 600; // time to live [frames]
     this.color = color;
   }
@@ -18,7 +18,7 @@ class Particle {
 
   draw() {
     ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false);
+    ctx.arc(this.pos.x, this.pos.y, this.rad, 0, Math.PI * 2, false);
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
@@ -29,17 +29,21 @@ class Particle {
   update() {
     // this.ttl--;
     this.draw();
-    this.position.x += this.velocity.x;
-    this.position.y += this.velocity.y;
+    this.pos.x += this.vel.x;
+    this.pos.y += this.vel.y;
 
     // gravity
-    if (this.position.y + this.radius + this.velocity.y <= canvas.height) {
+    if (this.pos.y + this.rad + this.vel.y <= canvas.height) {
       //console.log('add gravity');
-      this.velocity.y += GRAVITY * 0.1;
+      this.vel.y += GRAVITY * 0.1;
     }
   }
 
   // --------------------------------------------
+
+  get yb() { return this.pos.y + this.rad; }
+  get xr() { return this.pos.x + this.rad; }
+  get xl() { return this.pos.x; }
 }
 
 // ==============================================

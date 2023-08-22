@@ -1,7 +1,7 @@
 import "../util/debug.js";
 import Particle from "./Particle.js";
 import { canvas, ctx, GRAVITY } from "../util/util.js";
-import { getRandomColor } from "../util/rand.js";
+import { getRandom, getRandomColor } from "../util/rand.js";
 
 export default function newHero({
   size: { width, height }, 
@@ -127,18 +127,35 @@ export default function newHero({
       vel.y += GRAVITY;
     }
 
-    const landOnTop = (entity) => (
-      new_yb <= entity.yt && // above entity
-      new_yb + vel.y >= entity.yt && // hero is moving downwards while above entity (landed on top of entity)
-      AXRinBXL(new_xr, entity.xl) && AXLinBXR(new_xl, entity.xr) // hero is within enemy's x bounds
+    const heroLandOnTopOf = (object) => (
+      new_yb <= object.yt && // above object
+      new_yb + vel.y >= object.yt && // hero is moving downwards while above object (landed on top of object)
+      AXRinBXL(new_xr, object.xl) && AXLinBXR(new_xl, object.xr) // hero is within enemy's x bounds
+    );
+
+    const objectLandOnTopOf = (entity, object) => (
+      entity.yb <= object.yt && // entity is above object
+      entity.yb + entity.vel.y >= object.yt && // hero is moving downwards while above object (landed on top of object)
+      AXRinBXL(entity.xr, object.xl) && AXLinBXR(entity.xl, object.xr) // hero is within enemy's x bounds
     );
 
     // Collision Detection: land on top of platform
     platforms.forEach((platform) => {
-      if (landOnTop(platform)) {
+
+      // hero lands on top of platform
+      if (heroLandOnTopOf(platform)) {
         vel.y = 0;
         jumps = 0;
       }
+
+      // particle lands on top of platform 
+      particles.forEach((particle, idx) => { // [bounce particles off of platform]
+        if (objectLandOnTopOf(particle, platform)) { // particle lands on top of platform
+          // particle.vel.y = 0;
+          particle.vel.y = -particle.vel.y * 0.9; // each time particle hits floor reduce its y velocity by 10%
+        }
+      });
+
     });
 
     // remove from array
@@ -148,7 +165,7 @@ export default function newHero({
     enemies.forEach((enemy, idx) => {
 
       
-      if (landOnTop(enemy)) { // -land on top of enemy (kills enemy)
+      if (heroLandOnTopOf(enemy)) { // -land on top of enemy (kills enemy)
         vel.y = 0;
         jumps = 0;
         
@@ -158,17 +175,16 @@ export default function newHero({
         // spawn particles
         for (let i = 0; i < 100; i++) {
           particles.push( new Particle({ // create particles
-            position: { x: enemy.x_half, y: enemy.yt },
-            velocity: { 
-              x: (Math.random() - 0.5) * 7,
-              y: (Math.random() - 0.5) * 15
+            pos: { x: enemy.x_half, y: enemy.yt },
+            vel: { 
+              x: getRandom(-3, 3),
+              y: getRandom(-4, 4)
             },
-            radius: 3 * Math.random(),
-            //color: '#654426',
+            rad: getRandom(0, 3),
             color: getRandomColor(),
           }) );
         }
-        console.log(particles);
+        // console.log(particles);
 
         // kill enemy
         console.green('land on top of enemy (kills enemy)');
