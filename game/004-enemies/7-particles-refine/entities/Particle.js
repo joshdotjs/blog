@@ -29,7 +29,7 @@ class Particle {
   // --------------------------------------------
 
   update() {
-    // this.ttl--;
+    this.ttl--;
     this.draw();
     this.pos.x += this.vel.x;
     this.pos.y += this.vel.y;

@@ -162,9 +162,17 @@ export default function newHero({
           if (particle.rad - 0.3 > 0) {
             particle.rad -= 0.3;
           }
-          else kill(particles, idx);
+          else kill(particles, idx); // Garbage Collection
         }
+        
+        // remove particle if has lived longer than ttl frames
+        if (particle.ttl < 0) {
+          kill(particles, idx); // Garbage Collection
+        }
+
       });
+
+
       console.log('particless', particles);
 
     });
