@@ -171,15 +171,11 @@ export default function newHero({
         }
 
       });
-
-
       console.log('particless', particles);
-
     });
 
     // Collision Detection: Enemy
     enemies.forEach((enemy, idx) => {
-
       
       if (heroLandOnTopOf(enemy)) { // -land on top of enemy (kills enemy)
         vel.y = 0;
