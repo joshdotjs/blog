@@ -1,0 +1,11 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest  --run  --globals  --environment happy-dom"
+  },
+  "author": "Josh Holloway",
+  "devDependencies": {
+    "happy-dom": "^10.11.0",
+    "vitest": "^0.34.1"
+  }
+}
