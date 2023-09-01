@@ -7,16 +7,14 @@ import { canvas, ctx, loadImg } from "../util/util.js";
 // ==============================================
 
 export default function newPlatform({
-  size: { width, height }, 
   position,
-  color='hotpink',
   image,
 }) {
 
   // ============================================
 
   const img = image;
-  const [w, h] = [width, height];
+  const [w, h] = [img.width, img.height];
 
   // ============================================
 
@@ -41,9 +39,6 @@ export default function newPlatform({
 
   function render () {
     ctx.drawImage(img, pos.x, pos.y);
-
-    ctx.fillStyle = color;
-    ctx.fillRect(pos.x, pos.y, w, h);
   };
 
   // ============================================

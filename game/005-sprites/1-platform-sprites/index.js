@@ -10,19 +10,21 @@ let enemies = [];
 let platforms = [];
 let particles = [];
 
-const HERO  = { h: 50, w: 50};
-const ENEMY = { h: 50, w: 50};
-const FLOOR = { h: 75, w: canvas.width };
-
-const floorOffset = y => canvas.height - y - FLOOR.h; // y is from bottom of screen
-
 // ==========================================
 
 const reset = async () => {
 
-  // const platform_img = await loadImg('background.png');
-  // const platform_img = await loadImg('platform.png');
-  const platform_img = await loadImg('platform2.png');
+  const platform_img = await loadImg('platform.png');
+
+  const { HERO, ENEMY, PLATFORM } = (() => {
+    const HERO  = { h: 50, w: 50};
+    const ENEMY = { h: 50, w: 50};
+    const PLATFORM = { h: platform_img.height, w: platform_img.width };
+
+    return { HERO, ENEMY, PLATFORM };
+  })();
+
+  const floorOffset = y => canvas.height - y - PLATFORM.h; // y is from bottom of screen
 
   // --------------------------------------------
 
@@ -43,14 +45,12 @@ const reset = async () => {
 
   platforms = [];
   platforms.push(newPlatform({ 
-    // color: 'black',
-    size: { width: FLOOR.w, height: 10 },
+    color: 'black',
     position: { x: 0, y: floorOffset(0)},
     image: platform_img,
   }));
   platforms.push(newPlatform({ 
     color: 'black',
-    size: { width: 100, height: 10 },
     position: { x: 175, y: floorOffset(75)},
     image: platform_img,
   }));
