@@ -2,6 +2,7 @@ import { canvas, ctx, loadImg } from "./util/util.js";
 import newHero from './entities/Hero.js';
 import { newEnemy } from './entities/Enemy.js';
 import newPlatform from './entities/Platform.js';
+import Generic from './entities/Generic.js';
 
 // ==========================================
 
@@ -9,6 +10,7 @@ let hero;
 let enemies = [];
 let platforms = [];
 let particles = [];
+let generics = [];
 
 // ==========================================
 
@@ -16,6 +18,7 @@ const reset = async () => {
 
   const hero_img = await loadImg('hero.svg');
   const platform_img = await loadImg('platform.svg');
+  const background_img = await loadImg('background.svg');
 
   const { ENEMY, PLATFORM } = (() => {
     const ENEMY = { h: hero_img.width,         w: hero_img.height };
@@ -62,6 +65,12 @@ const reset = async () => {
     image: platform_img,
   }));
 
+  // --------------------------------------------
+
+  generics = [
+    new Generic({ x: -1, y: -1, image: background_img }),
+    // new Generic({ x: 0, y: 0, image: hills_img }),
+  ];
 
   // --------------------------------------------
 
@@ -84,6 +93,8 @@ function animate(t1) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Update:
+  generics.forEach( obj => { obj.update(); obj.velocity.x = 0; } );
+
   particles.forEach( particle => particle.update() );
   
   enemies.forEach((enemy) => {
