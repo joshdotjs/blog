@@ -13,8 +13,7 @@ export default function newPlatform({
 
   // ============================================
 
-  const img = image;
-  const [w, h] = [img.width, img.height];
+  const [w, h] = [image.width, image.height];
 
   // ============================================
 
@@ -38,7 +37,7 @@ export default function newPlatform({
   // ============================================
 
   function render () {
-    ctx.drawImage(img, pos.x, pos.y);
+    ctx.drawImage(image, pos.x, pos.y);
   };
 
   // ============================================

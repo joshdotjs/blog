@@ -4,9 +4,9 @@ import { canvas, ctx, GRAVITY, kill } from "../util/util.js";
 import { getRandom, getRandomInt, getRandomColor } from "../util/rand.js";
 
 export default function newHero({
-  size: { width, height }, 
   position,
   color='darkorange', // this.color = color;
+  image,
 }) {
 
   // ==============================================
@@ -55,7 +55,8 @@ export default function newHero({
   // ==============================================
   // ==============================================
 
-  const [w, h] = [width, height];
+  // const [w, h] = [width, height];
+  const [w, h] = [image.width, image.height];
   
   // ============================================
 
@@ -224,8 +225,9 @@ export default function newHero({
   // ============================================
 
   function render () {
-    ctx.fillStyle = color;
-    ctx.fillRect(pos.x, pos.y, w, h);
+    ctx.drawImage(image, pos.x, pos.y);
+    // ctx.fillStyle = color;
+    // ctx.fillRect(pos.x, pos.y, w, h);
   };
 
   // ==============================================

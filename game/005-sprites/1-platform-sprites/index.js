@@ -14,14 +14,13 @@ let particles = [];
 
 const reset = async () => {
 
-  const platform_img = await loadImg('platform.png');
+  const hero_img = await loadImg('hero.svg');
+  const platform_img = await loadImg('platform.svg');
 
-  const { HERO, ENEMY, PLATFORM } = (() => {
-    const HERO  = { h: 50, w: 50};
-    const ENEMY = { h: 50, w: 50};
+  const { ENEMY, PLATFORM } = (() => {
+    const ENEMY = { h: hero_img.width,         w: hero_img.height };
     const PLATFORM = { h: platform_img.height, w: platform_img.width };
-
-    return { HERO, ENEMY, PLATFORM };
+    return { ENEMY, PLATFORM };
   })();
 
   const floorOffset = y => canvas.height - y - PLATFORM.h; // y is from bottom of screen
@@ -29,8 +28,8 @@ const reset = async () => {
   // --------------------------------------------
 
   hero = newHero({ 
-    size: { width: HERO.w, height: HERO.h },
-    position: { x: 0, y: 1}
+    position: { x: 0, y: 1},
+    image: hero_img,
   });
 
   // --------------------------------------------
@@ -38,7 +37,15 @@ const reset = async () => {
   enemies = [];
   enemies.push(newEnemy({ 
     size: { width: ENEMY.w, height: ENEMY.h },
-    position: { x: 100, y: floorOffset(50)},
+    position: { x: 0, y: floorOffset(ENEMY.h)},
+  }));
+  enemies.push(newEnemy({ 
+    size: { width: ENEMY.w, height: ENEMY.h },
+    position: { x: 60, y: floorOffset(ENEMY.h)},
+  }));
+  enemies.push(newEnemy({ 
+    size: { width: ENEMY.w, height: ENEMY.h },
+    position: { x: 120, y: floorOffset(ENEMY.h)},
   }));
 
   // --------------------------------------------
@@ -51,7 +58,7 @@ const reset = async () => {
   }));
   platforms.push(newPlatform({ 
     color: 'black',
-    position: { x: 175, y: floorOffset(75)},
+    position: { x: 175, y: floorOffset(60)},
     image: platform_img,
   }));
 
@@ -78,7 +85,6 @@ function animate(t1) {
 
   // Update:
   particles.forEach( particle => particle.update() );
-  hero.update(platforms, enemies, particles, reset);
   
   enemies.forEach((enemy) => {
     enemy.update(0, 0);
@@ -88,5 +94,6 @@ function animate(t1) {
     platform.update(0, 0);
   });
 
+  hero.update(platforms, enemies, particles, reset);
 }
 animate();
