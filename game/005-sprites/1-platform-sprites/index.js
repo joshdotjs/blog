@@ -18,7 +18,11 @@ const floorOffset = y => canvas.height - y - FLOOR.h; // y is from bottom of scr
 
 // ==========================================
 
-const reset = () => {
+const reset = async () => {
+
+  // const platform_img = await loadImg('background.png');
+  // const platform_img = await loadImg('platform.png');
+  const platform_img = await loadImg('platform2.png');
 
   // --------------------------------------------
 
@@ -40,13 +44,15 @@ const reset = () => {
   platforms = [];
   platforms.push(newPlatform({ 
     // color: 'black',
-    size: { width: FLOOR.w, height: 0 },
+    size: { width: FLOOR.w, height: 10 },
     position: { x: 0, y: floorOffset(0)},
+    image: platform_img,
   }));
   platforms.push(newPlatform({ 
     color: 'black',
     size: { width: 100, height: 10 },
     position: { x: 175, y: floorOffset(75)},
+    image: platform_img,
   }));
 
 
@@ -54,7 +60,7 @@ const reset = () => {
 
   particles = [];
 };
-reset();
+await reset(); // top level await! 🤯
 
 // ==========================================
 

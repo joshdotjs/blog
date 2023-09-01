@@ -10,13 +10,13 @@ export default function newPlatform({
   size: { width, height }, 
   position,
   color='hotpink',
+  image,
 }) {
 
   // ============================================
 
+  const img = image;
   const [w, h] = [width, height];
-
-  const platform_img = loadImg('platform.png');
 
   // ============================================
 
@@ -40,7 +40,7 @@ export default function newPlatform({
   // ============================================
 
   function render () {
-    ctx.drawImage(platform_img, pos.x, pos.y);
+    ctx.drawImage(img, pos.x, pos.y);
 
     ctx.fillStyle = color;
     ctx.fillRect(pos.x, pos.y, w, h);
