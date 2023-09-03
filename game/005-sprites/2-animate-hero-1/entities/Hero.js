@@ -5,10 +5,13 @@ import { getRandom, getRandomInt, getRandomColor } from "../util/rand.js";
 
 const image = await loadImg('hero.svg');
 
-  // const hero_run_left = await loadImg('hero-run-left.svg');
-  // const hero_run_right = await loadImg('hero-run-right.svg');
-  // const hero_jump_left = await loadImg('hero-jump-left.svg');
-  // const hero_jump_right = await loadImg('hero-jump-right.svg');
+const hero_run_left    = await loadImg('hero-run-left.png');
+const hero_run_right   = await loadImg('hero-run-right.png');
+const hero_jump_left   = await loadImg('hero-jump-left.png');
+const hero_jump_right  = await loadImg('hero-jump-right.png');
+const hero_stand_left  = await loadImg('hero-stand-left.png');
+// const hero_stand_right = await loadImg('hero-stand-right.png');
+const hero_stand_right = await loadImg('sprite-stand-right.png');
 
 // ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
 // ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
@@ -61,7 +64,10 @@ export default function newHero({
   // ==============================================
 
   // const [w, h] = [width, height];
-  const [w, h] = [image.width, image.height];
+  // const [w, h] = [image.width, image.height];
+  const [w, h] = [66, 150];
+  let frame = 0;
+  const crop_w = 177;
   
   // ============================================
 
@@ -232,24 +238,20 @@ export default function newHero({
   function render () {
     // ctx.fillStyle = color;
     // ctx.fillRect(pos.x, pos.y, w, h);
-    ctx.drawImage(image, pos.x, pos.y);
+    ctx.drawImage(
+      hero_stand_right, 
 
-    // ctx.drawImage(
-    //   this.current_sprite,
+      // source pos / size [crop]
+      crop_w * frame,    // (sx)  The x-axis coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context 
+      0,                 // (sy) The y-axis coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context. 
+      crop_w,            // (sWidth) The width of the sub-rectangle of the source image to draw into the destination context.
+      400,               // (sHeight) The height of the sub-rectangle of the source image to draw into the destination context.
 
-    //   // source pos / size [crop]
-    //   this.current_crop_width  * this.frames,   // (sx) The x-axis coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context. 
-    //   0,   // (sy) The y-axis coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context. 
-    //   this.current_crop_width,  // (sWidth) The width of the sub-rectangle of the source image to draw into the destination context.
-    //   this.unscaled_height, //400, // (sHeight) The height of the sub-rectangle of the source image to draw into the destination context.
-
-    //   // dest. pos / size
-    //   this.position.x,  // (dx)
-    //   this.position.y,  // (dy)
-    //   this.width,       // (dWidth)
-    //   this.height,      // (dHeight)
-    // );
-
+      // dest. pos / size
+      pos.x, pos.y,  // (dx, dy)
+      w, h           // (dWidth, dHeight)
+    );
+    frame = (frame + 1) % 60;
   };
 
   // ==============================================
