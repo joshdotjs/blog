@@ -1,6 +1,4 @@
 1. platform sprites
-2. hero sprite
-3. enemy sprites
-4. hero move animation
-5. enemy move animation
-6. hero jump 
+2. hero move animation
+3. enemy move animation
+4. hero jump 
