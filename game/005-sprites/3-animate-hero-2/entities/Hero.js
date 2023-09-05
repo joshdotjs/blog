@@ -15,7 +15,9 @@ const hero_jump_right  = await loadImg('hero-jump-right.png');
 
 const hero_stand_left  = await loadImg('hero-stand-left.png');
 // const hero_stand_left  = await loadImg('sprite-stand-left.png');
-const hero_stand_right = await loadImg('hero-stand-right.png');
+
+const hero_stand_right = await loadImg('character-groups.png');
+// const hero_stand_right = await loadImg('hero-stand-right.png');
 // const hero_stand_right = await loadImg('sprite-stand-right.png');
 
 // ≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡≡
@@ -71,10 +73,12 @@ export default function newHero({
   // const [w, h] = [width, height];
   // const [w, h] = [image.width, image.height];
   
-  const scale = 0.15;
-  const [w, h] = [398 * scale, 353 * scale];
+  const scale = 1;
+  const width = 69;
+  const height = 64;
+  const [w, h] = [width * scale, height * scale];
   let frame = 0;
-  const [crop_w, crop_h] = [398, 353];
+  const [crop_w, crop_h] = [width, height];
   const sprites = { // different sprites for each action
     stand: {
       r: hero_stand_right,
