@@ -13,6 +13,7 @@ section {
   width: fit-content;
   margin: 0 auto;
   margin-top: 4rem;
+  background: lightgray;
 }
 
 .row {
@@ -26,6 +27,7 @@ section {
   border: solid black 2px;
   padding: 1rem;
   border-radius: var(--rad);
+  background: white;
 }
 pre {
   background: black;
