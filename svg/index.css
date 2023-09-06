@@ -1,0 +1,44 @@
+:root {
+  --rad: 8px;
+}
+
+body {
+  padding-top: 50px;
+}
+
+section {
+  border: solid black 2px;
+  padding: 1rem;
+  border-radius: var(--rad);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card {
+  display: inline-block;
+  border: solid black 2px;
+  padding: 1rem;
+  border-radius: var(--rad);
+}
+pre {
+  background: black;
+  padding: 1rem;
+  color: white;
+  border-radius: var(--rad);
+  margin-top: 0;
+}
+
+.shadow {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.shadow:hover { box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); }
+
+.text-yellow { color: yellow; }
+.text-orange { color: darkorange; }
