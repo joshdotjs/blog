@@ -12,6 +12,7 @@ section {
   border-radius: var(--rad);
   width: fit-content;
   margin: 0 auto;
+  margin-top: 4rem;
 }
 
 .row {
