@@ -10,10 +10,9 @@
       <rect class="leg-l" x="50" y="150" width="25" height="50" fill="orange"  />
       <rect class="leg-r" x="125" y="150" width="25" height="50" fill="orange" />
 
-      <rect class="body" x="50" y="75" width="100" height="100" fill="blue" />
-
-      <rect class="arm-l" x="50" y="75" width="25" height="75" fill="magenta" transform="rotate(25, 50, 75)" />
       <rect class="arm-r" x="125" y="75" width="25" height="75" fill="magenta" transform="rotate(-25, 150, 75)" />
+      <rect class="body" x="50" y="75" width="100" height="100" fill="blue" />
+      <rect class="arm-l" x="50" y="75" width="25" height="75" fill="magenta" transform="rotate(25, 50, 75)" />
 
       <circle class="head" cx="100" cy="50" r="50" fill="green" />
     </g>

@@ -47,5 +47,3 @@ pre {
 
 .text-yellow { color: yellow; }
 .text-orange { color: darkorange; }
-
-.transform-top-left { transform-origin: top left; border: solid red 2px;  }
