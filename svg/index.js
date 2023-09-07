@@ -3,10 +3,10 @@ const g_sprite_1 = document.querySelector('.g-sprite-1');
 const g_sprite_2 = document.querySelector('.g-sprite-2');
 
 
-console.log('svg_sprite', svg_sprite);
-svg_sprite.setAttribute('width', '600');
-svg_sprite.setAttribute('height', '200');
-svg_sprite.setAttribute('viewBox', '0 0 600 200');
+// console.log('svg_sprite', svg_sprite);
+// svg_sprite.setAttribute('width', '600');
+// svg_sprite.setAttribute('height', '200');
+// svg_sprite.setAttribute('viewBox', '0 0 600 200');
 
 // g_sprite_1.setAttribute('transform', 'translate(400, 0)');
 
@@ -25,8 +25,26 @@ svg_sprite.setAttribute('viewBox', '0 0 600 200');
 //   x-dim transform and the way we want to animate the sprite.
 
 
+const create = tag => document.createElement(tag);
+const set = (el, attr, val) => el.setAttribute(attr, val);
+const addClass = (el, str) =>  el.classList.add(str);
+
 // - generate the svg in js
-const g_sprite_3 = structuredClone(g_sprite_2);
-g_sprite_3.classList.remove('g-sprite-2');
+const g_sprite_3 = document.createElement('g');
 g_sprite_3.classList.add('g-sprite-3');
+g_sprite_3.setAttribute('transform', 'translate(400, 0)');
+set(g_sprite_3, 'transform', 'translate(400, 0)');
+const createRect = () => {
+  const rect = document.createElement('rect');
+  addClass(rect, 'svg-background');
+  set(rect, 'x', '0');
+  set(rect, 'width', '200');
+  set(rect, 'height', '100%');
+  set(rect, 'stroke', 'black');
+  set(rect, 'fill', 'transparent');
+  g_sprite_3.appendChild(rect);
+};
+createRect();
 console.log('g_sprite_3: ', g_sprite_3);
+
+svg_sprite.appendChild(g_sprite_3);
