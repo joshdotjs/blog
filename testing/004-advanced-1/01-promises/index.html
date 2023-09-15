@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh Holloway | Testing</title>
+  </head>
+  <body>
+
+    <div id="container"></div>
+
+    <script type="module">
+      import { callbackCaller } from './callback.js';
+
+      const callback = (x) => {
+        const z = 2 * x;
+        console.log('callback: ', z);
+      };
+      callbackCaller(callback);
+    </script>
+
+
+    <script type="module">
+      import { promiseFunc } from './promise.js';
+
+      try {
+        const promise0 = promiseFunc(2);
+        console.log('promise0: ', promise0);
+        
+        const promise1 = await promiseFunc(2);
+        console.log('promise1: ', promise1);
+  
+        const promise2 = await promiseFunc();
+        console.log('promise2: ', promise2);  // never reachged because error is thrown from promise rejection
+      } catch (err) {
+        console.log('catch (err) -- err: ', err)
+      }
+    </script>
+
+  </body>
+</html>
