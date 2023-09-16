@@ -1,0 +1,11 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest  --run  --globals",
+    "test:watch": "vitest  --globals"
+  },
+  "author": "Josh Holloway",
+  "devDependencies": {
+    "vitest": "^0.34.1"
+  }
+}

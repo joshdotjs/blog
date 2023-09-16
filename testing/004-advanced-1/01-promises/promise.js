@@ -4,7 +4,7 @@ const promiseFunc = (x) => {
       if (x) {
         resolve('success');
       } else {
-        reject('fail');
+        reject(new Error('fail'));
       } // if (x)
     }, 1e3); // setTimeout()
   }); // new Promise()

@@ -1,5 +1,5 @@
 import { expect, vi } from 'vitest'; // not needed with --globals (expect helps intellisense)
-import { add } from './spies.js';
+import { add } from './add.js';
 
 // ==============================================
 // ==============================================
@@ -7,7 +7,8 @@ import { add } from './spies.js';
 // ==============================================
 
 // const mockAdd = jest.fn(add);  // create a spy wrapping the real function
- const mockAdd = vi.fn(add);  // create a spy wrapping the real function
+//  const mockAdd = vi.fn(add);  // create a spy wrapping the real function
+ const mockAdd = vi.fn(() => {}); // the function passed in defines the behavior of the function we'll test
 
 
 // Your test

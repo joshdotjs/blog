@@ -7,7 +7,7 @@
 
     <div id="container"></div>
 
-    <script type="module">
+    <!-- <script type="module">
       import { callbackCaller } from './callback.js';
 
       const callback = (x) => {
@@ -15,10 +15,10 @@
         console.log('callback: ', z);
       };
       callbackCaller(callback);
-    </script>
+    </script> -->
 
 
-    <script type="module">
+    <!-- <script type="module">
       import { promiseFunc } from './promise.js';
 
       try {
@@ -32,6 +32,27 @@
         console.log('promise2: ', promise2);  // never reachged because error is thrown from promise rejection
       } catch (err) {
         console.log('catch (err) -- err: ', err)
+      }
+    </script> -->
+
+
+    <script type="module">
+      import { promiseFunc } from './promise.js';
+      import { asynch } from './asynch.js';
+
+      try { 
+
+
+        const [data, error] = await asynch(promiseFunc(2));
+        if (error) throw error;
+        console.log('data: ', data);
+
+        const [data2, error2] = await asynch(promiseFunc());
+        if (error2) throw error2;
+        console.log('data2: ', data2);
+
+      } catch (err) {
+        console.log('catch (err) --  ', err)
       }
     </script>
 

@@ -1,5 +1,4 @@
 import { afterAll, afterEach, beforeAll, beforeEach, expect } from 'vitest'; // not needed with --globals (expect helps intellisense)
-import { promiseFunc } from './hooks.js';
 
 // ==============================================
 // ==============================================
